@@ -6070,7 +6070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &245332827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9510,6 +9510,7 @@ GameObject:
   - component: {fileID: 913296797}
   - component: {fileID: 913296796}
   - component: {fileID: 913296802}
+  - component: {fileID: 913296803}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -9529,7 +9530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33e67aeccda444e47b729db1fded2d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movement: {x: 0, y: 0}
+  movementDirection: {x: 0, y: 0}
   movementSpeed: 0
   MOVEMENT_BASE_SPEED: 10
   ROCK_BASE_SPEED: 25
@@ -9538,6 +9539,7 @@ MonoBehaviour:
   baseAttack: 0
   rb: {fileID: 913296799}
   animator: {fileID: 913296798}
+  a1: {fileID: 913296803}
   rockPrefab: {fileID: 1322406132710005115, guid: a88fdd45e4f7130448fa510f100b6a32,
     type: 3}
   treePrefab: {fileID: 7480321473359576387, guid: 00713248121b4e942a3f5faa87138e92,
@@ -9692,6 +9694,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.67, y: 0.87}
   m_EdgeRadius: 0
+--- !u!114 &913296803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913296795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efaf504cf9f85148bb151a6918b0ed9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1322406132710005115, guid: a88fdd45e4f7130448fa510f100b6a32, type: 3}
+  abilitySpeed: 20
+  attDir: {x: 0, y: 1}
 --- !u!1001 &932262549
 PrefabInstance:
   m_ObjectHideFlags: 0

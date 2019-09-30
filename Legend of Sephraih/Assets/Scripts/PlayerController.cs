@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     
-    public Vector2 movementDirection;
-    public float movementSpeed;
+    public Vector2 movementDirection; // from input
+    public float movementSpeed; //from input
     public float MOVEMENT_BASE_SPEED = 1.0f;
     public float ROCK_BASE_SPEED =1.0f;
     public bool useSkill_1;
@@ -14,20 +14,14 @@ public class PlayerController : MonoBehaviour
     public bool baseAttack;
     public Rigidbody2D rb;
     public Animator animator;
-
-    public Ability a1;
-
     
+    public Vector2 attackingDirection;
     
-    public GameObject rockPrefab;
-    public GameObject treePrefab;
-
     public GameObject crosshair;
 
     
     private void Start() {
     crosshair.transform.localPosition = new Vector2(0,-3);
-               
     }
 
     void Update()
@@ -71,21 +65,17 @@ public class PlayerController : MonoBehaviour
         }
 
     void Attack(){
-        Vector2 attackingDirection = crosshair.transform.localPosition;
-        attackingDirection.Normalize();
+        attackingDirection = crosshair.transform.localPosition; // vector to crosshair obj
+        attackingDirection.Normalize(); //ignore magnitude
         
 
-        if(useSkill_1){
-            //instantiate arrow / throwable on player position + offset to shooting direction + offset to center according to playersprite
-            GameObject arrow = Instantiate(rockPrefab,transform.position + new Vector3(0.5f*attackingDirection.x,0.5f*attackingDirection.y+0.4f,0), Quaternion.identity);
-            arrow.GetComponent<Rigidbody2D>().velocity = attackingDirection *ROCK_BASE_SPEED;
-            arrow.transform.Rotate(0,0, Mathf.Atan2(attackingDirection.y,attackingDirection.x)*Mathf.Rad2Deg);
-            Destroy(arrow, 5.0f);
+        if(useSkill_1){ 
+          this.GetComponent<Abilities>().rockAim();
         }
         
         
          if(useSkill_2){
-          a1.trigger();
+          this.GetComponent<Abilities>().rockMouse();
         }
       }
     

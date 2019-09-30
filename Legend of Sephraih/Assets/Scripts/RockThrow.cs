@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : Ability
+public class RockThrow : Ability
 {
    
-   public GameObject prefab;
+   GameObject prefab;
    public float abilitySpeed = 25;
 
+   public Vector2 attDir = new Vector2(0,1);
 
-    public Vector2 attDir = new Vector2(0,1);
-
-
-    public override void trigger(){
+   public void Start() {
+      prefab = Resources.Load("Throwable") as GameObject;
+   }
+   
+   public override void trigger(){
         
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
@@ -25,5 +27,6 @@ public class Test : Ability
         projectile.transform.Rotate(0,0, Mathf.Atan2(attDir.y,attDir.x)*Mathf.Rad2Deg);
         Destroy(projectile, 5.0f);
    }
+
 }
 

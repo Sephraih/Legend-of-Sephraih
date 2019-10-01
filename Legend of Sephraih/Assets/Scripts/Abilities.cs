@@ -18,7 +18,7 @@ public class Abilities : MonoBehaviour
 
     public void Start(){
       rock = Resources.Load("Rock") as GameObject;
-      slash = Resources.Load("Slash") as GameObject;
+      slash = Resources.Load("SlashProjectile") as GameObject;
     }
     
 

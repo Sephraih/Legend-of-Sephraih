@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    public int health = 100;
 
     public Animator animator;
     public Vector2 movement;
@@ -35,6 +36,14 @@ public class EnemyController : MonoBehaviour
         
         }
             animator.SetFloat("Speed",movementSpeed);
+    }
+
+    public void TakeDamage(int damage){
+        health -= damage;
+        Debug.Log("took dmg" + damage);
+        if(health <= 0){
+            Destroy(gameObject);
+        }
     }
         
 }

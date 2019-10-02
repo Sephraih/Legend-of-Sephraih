@@ -9,11 +9,20 @@ public class EnemyController : MonoBehaviour
     public Animator animator;
     public Vector2 movement;
     public float movementSpeed;
-    
     public float MOVEMENT_BASE_SPEED = 1.0f;
-    public Rigidbody2D rb;
-    public GameObject player;
-    // Update is called once per frame
+
+    public ParticleSystem BloodEffect;
+
+    private Rigidbody2D rb;
+    private GameObject player;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        player = GameObject.Find("Player");
+
+    }
+
     void Update()
     {
       Move();  
@@ -40,6 +49,10 @@ public class EnemyController : MonoBehaviour
 
     public void TakeDamage(int damage){
         health -= damage;
+        BloodEffect.GetComponent<ParticleSystem>().Play();
+        //ParticleSystem dmgEffect =Instantiate(BloodEffect, transform.position, Quaternion.identity);
+        //Destroy(dmgEffect, 3);
+        
         Debug.Log("took dmg" + damage);
         if(health <= 0){
             Destroy(gameObject);

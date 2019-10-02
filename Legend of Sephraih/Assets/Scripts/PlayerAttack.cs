@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     private float delay;
     public float startDelay;
     public int damage;
+    private bool attack;
 
     public Vector2 movementDirection;
 
@@ -27,9 +28,11 @@ public class PlayerAttack : MonoBehaviour
 
     void Update() {
 
+     //attack = Input.GetButtonUp("Fire1");
+
      crossAim = this.GetComponent<PlayerController>().attackingDirection;
      attackPos.localPosition = new Vector2(crossAim.x,crossAim.y);
-     Attack();
+     //Attack();
      if(delay>=0){
          delay -= Time.deltaTime;
      }
@@ -39,10 +42,10 @@ public class PlayerAttack : MonoBehaviour
         Gizmos.DrawWireCube(attackPos.position, new Vector3(attackRangeX,attackRangeY,1));
     }
 
-    void Attack(){
+    public void Attack(){
         if(delay <= 0){
 
-         if(Input.GetKey(KeyCode.A)){
+         //if(attack){
 
              slash = Instantiate(slashEffect,transform.position + new Vector3(0.5f*crossAim.x,0.5f*crossAim.y,0),Quaternion.identity);
              slash.transform.Rotate(Mathf.Atan2(crossAim.y,crossAim.x)*Mathf.Rad2Deg-90,-90, 0);
@@ -54,7 +57,7 @@ public class PlayerAttack : MonoBehaviour
                 enemiesToDamage[i].GetComponent<EnemyController>().TakeDamage(damage);
             }
            
-         }
+        // }
          delay = startDelay;
      }
     }

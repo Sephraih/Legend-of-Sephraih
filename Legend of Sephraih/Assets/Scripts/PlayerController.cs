@@ -77,6 +77,10 @@ public class PlayerController : MonoBehaviour
          if(useSkill_2){
           this.GetComponent<Abilities>().rockMouse();
         }
-      }
+        if (baseAttack)
+        {
+            this.GetComponent<PlayerAttack>().Attack();
+        }
+    }
     
 }

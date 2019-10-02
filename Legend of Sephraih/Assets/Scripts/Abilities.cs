@@ -14,6 +14,9 @@ public class Abilities : MonoBehaviour
     GameObject rock;
     GameObject slash;
 
+    public LayerMask whatIsEnemy;
+
+
    
 
     public void Start(){
@@ -32,10 +35,10 @@ public class Abilities : MonoBehaviour
         attDir = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
         attDir.Normalize();
 
-        GameObject projectile = Instantiate(slash,transform.position + new Vector3(0.5f*attDir.x,0.5f*attDir.y+0.4f,0), Quaternion.identity);
+        GameObject projectile = Instantiate(slash,transform.position + new Vector3(0.5f*attDir.x,0.5f*attDir.y,0), Quaternion.identity);
         projectile.GetComponent<Rigidbody2D>().velocity = attDir *abilitySpeed;
         projectile.transform.Rotate(0,0, Mathf.Atan2(attDir.y,attDir.x)*Mathf.Rad2Deg-90);
-        Destroy(projectile, 5.0f);
+        Destroy(projectile, 2.0f);
     }
 
 
@@ -43,10 +46,10 @@ public class Abilities : MonoBehaviour
         //instantiate arrow / throwable on player position + offset to shooting direction + offset to center according to playersprite
         crossAim = this.GetComponent<PlayerController>().attackingDirection;
 
-            GameObject projectile = Instantiate(slash,transform.position + new Vector3(0.5f*crossAim.x,0.5f*crossAim.y+0.4f,0), Quaternion.identity);
+            GameObject projectile = Instantiate(slash,transform.position + new Vector3(0.5f*crossAim.x,0.5f*crossAim.y,0), Quaternion.identity);
             projectile.GetComponent<Rigidbody2D>().velocity = crossAim *abilitySpeed;
             projectile.transform.Rotate(0,0, Mathf.Atan2(crossAim.y,crossAim.x)*Mathf.Rad2Deg-90);
-            Destroy(projectile, 5.0f);
+            Destroy(projectile, 0.2f);
     }
 }
 

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    public int health = 100;
-
+    
     public Animator animator;
-    public Vector2 movement;
+    public Vector2 movementDirection;
+    public GameObject attackingDirection;
+
     public float movementSpeed;
     public float MOVEMENT_BASE_SPEED = 1.0f;
 
-    public ParticleSystem BloodEffect;
-
+    
     private Rigidbody2D rb;
     private GameObject player;
 
@@ -20,43 +20,43 @@ public class EnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
-
     }
 
     void Update()
     {
-      Move();  
-      Animate();
+     Move();
+     Aim();
+     Attack();
     }
 
     void Move(){
         
-        movement = new Vector2(-1*(rb.position.x - player.transform.position.x),-1* (rb.position.y - player.transform.position.y));
-        movement.Normalize();
-        movementSpeed = Mathf.Clamp(movement.magnitude,0.0f,1.0f);
-        rb.velocity = movement * movementSpeed *MOVEMENT_BASE_SPEED;
+        movementDirection = new Vector2(-1*(rb.position.x - player.transform.position.x),-1* (rb.position.y - player.transform.position.y));
+        movementDirection.Normalize();
+        movementSpeed = Mathf.Clamp(movementDirection.magnitude,0.0f,1.0f);
+        rb.velocity = movementDirection * movementSpeed *MOVEMENT_BASE_SPEED;
+
+        // movement animation
+        if (movementDirection != Vector2.zero)
+        {
+            animator.SetFloat("moveX", movementDirection.x);
+            animator.SetFloat("moveY", movementDirection.y);
+
+        }
+        animator.SetFloat("Speed", movementSpeed);
     }
 
-    void Animate()
+    void Aim()
     {
-        if(movement != Vector2.zero){
-            animator.SetFloat("moveX",movement.x);
-            animator.SetFloat("moveY",movement.y);
-        
+        if (movementDirection != Vector2.zero)
+        {
+            attackingDirection.transform.localPosition = movementDirection;
         }
-            animator.SetFloat("Speed",movementSpeed);
     }
 
-    public void TakeDamage(int damage){
-        health -= damage;
-        BloodEffect.GetComponent<ParticleSystem>().Play();
-        //ParticleSystem dmgEffect =Instantiate(BloodEffect, transform.position, Quaternion.identity);
-        //Destroy(dmgEffect, 3);
-        
-        Debug.Log("took dmg" + damage);
-        if(health <= 0){
-            Destroy(gameObject);
-        }
+    
+    void Attack(){
+        this.GetComponent<BasicAttack>().Attack();
     }
         
 }

@@ -4,24 +4,26 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
+
+
+    public Rigidbody2D rb;
+
     public Vector2 movementDirection; // from input
     public float movementSpeed; //from input
     public float MOVEMENT_BASE_SPEED = 1.0f;
-    public float ROCK_BASE_SPEED =1.0f;
-    public bool useSkill_1;
-    public bool useSkill_2;
-    public bool baseAttack;
-    public Rigidbody2D rb;
     public Animator animator;
+
+    private bool useSkill_1;
+    private bool useSkill_2;
+    private bool baseAttack;
+
     
-    public Vector2 attackingDirection;
     
-    public GameObject crosshair;
+    public GameObject attackingDirection;
 
     
     private void Start() {
-    crosshair.transform.localPosition = new Vector2(0,-3);
+    attackingDirection.transform.localPosition = new Vector2(0,-1);
     }
 
     void Update()
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void ProcessInputs(){
+
         movementDirection = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
         movementDirection.Normalize();
         movementSpeed = Mathf.Clamp(movementDirection.magnitude,0.0f,1.0f);
@@ -42,45 +45,41 @@ public class PlayerController : MonoBehaviour
         baseAttack = Input.GetButtonUp("Fire3");
     }
 
+    //move player based on input and play movement animation
     void Move(){
         rb.velocity = movementDirection * movementSpeed *MOVEMENT_BASE_SPEED;
-        animateMovement();
+
+        if (movementDirection != Vector2.zero)
+        {
+            animator.SetFloat("moveX", movementDirection.x);
+            animator.SetFloat("moveY", movementDirection.y);
+
+        }
+        animator.SetFloat("Speed", movementSpeed);
     }
 
-    void animateMovement()
-    {
-        if(movementDirection != Vector2.zero){
-            animator.SetFloat("moveX",movementDirection.x);
-            animator.SetFloat("moveY",movementDirection.y);
-        
-        }
-            animator.SetFloat("Speed",movementSpeed);
-    }
-        
+    
+    // set attacking direction object's position
     void Aim(){
-        
             if (movementDirection != Vector2.zero){
-            crosshair.transform.localPosition = movementDirection*3;
+            attackingDirection.transform.localPosition = movementDirection;
             }
         }
 
     void Attack(){
-        attackingDirection = crosshair.transform.localPosition; // vector to crosshair obj
-        attackingDirection.Normalize(); //ignore magnitude
-        
 
         if(useSkill_1){ 
-          this.GetComponent<Abilities>().rockAim();
+          this.GetComponent<Abilities>().RockAim();
         }
         
         
          if(useSkill_2){
-          this.GetComponent<Abilities>().rockMouse();
+          this.GetComponent<Abilities>().RockMouse();
         }
         if (baseAttack)
         {
-            this.GetComponent<PlayerAttack>().Attack();
+            this.GetComponent<BasicAttack>().Attack();
         }
     }
-    
+
 }

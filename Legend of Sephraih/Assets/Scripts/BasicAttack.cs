@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class BasicAttack : MonoBehaviour
 {
-    private float delay;
-    public float startDelay;
     public int damage;
+    public float startDelay;
+    private float delay;
 
 
     public LayerMask whatIsEnemy;
 
     private Transform attackPos;
-    public float attackRangeX=2;
-    public float attackRangeY=1;
+    private float attackRangeX=2.5f;
+    private float attackRangeY=1.5f;
 
     private GameObject slashEffect;
 

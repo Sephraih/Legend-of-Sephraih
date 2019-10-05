@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     
     private void Start() {
-    attackingDirection.transform.localPosition = new Vector2(0,-1);
+    attackingDirection.transform.localPosition = new Vector2(0,-0.5f);
     }
 
     void Update()
@@ -62,20 +62,21 @@ public class PlayerController : MonoBehaviour
     // set attacking direction object's position
     void Aim(){
             if (movementDirection != Vector2.zero){
-            attackingDirection.transform.localPosition = movementDirection;
+            attackingDirection.transform.localPosition = movementDirection*0.5f;
             }
         }
 
     void Attack(){
 
         if(useSkill_1){ 
-          this.GetComponent<Abilities>().RockAim();
+    //      this.GetComponent<Abilities>().RockAim();
         }
         
         
-         if(useSkill_2){
-          this.GetComponent<Abilities>().RockMouse();
+        if(useSkill_2){
+         this.GetComponent<FireBolt>().Blast();
         }
+
         if (baseAttack)
         {
             this.GetComponent<BasicAttack>().Attack();

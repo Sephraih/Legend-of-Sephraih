@@ -12,6 +12,8 @@ public class EnemyController : MonoBehaviour
     public float movementSpeed;
     public float MOVEMENT_BASE_SPEED = 1.0f;
 
+
+    private GameObject epf;
     
     private Rigidbody2D rb;
     private GameObject player;
@@ -20,6 +22,7 @@ public class EnemyController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
+        epf = Resources.Load("Enemy") as GameObject;
     }
 
     void Update()
@@ -58,5 +61,12 @@ public class EnemyController : MonoBehaviour
     void Attack(){
         this.GetComponent<BasicAttack>().Attack();
     }
-        
+
+    private void OnDestroy()
+    {
+
+        Instantiate(epf, new Vector3(0, 0, 0), Quaternion.identity);
+
+    }
+
 }

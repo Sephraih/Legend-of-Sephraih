@@ -13,7 +13,6 @@ public class EnemyController : MonoBehaviour
     public float MOVEMENT_BASE_SPEED = 1.0f;
 
 
-    private GameObject epf;
     
     private Rigidbody2D rb;
     private GameObject player;
@@ -21,8 +20,6 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.Find("Player");
-        epf = Resources.Load("Enemy") as GameObject;
     }
 
     void Update()
@@ -30,10 +27,13 @@ public class EnemyController : MonoBehaviour
      Move();
      Aim();
      Attack();
+     Die();
     }
 
     void Move(){
-        
+
+        player = GameObject.Find("Player");
+
         movementDirection = new Vector2(-1*(rb.position.x - player.transform.position.x),-1* (rb.position.y - player.transform.position.y));
         movementDirection.Normalize();
         movementSpeed = Mathf.Clamp(movementDirection.magnitude,0.0f,1.0f);
@@ -62,11 +62,14 @@ public class EnemyController : MonoBehaviour
         this.GetComponent<BasicAttack>().Attack();
     }
 
-    private void OnDestroy()
+    private void Die()
     {
-
-        Instantiate(epf, new Vector3(0, 0, 0), Quaternion.identity);
-
+        if (this.GetComponent<HealthController>().health <= 0)
+        {
+            Instantiate((Resources.Load("Enemy") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate((Resources.Load("Enemy") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
+            Destroy(gameObject);
+        }
     }
 
 }

@@ -26,10 +26,7 @@ public class HealthController : MonoBehaviour
         
 
         Debug.Log("took dmg" + damage);
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+        
     }
 
     public void Heal(int heal) {

@@ -17,13 +17,14 @@ public class PlayerController : MonoBehaviour
     private bool useSkill_2;
     private bool baseAttack;
 
-    
-    
+
+
     public GameObject attackingDirection;
 
-    
-    private void Start() {
-    attackingDirection.transform.localPosition = new Vector2(0,-0.5f);
+
+    private void Start()
+    {
+        attackingDirection.transform.localPosition = new Vector2(0, -0.5f);
     }
 
     void Update()
@@ -34,11 +35,12 @@ public class PlayerController : MonoBehaviour
         Attack();
     }
 
-    void ProcessInputs(){
+    void ProcessInputs()
+    {
 
-        movementDirection = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+        movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         movementDirection.Normalize();
-        movementSpeed = Mathf.Clamp(movementDirection.magnitude,0.0f,1.0f);
+        movementSpeed = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
 
         useSkill_1 = Input.GetButtonUp("Fire1");
         useSkill_2 = Input.GetButtonUp("Fire2");
@@ -46,8 +48,9 @@ public class PlayerController : MonoBehaviour
     }
 
     //move player based on input and play movement animation
-    void Move(){
-        rb.velocity = movementDirection * movementSpeed *MOVEMENT_BASE_SPEED;
+    void Move()
+    {
+        rb.velocity = movementDirection * movementSpeed * MOVEMENT_BASE_SPEED;
 
         if (movementDirection != Vector2.zero)
         {
@@ -58,28 +61,34 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Speed", movementSpeed);
     }
 
-    
+
     // set attacking direction object's position
-    void Aim(){
-            if (movementDirection != Vector2.zero){
-            attackingDirection.transform.localPosition = movementDirection*0.5f;
-            }
+    void Aim()
+    {
+        if (movementDirection != Vector2.zero)
+        {
+            attackingDirection.transform.localPosition = movementDirection * 0.5f;
+        }
+    }
+
+    void Attack()
+    {
+
+        if (useSkill_1)
+        {
+            this.GetComponent<BasicAttack>().Attack();
+
         }
 
-    void Attack(){
 
-        if(useSkill_1){ 
-    //      this.GetComponent<Abilities>().RockAim();
-        }
-        
-        
-        if(useSkill_2){
-         this.GetComponent<FireBolt>().Blast();
+        if (useSkill_2)
+        {
+            this.GetComponent<FireBolt>().Blast();
         }
 
         if (baseAttack)
         {
-            this.GetComponent<BasicAttack>().Attack();
+            this.GetComponent<TrippleAttack>().Attack();
         }
     }
 

@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicAttack : MonoBehaviour
+public class TrippleAttack : MonoBehaviour
 {
     public int damage;
     public float startDelay;
     private float delay;
+    private int maxCombo = 3;
+    private int comboCount = 1;
+    private float comboDelay = 0.1f;
 
 
     public LayerMask whatIsEnemy;
@@ -17,8 +20,6 @@ public class BasicAttack : MonoBehaviour
 
     private GameObject slashEffect;
 
-
-    public Gradient particleColorGradient;
 
 
     private void Start()
@@ -44,6 +45,18 @@ public class BasicAttack : MonoBehaviour
             //get particle system to set it's color
             var a = slash.GetComponent<ParticleSystem>().main;
 
+            //set color depending on combo
+            if (comboCount == 2)
+            {
+                a.startColor = Color.blue;
+
+            }
+            if (comboCount == 3)
+            {
+                a.startColor = Color.red;
+
+            }
+
             //effect
             slash.transform.parent = transform;
             slash.transform.Rotate(Mathf.Atan2(attackPos.localPosition.x, attackPos.localPosition.y) * Mathf.Rad2Deg, +90, 0);
@@ -53,10 +66,17 @@ public class BasicAttack : MonoBehaviour
             Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(attackRangeX, attackRangeY), attackPos.localPosition.x * 90, whatIsEnemy);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<HealthController>().TakeDamage(damage);
+                enemiesToDamage[i].GetComponent<HealthController>().TakeDamage(damage * comboCount);
             }
+            comboCount++;
+            delay = comboDelay;
+
+            if (comboCount > maxCombo)
+            {
                 delay = startDelay;
-            
+                comboCount = 1;
+            }
+
         }
     }
 

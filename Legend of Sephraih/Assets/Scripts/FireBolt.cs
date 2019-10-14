@@ -26,10 +26,10 @@ public class FireBolt : MonoBehaviour
 
         if (timeBtwShots <= 0)
         {
-            
-                Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
-                timeBtwShots = starTimeBtwShots;
-            
+            //instantiates a projectile prefab which contains an attached projectile script handling the movement and destruction of itself
+            Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
+            timeBtwShots = starTimeBtwShots;
+
         }
 
     }

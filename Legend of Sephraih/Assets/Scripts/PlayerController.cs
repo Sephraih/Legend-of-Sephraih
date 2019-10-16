@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
         if (baseAttack)
         {
-            this.GetComponent<TrippleAttack>().Attack();
+            this.GetComponent<MultiSlash>().Attack();
         }
     }
 

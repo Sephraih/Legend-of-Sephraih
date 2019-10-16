@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrippleAttack : MonoBehaviour
+public class MultiSlash : MonoBehaviour
 {
     public int damage;
     public float startDelay;
     private float delay;
-    private int maxCombo = 3;
+    private int maxCombo = 5;
     private int comboCount = 1;
     private float comboDelay = 0.1f;
 
@@ -25,7 +25,7 @@ public class TrippleAttack : MonoBehaviour
     private void Start()
     {
         attackPos = transform.GetChild(0);
-        slashEffect = Resources.Load("ParticleSlash") as GameObject;
+        slashEffect = Resources.Load("Prefabs/ParticleSlashPrefab") as GameObject;
     }
     void Update()
     {
@@ -48,10 +48,20 @@ public class TrippleAttack : MonoBehaviour
             //set color depending on combo
             if (comboCount == 2)
             {
-                a.startColor = Color.blue;
+                a.startColor = Color.cyan;
 
             }
             if (comboCount == 3)
+            {
+                a.startColor = Color.blue;
+
+            }
+            if (comboCount == 4)
+            {
+                a.startColor = Color.magenta;
+
+            }
+            if (comboCount == 5)
             {
                 a.startColor = Color.red;
 

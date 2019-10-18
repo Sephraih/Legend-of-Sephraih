@@ -7984,7 +7984,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 30
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -9554,7 +9554,6 @@ MonoBehaviour:
   health: 100
   RandomizeIntensity: {x: 0.5, y: 0, z: 0}
   ht: {fileID: 0}
-  lastdmg: 0
 --- !u!95 &913296798
 Animator:
   serializedVersion: 3
@@ -16713,6 +16712,24 @@ PrefabInstance:
     - target: {fileID: 5765252530442742022, guid: 4f5f866bdc4e81147887548c409fde77,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765252530442742074, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765252528384337072, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539615717, guid: 4f5f866bdc4e81147887548c409fde77, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1046364321, guid: 4f5f866bdc4e81147887548c409fde77, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

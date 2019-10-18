@@ -7,7 +7,7 @@ public class MultiSlash : MonoBehaviour
     public int damage;
     public float startDelay;
     private float delay;
-    private int maxCombo = 5;
+    private int maxCombo = 6;
     private int comboCount = 1;
     private float comboDelay = 0.1f;
 
@@ -19,14 +19,15 @@ public class MultiSlash : MonoBehaviour
     private float attackRangeY = 1.5f;
 
     private GameObject slashEffect;
-
-
+    private Color slashcolor;
+    
 
     private void Start()
     {
         attackPos = transform.GetChild(0);
         slashEffect = Resources.Load("Prefabs/ParticleSlashPrefab") as GameObject;
     }
+
     void Update()
     {
         if (delay >= 0)
@@ -43,29 +44,23 @@ public class MultiSlash : MonoBehaviour
             GameObject slash = Instantiate(slashEffect, transform.position + attackPos.localPosition, Quaternion.identity);
 
             //get particle system to set it's color
-            var a = slash.GetComponent<ParticleSystem>().main;
+            ParticleSystem.MainModule slashParticleMain = slash.GetComponent<ParticleSystem>().main;
+            
 
             //set color depending on combo
-            if (comboCount == 2)
-            {
-                a.startColor = Color.cyan;
 
-            }
             if (comboCount == 3)
             {
-                a.startColor = Color.blue;
-
-            }
-            if (comboCount == 4)
-            {
-                a.startColor = Color.magenta;
+                slashcolor = Color.cyan;
 
             }
             if (comboCount == 5)
             {
-                a.startColor = Color.red;
+                slashcolor = Color.blue;
 
             }
+            slashParticleMain.startColor = slashcolor;
+
 
             //effect
             slash.transform.parent = transform;

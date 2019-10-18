@@ -11,6 +11,7 @@ public class HealthController : MonoBehaviour
     public Vector3 RandomizeIntensity = new Vector3(0.5f,0,0);
 
     public GameObject ht;
+    public int lastdmg;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class HealthController : MonoBehaviour
         Destroy(blood, 0.7f);
 
         ShowHealthText(damage);
+        lastdmg = damage;
         health -= damage;
         
         Debug.Log("took dmg" + damage);

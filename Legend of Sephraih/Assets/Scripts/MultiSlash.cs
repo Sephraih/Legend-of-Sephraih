@@ -19,7 +19,6 @@ public class MultiSlash : MonoBehaviour
     private float attackRangeY = 1.5f;
 
     private GameObject slashEffect;
-    private Color slashcolor;
     
 
     private void Start()
@@ -49,18 +48,17 @@ public class MultiSlash : MonoBehaviour
 
             //set color depending on combo
 
-            if (comboCount == 3)
+            if (comboCount >= 3)
             {
-                slashcolor = Color.cyan;
+                slashParticleMain.startColor = Color.cyan;
 
             }
-            if (comboCount == 5)
+            if (comboCount >= 5)
             {
-                slashcolor = Color.blue;
+                slashParticleMain.startColor = Color.blue;
 
             }
-            slashParticleMain.startColor = slashcolor;
-
+            
 
             //effect
             slash.transform.parent = transform;

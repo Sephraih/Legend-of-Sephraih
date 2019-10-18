@@ -8,7 +8,7 @@ public class HealthController : MonoBehaviour
     public int health = 100;
     private GameObject healthText;
     private GameObject BloodEffect;
-    public Vector3 RandomizeIntensity = new Vector3(0.5f,0,0);
+    private Vector3 RandomizeIntensity = new Vector3(0.5f,0,0);
 
     public GameObject ht;
 

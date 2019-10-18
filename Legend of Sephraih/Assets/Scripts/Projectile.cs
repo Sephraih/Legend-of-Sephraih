@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
             {
                 Debug.Log("enemy damage taken");
                 hitInfo.collider.GetComponent<HealthController>().TakeDamage(50);
-                //DestroyProjectile();
+                DestroyProjectile();
             }
             
         }

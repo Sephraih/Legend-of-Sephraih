@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7170307868503398169}
   - component: {fileID: 2835216819972123913}
   m_Layer: 0
-  m_Name: FireBolt(ws)
+  m_Name: FireBoltPrefab(ws)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
-  destroyEffect: {fileID: 8287766920023427210, guid: c906b5ba1207b3a45b00fb354bc6e6a4,
+  destroyEffect: {fileID: 1011458117992520537, guid: 4a1aa3580c0998344bbb22c4b7bcec5b,
     type: 3}
 --- !u!198 &7170307868503398169
 ParticleSystem:

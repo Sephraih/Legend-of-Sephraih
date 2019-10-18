@@ -59,7 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -347,7 +347,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -1888405239356951315, guid: 61ff590124f6fc245a9d1a627bf5917f,
     type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.103773594, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -454,7 +454,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 500
   health: 100
-  RandomizeIntensity: {x: 0.5, y: 0, z: 0}
   ht: {fileID: 0}
 --- !u!114 &5765252528384337082
 MonoBehaviour:

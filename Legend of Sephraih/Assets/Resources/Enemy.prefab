@@ -518,7 +518,7 @@ MonoBehaviour:
   matk: 5
   aspd: 1
   mvspd: 3
-  dmvspd: 3
+  dmvspd: 5
   crit: 0
   burnEffect: {fileID: 5987478075576669587, guid: b3cf8b2afe9be424a871a64504cd751b,
     type: 3}

@@ -6,11 +6,12 @@ public class EnemyController : MonoBehaviour
 {
 
     public Animator animator;
-    public Vector2 movementDirection;
     public GameObject attackingDirection;
 
-    public float movementSpeed;
-    public float MOVEMENT_BASE_SPEED = 1.0f;
+    public Vector2 movementDirection;
+    private float movementSpeedInput;
+
+    public float movementSpeed = 1.0f;
 
 
 
@@ -28,6 +29,7 @@ public class EnemyController : MonoBehaviour
         Aim();
         Attack();
         Die();
+        UpdateStatus();
     }
 
     void Move()
@@ -37,8 +39,8 @@ public class EnemyController : MonoBehaviour
 
         movementDirection = new Vector2(-1 * (rb.position.x - player.transform.position.x), -1 * (rb.position.y - player.transform.position.y));
         movementDirection.Normalize();
-        movementSpeed = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
-        rb.velocity = movementDirection * movementSpeed * MOVEMENT_BASE_SPEED;
+        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
+        rb.velocity = movementDirection * movementSpeedInput * movementSpeed;
 
         // movement animation
         if (movementDirection != Vector2.zero)
@@ -47,7 +49,7 @@ public class EnemyController : MonoBehaviour
             animator.SetFloat("moveY", movementDirection.y);
 
         }
-        animator.SetFloat("Speed", movementSpeed);
+        animator.SetFloat("Speed", movementSpeedInput);
     }
 
     void Aim()
@@ -56,6 +58,11 @@ public class EnemyController : MonoBehaviour
         {
             attackingDirection.transform.localPosition = movementDirection;
         }
+    }
+
+    void UpdateStatus() {
+        movementSpeed = this.GetComponent<StatusController>().mvspd;
+        
     }
 
 

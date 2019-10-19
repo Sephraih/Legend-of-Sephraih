@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class FireBolt : MonoBehaviour
 {
-    public float offset;
+    private float offset =-90.0f;
+    public string enemy="Enemy";
 
     public GameObject projectile;
     public Transform shotPoint;
@@ -27,7 +28,11 @@ public class FireBolt : MonoBehaviour
         if (timeBtwShots <= 0)
         {
             //instantiates a projectile prefab which contains an attached projectile script handling the movement and destruction of itself
-            Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
+            var bolt = Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
+            bolt.GetComponent<Projectile>().enemy = enemy;
+            bolt.GetComponent<Projectile>().dmg += this.GetComponent<StatusController>().matk;
+            bolt.GetComponent<Projectile>().dotd += this.GetComponent<StatusController>().matk;
+
             timeBtwShots = starTimeBtwShots;
 
         }

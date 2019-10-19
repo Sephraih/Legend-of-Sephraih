@@ -283,6 +283,8 @@ GameObject:
   - component: {fileID: 5765252530442742074}
   - component: {fileID: 5765252528384337072}
   - component: {fileID: 5765252528384337082}
+  - component: {fileID: 4671947060057722227}
+  - component: {fileID: 4981967574065911920}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -410,10 +412,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5765252530442742075}
-  movementDirection: {x: 0, y: 0}
   attackingDirection: {fileID: 5765252529138207894}
-  movementSpeed: 0
-  MOVEMENT_BASE_SPEED: 3
+  movementDirection: {x: 0, y: 0}
+  movementSpeed: 3
 --- !u!61 &5765252530442742074
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -501,3 +502,41 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+--- !u!114 &4671947060057722227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765252530442742076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3852cc262743a534eb60223a5fae5688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atk: 5
+  matk: 5
+  aspd: 1
+  mvspd: 3
+  dmvspd: 3
+  crit: 0
+  slows: 0
+  burnEffect: {fileID: 0}
+--- !u!114 &4981967574065911920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765252530442742076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e82ab83fa701c498069fa7b8e974a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: 0
+  enemy: Player
+  projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
+    type: 3}
+  shotPoint: {fileID: 5765252529138207895}
+  starTimeBtwShots: 1

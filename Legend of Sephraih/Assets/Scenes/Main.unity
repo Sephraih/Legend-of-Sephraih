@@ -9513,6 +9513,7 @@ GameObject:
   - component: {fileID: 913296797}
   - component: {fileID: 913296805}
   - component: {fileID: 913296806}
+  - component: {fileID: 913296807}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -9533,10 +9534,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 913296799}
-  movementDirection: {x: 0, y: 0}
-  movementSpeed: 0
-  MOVEMENT_BASE_SPEED: 10
   animator: {fileID: 913296798}
+  movementDirection: {x: 0, y: 0}
+  movementSpeedInput: 0
+  movementSpeed: 1
   attackingDirection: {fileID: 141768371}
 --- !u!114 &913296797
 MonoBehaviour:
@@ -9784,6 +9785,25 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &913296807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913296795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3852cc262743a534eb60223a5fae5688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atk: 10
+  matk: 10
+  aspd: 10
+  mvspd: 0
+  dmvspd: 10
+  crit: 0
+  burnEffect: {fileID: 0}
 --- !u!1001 &932262549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10150,6 +10170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1056363208}
+  - component: {fileID: 1056363209}
   m_Layer: 0
   m_Name: HorizontalTreeWallBot
   m_TagString: Untagged
@@ -10202,6 +10223,32 @@ Transform:
   m_Father: {fileID: 743237806}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1056363209
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056363207}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 124, y: 5}
+  m_EdgeRadius: 0
 --- !u!1001 &1056519982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12948,6 +12995,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1474549940}
+  - component: {fileID: 1474549941}
   m_Layer: 0
   m_Name: VerticalTreeWallRight
   m_TagString: Untagged
@@ -13002,6 +13050,32 @@ Transform:
   m_Father: {fileID: 743237806}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1474549941
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474549939}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 51}
+  m_EdgeRadius: 0
 --- !u!1001 &1475262798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13752,6 +13826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1679660158}
+  - component: {fileID: 1679660159}
   m_Layer: 0
   m_Name: HorizontalTreeWallTop
   m_TagString: Untagged
@@ -13804,6 +13879,32 @@ Transform:
   m_Father: {fileID: 743237806}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1679660159
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1679660157}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 2.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 124, y: 5}
+  m_EdgeRadius: 0
 --- !u!1001 &1692442696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14127,6 +14228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1743833753}
+  - component: {fileID: 1743833754}
   m_Layer: 0
   m_Name: VerticalTreeWallLeft
   m_TagString: Untagged
@@ -14181,6 +14283,32 @@ Transform:
   m_Father: {fileID: 743237806}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1743833754
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743833752}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 51}
+  m_EdgeRadius: 0
 --- !u!1001 &1755756397
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16730,6 +16858,31 @@ PrefabInstance:
     - target: {fileID: 1046364321, guid: 4f5f866bdc4e81147887548c409fde77, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765252530442742077, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: movementSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671947060057722227, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: atk
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671947060057722227, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: matk
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671947060057722227, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: aspd
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4671947060057722227, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: mvspd
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f5f866bdc4e81147887548c409fde77, type: 3}

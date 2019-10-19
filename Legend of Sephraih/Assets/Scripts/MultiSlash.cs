@@ -11,6 +11,8 @@ public class MultiSlash : MonoBehaviour
     private int comboCount = 1;
     private float comboDelay = 0.1f;
 
+    private int userAtk;
+
 
     public LayerMask whatIsEnemy;
 
@@ -45,6 +47,8 @@ public class MultiSlash : MonoBehaviour
             //get particle system to set it's color
             ParticleSystem.MainModule slashParticleMain = slash.GetComponent<ParticleSystem>().main;
             
+            userAtk = transform.GetComponent<StatusController>().atk;
+
 
             //set color depending on combo
 
@@ -69,7 +73,7 @@ public class MultiSlash : MonoBehaviour
             Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(attackRangeX, attackRangeY), attackPos.localPosition.x * 90, whatIsEnemy);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                enemiesToDamage[i].GetComponent<HealthController>().TakeDamage(damage * comboCount);
+                enemiesToDamage[i].GetComponent<HealthController>().TakeDamage((damage +userAtk)  * comboCount);
             }
             comboCount++;
             delay = comboDelay;

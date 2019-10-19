@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public string enemy ="Enemy";
     public float speed;
     public float lifetime;
     public float distance;
+    public int dmg;
+    public int dotd;
+    public int dott;
+    public float slow;
+
     public LayerMask whatIsEnemy;
 
     public GameObject destroyEffect;
@@ -17,17 +23,19 @@ public class Projectile : MonoBehaviour
     }
     private void Update()
     {
-       RaycastHit2D hitInfo = Physics2D.Raycast(transform.position,Vector2.up, distance);
+        RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, distance);
 
-        if(hitInfo.collider != null)
+        if (hitInfo.collider != null)
         {
-            if (hitInfo.collider.CompareTag("Enemy"))
+            if (hitInfo.collider.CompareTag(enemy))
             {
                 Debug.Log("enemy damage taken");
-                hitInfo.collider.GetComponent<HealthController>().TakeDamage(50);
+                hitInfo.collider.GetComponent<HealthController>().TakeDamage(dmg);
+                hitInfo.collider.GetComponent<StatusController>().Burn(dotd, dott,slow);
+
                 DestroyProjectile();
             }
-            
+
         }
 
 

@@ -7,11 +7,13 @@ public class PlayerController : MonoBehaviour
 
 
     public Rigidbody2D rb;
+    public Animator animator;
 
     public Vector2 movementDirection; // from input
-    public float movementSpeed; //from input
-    public float MOVEMENT_BASE_SPEED = 1.0f;
-    public Animator animator;
+    public float movementSpeedInput; //from input
+
+
+    public float movementSpeed = 1.0f;
 
     private bool useSkill_1;
     private bool useSkill_2;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
         Move();
         Aim();
         Attack();
+        StatusUpdate();
     }
 
     void ProcessInputs()
@@ -40,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         movementDirection.Normalize();
-        movementSpeed = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
+        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
 
         useSkill_1 = Input.GetButtonUp("Fire1");
         useSkill_2 = Input.GetButtonUp("Fire2");
@@ -50,7 +53,7 @@ public class PlayerController : MonoBehaviour
     //move player based on input and play movement animation
     void Move()
     {
-        rb.velocity = movementDirection * movementSpeed * MOVEMENT_BASE_SPEED;
+        rb.velocity = movementDirection * movementSpeedInput * movementSpeed;
 
         if (movementDirection != Vector2.zero)
         {
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
             animator.SetFloat("moveY", movementDirection.y);
 
         }
-        animator.SetFloat("Speed", movementSpeed);
+        animator.SetFloat("Speed", movementSpeedInput);
     }
 
 
@@ -69,6 +72,12 @@ public class PlayerController : MonoBehaviour
         {
             attackingDirection.transform.localPosition = movementDirection * 0.5f;
         }
+    }
+
+
+    void StatusUpdate()
+    {
+        movementSpeed = this.GetComponent<StatusController>().mvspd;
     }
 
     void Attack()

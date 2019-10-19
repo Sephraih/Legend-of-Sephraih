@@ -111,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c22217599e5592946a06b570f35bfed4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: Enemy
   speed: 60
   lifetime: 0.5
   distance: 0.5
@@ -121,7 +122,7 @@ MonoBehaviour:
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
-  destroyEffect: {fileID: 1011458117992520537, guid: 4a1aa3580c0998344bbb22c4b7bcec5b,
+  destroyEffect: {fileID: 986805914817456092, guid: 25abb332a4bf4a843aa274daafa7adfc,
     type: 3}
 --- !u!198 &7170307868503398169
 ParticleSystem:

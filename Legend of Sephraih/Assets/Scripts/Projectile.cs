@@ -44,7 +44,7 @@ public class Projectile : MonoBehaviour
 
     void DestroyProjectile()
     {
-        GameObject a = Instantiate(destroyEffect, transform.position, Quaternion.identity);
+        GameObject a = Instantiate(destroyEffect, transform.position, Quaternion.Euler(0, 0f, 0f));
         Destroy(a, 1);
         Destroy(gameObject);
     }

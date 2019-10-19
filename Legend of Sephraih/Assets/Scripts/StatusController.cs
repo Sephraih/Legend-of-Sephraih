@@ -42,6 +42,10 @@ public class StatusController : MonoBehaviour
     IEnumerator DoTCoroutine(float dmg, float time)
     {
         float amountDamaged = 0;
+        GameObject burn = Instantiate(burnEffect, transform.position, Quaternion.Euler(-90f, 0f,0f));
+        burn.transform.parent = transform;
+
+        Destroy(burn, time);
         while (amountDamaged < dmg)
         {
             // apply dmg dmg/time

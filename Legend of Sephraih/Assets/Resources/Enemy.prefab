@@ -520,8 +520,8 @@ MonoBehaviour:
   mvspd: 3
   dmvspd: 3
   crit: 0
-  slows: 0
-  burnEffect: {fileID: 0}
+  burnEffect: {fileID: 5987478075576669587, guid: b3cf8b2afe9be424a871a64504cd751b,
+    type: 3}
 --- !u!114 &4981967574065911920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,7 +534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e82ab83fa701c498069fa7b8e974a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: 0
   enemy: Player
   projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
     type: 3}

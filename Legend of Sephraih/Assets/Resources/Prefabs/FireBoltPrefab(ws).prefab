@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: Enemy
-  speed: 60
+  speed: 50
   lifetime: 0.5
   distance: 0.5
   dmg: 50

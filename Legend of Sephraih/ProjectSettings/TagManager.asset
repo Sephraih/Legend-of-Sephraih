@@ -16,7 +16,7 @@ TagManager:
   - 
   - Enemy
   - Player
-  - 
+  - effect
   - 
   - 
   - 
@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: effects
+    uniqueID: 4169905155
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

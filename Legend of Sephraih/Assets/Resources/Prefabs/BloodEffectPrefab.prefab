@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8287766920023427205}
   - component: {fileID: 8287766920023427207}
   - component: {fileID: 8287766920023427204}
-  m_Layer: 0
-  m_Name: BloodEffect
+  m_Layer: 10
+  m_Name: BloodEffectPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

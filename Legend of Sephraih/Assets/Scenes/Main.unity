@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 3854664}
   - component: {fileID: 3854666}
   - component: {fileID: 3854665}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,8 +191,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -125062141
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -7594,7 +7594,7 @@ MonoBehaviour:
   projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
     type: 3}
   shotPoint: {fileID: 847575888}
-  starTimeBtwShots: 0.5
+  startTimeBtwShots: 0
 --- !u!114 &424657726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10280,7 +10280,7 @@ MonoBehaviour:
   projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
     type: 3}
   shotPoint: {fileID: 141768372}
-  starTimeBtwShots: 0.5
+  startTimeBtwShots: 0
 --- !u!114 &913296806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10541,7 +10541,7 @@ MonoBehaviour:
   projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
     type: 3}
   shotPoint: {fileID: 460071110}
-  starTimeBtwShots: 0.5
+  startTimeBtwShots: 0
 --- !u!114 &972581351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13901,8 +13901,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -125062141
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0
@@ -21612,8 +21612,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -125062141
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_SortMode: 0

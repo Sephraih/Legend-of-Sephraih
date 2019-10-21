@@ -25,6 +25,7 @@ public class BasicAttack : MonoBehaviour
     {
         attackPos = transform.GetChild(0);
         slashEffect = Resources.Load("prefabs/ParticleSlashPrefab") as GameObject;
+        
     }
     void Update()
     {

@@ -8,7 +8,7 @@ public class PlayerOneController : MonoBehaviour
 
     public Rigidbody2D rb;
     public Animator animator;
-   
+
 
 
     public Vector2 movementDirection; // from input
@@ -29,7 +29,7 @@ public class PlayerOneController : MonoBehaviour
     private void Start()
     {
         attackingDirection.transform.localPosition = new Vector2(0, -0.5f);
-     
+
     }
 
     void Update()
@@ -90,11 +90,9 @@ public class PlayerOneController : MonoBehaviour
 
         if (useSkill_1)
         {
-            this.GetComponent<BasicAttack>().Attack();
-
+            this.GetComponent<FireBolt>().Blast();
         }
-
-
+        
         if (useSkill_2)
         {
             this.GetComponent<FireBolt>().Blast();

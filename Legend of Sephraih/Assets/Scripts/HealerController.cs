@@ -8,7 +8,7 @@ public class HealerController : MonoBehaviour
 
     public Rigidbody2D rb;
     public Animator animator;
-    
+
 
     public Vector2 movementDirection; // from input
     public float movementSpeedInput; //from input
@@ -30,7 +30,7 @@ public class HealerController : MonoBehaviour
     private void Start()
     {
         attackingDirection.transform.localPosition = new Vector2(0, -0.5f);
-        }
+    }
 
     void Update()
     {
@@ -41,7 +41,7 @@ public class HealerController : MonoBehaviour
         StatusUpdate();
     }
 
-   
+
     void ProcessInputs()
     {
 
@@ -90,10 +90,8 @@ public class HealerController : MonoBehaviour
 
         if (useSkill_1)
         {
-            this.GetComponent<BasicAttack>().Attack();
-
+            this.GetComponent<FireBolt>().Blast();
         }
-
 
         if (useSkill_2)
         {
@@ -102,7 +100,7 @@ public class HealerController : MonoBehaviour
 
         if (baseAttack)
         {
-            this.GetComponent<MultiSlash>().Attack();
+            this.GetComponent<FireBolt>().Blast();
         }
     }
 

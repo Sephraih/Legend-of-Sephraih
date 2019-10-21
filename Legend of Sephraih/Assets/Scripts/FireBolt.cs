@@ -11,7 +11,7 @@ public class FireBolt : MonoBehaviour
     public Transform shotPoint;
 
     private float timeBtwShots;
-    public float starTimeBtwShots;
+    public float startTimeBtwShots;
 
     private void Update()
     {
@@ -22,25 +22,52 @@ public class FireBolt : MonoBehaviour
     public void Blast()
     {
         Vector2 difference = transform.position - shotPoint.transform.position;
+        
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         shotPoint.transform.rotation = Quaternion.Euler(0f, 0f, rotZ - offset);
 
         if (timeBtwShots <= 0)
         {
-            //instantiates a projectile prefab which contains an attached projectile script handling the movement and destruction of itself
+            
+
             var bolt = Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
             bolt.GetComponent<Projectile>().enemy = enemy;
             bolt.GetComponent<Projectile>().dmg += this.GetComponent<StatusController>().matk;
             bolt.GetComponent<Projectile>().dotd += this.GetComponent<StatusController>().matk;
 
-            timeBtwShots = starTimeBtwShots;
+            timeBtwShots = startTimeBtwShots;
 
         }
 
     }
+
+
+
+    //same use as blast but shooting towards mouse position, delay zero for testing
+    public void BlastMouse()
+    {
+
+
+        Vector2 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - shotPoint.transform.position;
+
+        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg -180;
+        shotPoint.transform.rotation = Quaternion.Euler(0f, 0f, rotZ - offset);
+
+        if (timeBtwShots <= 0)
+        {
+            
+            var bolt = Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
+            bolt.GetComponent<Projectile>().enemy = enemy;
+            bolt.GetComponent<Projectile>().dmg += this.GetComponent<StatusController>().matk;
+            bolt.GetComponent<Projectile>().dotd += this.GetComponent<StatusController>().matk;
+            
+
+            timeBtwShots = 0f;
+
+        }
+
+    }
+
 }
 
 
-
-//mouse position
-//  Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - shotPoint.transform.position;

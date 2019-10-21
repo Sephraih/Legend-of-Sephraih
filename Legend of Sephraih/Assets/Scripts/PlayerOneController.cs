@@ -95,7 +95,7 @@ public class PlayerOneController : MonoBehaviour
         
         if (useSkill_2)
         {
-            this.GetComponent<FireBolt>().Blast();
+            this.GetComponent<FireBolt>().BlastMouse();
         }
 
         if (baseAttack)

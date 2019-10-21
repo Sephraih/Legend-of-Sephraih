@@ -44,7 +44,7 @@ public class Abilities : MonoBehaviour
 
     public void RockAim(){
         //instantiate arrow / throwable on player position + offset to shooting direction + offset to center according to playersprite
-        attackingDirection = this.GetComponent<PlayerController>().attackingDirection.transform.localPosition;
+        attackingDirection = this.GetComponent<PlayerOneController>().attackingDirection.transform.localPosition;
 
             GameObject projectile = Instantiate(slash,transform.position + new Vector3(0.5f*attackingDirection.x,0.5f*attackingDirection.y,0), Quaternion.identity);
             projectile.GetComponent<Rigidbody2D>().velocity = attackingDirection *abilitySpeed;

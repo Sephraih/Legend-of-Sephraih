@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
 
     public Animator animator;
     public GameObject attackingDirection;
+    public Camera mainCam;
 
     public Vector2 movementDirection;
     private float movementSpeedInput;
@@ -16,7 +17,7 @@ public class EnemyController : MonoBehaviour
 
 
     private Rigidbody2D rb;
-    private GameObject player;
+    private Transform player;
 
     void Start()
     {
@@ -35,7 +36,9 @@ public class EnemyController : MonoBehaviour
     void Move()
     {
 
-        player = GameObject.Find("Player");
+        player = Camera.main.GetComponent<camerafollow>().target;
+            //GameObject.Find("Player");
+        
 
         movementDirection = new Vector2(-1 * (rb.position.x - player.transform.position.x), -1 * (rb.position.y - player.transform.position.y));
         movementDirection.Normalize();

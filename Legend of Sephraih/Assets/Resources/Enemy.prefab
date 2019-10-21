@@ -413,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5765252530442742075}
   attackingDirection: {fileID: 5765252529138207894}
+  mainCam: {fileID: 0}
   movementDirection: {x: 0, y: 0}
   movementSpeed: 3
 --- !u!61 &5765252530442742074

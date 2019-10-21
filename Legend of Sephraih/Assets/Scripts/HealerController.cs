@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class HealerController : MonoBehaviour
 {
 
 
     public Rigidbody2D rb;
     public Animator animator;
+    
 
     public Vector2 movementDirection; // from input
     public float movementSpeedInput; //from input
@@ -21,13 +22,15 @@ public class PlayerController : MonoBehaviour
 
 
 
+
+
     public GameObject attackingDirection;
 
 
     private void Start()
     {
         attackingDirection.transform.localPosition = new Vector2(0, -0.5f);
-    }
+        }
 
     void Update()
     {
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
         StatusUpdate();
     }
 
+   
     void ProcessInputs()
     {
 
@@ -45,9 +49,10 @@ public class PlayerController : MonoBehaviour
         movementDirection.Normalize();
         movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
 
-        useSkill_1 = Input.GetButtonUp("Fire1");
-        useSkill_2 = Input.GetButtonUp("Fire2");
-        baseAttack = Input.GetButtonUp("Fire3");
+        baseAttack = Input.GetButtonUp("Attack");
+        useSkill_1 = Input.GetButtonUp("Skill1");
+        useSkill_2 = Input.GetButtonUp("Skill2");
+
     }
 
     //move player based on input and play movement animation

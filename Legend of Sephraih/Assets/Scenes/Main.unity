@@ -7591,7 +7591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: Enemy
-  projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
+  projectile: {fileID: 377115153599935253, guid: 937abaceb1382274482cceaa3e075edf,
     type: 3}
   shotPoint: {fileID: 847575888}
   startTimeBtwShots: 0

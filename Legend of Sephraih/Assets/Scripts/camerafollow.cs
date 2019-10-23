@@ -40,14 +40,14 @@ public class camerafollow : MonoBehaviour
             else if (target == ni)
             {
                 target.gameObject.SetActive(false);
-                target = ichi;
+                target = san;
             }
-            /* else if (target == san)
+             else if (target == san)
              {
                  target.gameObject.SetActive(false); 
                  target = ichi;
              }
-             */
+             
             target.gameObject.SetActive(true);
         }
 

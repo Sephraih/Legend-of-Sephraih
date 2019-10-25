@@ -7,9 +7,9 @@ public class StatusController : MonoBehaviour
 {
 
     //Stats
-    public int atk; //meelee damage factor
-    public int matk; //magic damage factor
-    public int aspd; // attack speed factor
+    public int atk; //melee attack stat
+    public int matk; //magical attack stat
+    public int aspd; // attack speed stat
 
 
     public float mvspd; // current movement speed

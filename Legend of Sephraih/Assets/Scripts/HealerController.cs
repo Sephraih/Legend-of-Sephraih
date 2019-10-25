@@ -106,7 +106,7 @@ public class HealerController : MonoBehaviour
 
         if (baseAttack)
         {
-            this.GetComponent<HealBolt>().Blast();
+            this.GetComponent<SelfHeal>().Heal();
         }
     }
 

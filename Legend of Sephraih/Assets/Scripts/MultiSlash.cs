@@ -73,6 +73,7 @@ public class MultiSlash : MonoBehaviour
             Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(attackRangeX, attackRangeY), attackPos.localPosition.x * 90, whatIsEnemy);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
+                if(enemiesToDamage[i].isTrigger)
                 enemiesToDamage[i].GetComponent<HealthController>().TakeDamage((damage +userAtk)  * comboCount);
             }
             comboCount++;

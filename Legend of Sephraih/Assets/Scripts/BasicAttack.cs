@@ -42,8 +42,6 @@ public class BasicAttack : MonoBehaviour
             // instantiate slash prefab
             GameObject slash = Instantiate(slashEffect, transform.position + attackPos.localPosition, Quaternion.identity);
 
-            //get particle system to set it's color
-            var a = slash.GetComponent<ParticleSystem>().main;
 
             //effect
             slash.transform.parent = transform;
@@ -53,7 +51,8 @@ public class BasicAttack : MonoBehaviour
             //determine damaged enemies, apply damage
             Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(attackRangeX, attackRangeY), attackPos.localPosition.x * 90, whatIsEnemy);
             for (int i = 0; i < enemiesToDamage.Length; i++)
-            {
+            {   
+                if(enemiesToDamage[i].isTrigger)
                 enemiesToDamage[i].GetComponent<HealthController>().TakeDamage(damage);
             }
                 delay = startDelay;
@@ -62,17 +61,3 @@ public class BasicAttack : MonoBehaviour
     }
 
 }
-
-
-
-/*void OnDrawGizmosSelected(){
-      Gizmos.color = Color.red;
-      Gizmos.DrawWireCube(attackPos.position, new Vector3(attackRangeX,attackRangeY,1));
-
-  }*/
-
-/*
-  
-                float x = Mathf.Pow(2,comboCount-1);
-                int z = Mathf.RoundToInt(x);
-*/

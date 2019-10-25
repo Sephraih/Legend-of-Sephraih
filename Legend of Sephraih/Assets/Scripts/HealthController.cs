@@ -8,7 +8,7 @@ public class HealthController : MonoBehaviour
     public int health = 100;
     private GameObject healthText;
     private GameObject BloodEffect;
-    private Vector3 RandomizeIntensity = new Vector3(0.5f,0,0);
+    private Vector3 RandomizeIntensity = new Vector3(0.5f, 0, 0);
 
     public GameObject ht;
 
@@ -22,21 +22,22 @@ public class HealthController : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        
+
         GameObject blood = Instantiate(BloodEffect, transform.position, Quaternion.identity);
         blood.transform.parent = transform;
         Destroy(blood, 0.7f);
 
         ShowHealthText(damage);
         health -= damage;
-        
+
         Debug.Log("took dmg" + damage);
 
     }
 
     public void Heal(int heal)
     {
-        health += heal;
+        if (health < MaxHealth) { health += heal; }
+        if (health > MaxHealth) { health = MaxHealth; }
     }
 
     public void ShowHealthText(int damage)
@@ -44,19 +45,19 @@ public class HealthController : MonoBehaviour
 
         if (healthText)
         {
-            ht = Instantiate(healthText, transform.position +new Vector3(0,1,0), Quaternion.identity);
+            ht = Instantiate(healthText, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             ht.GetComponent<TextMesh>().text = damage.ToString();
-            ht.transform.localPosition += new Vector3(Random.Range(-RandomizeIntensity.y,RandomizeIntensity.x),
+            ht.transform.localPosition += new Vector3(Random.Range(-RandomizeIntensity.y, RandomizeIntensity.x),
                 Random.Range(-RandomizeIntensity.y, RandomizeIntensity.y),
                 Random.Range(-RandomizeIntensity.z, RandomizeIntensity.z));
-           
+
 
             Destroy(ht, 2.0f);
         }
 
     }
 
-    
+
 
 }
 

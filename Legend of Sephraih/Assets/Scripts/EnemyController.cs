@@ -26,6 +26,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        Camera.main.GetComponent<camerafollow>().enemy = transform;
         Move();
         Aim();
         Attack();
@@ -37,8 +38,8 @@ public class EnemyController : MonoBehaviour
     {
 
         player = Camera.main.GetComponent<camerafollow>().target;
-            //GameObject.Find("Player");
-        
+        //GameObject.Find("Player");
+                
 
         movementDirection = new Vector2(-1 * (rb.position.x - player.transform.position.x), -1 * (rb.position.y - player.transform.position.y));
         movementDirection.Normalize();
@@ -79,7 +80,7 @@ public class EnemyController : MonoBehaviour
         if (this.GetComponent<HealthController>().health <= 0)
         {
 
-            Instantiate((Resources.Load("Enemy") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
+            Instantiate((Resources.Load("Prefabs/Enemy") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
             Destroy(gameObject);
         }
     }

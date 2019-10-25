@@ -4765,11 +4765,11 @@ GameObject:
   - component: {fileID: 377115153599935255}
   - component: {fileID: 377115153599935464}
   - component: {fileID: 7788534690252143451}
-  - component: {fileID: 6576802081623874161}
   - component: {fileID: 7584612224574373646}
   - component: {fileID: 3286307262618191134}
+  - component: {fileID: 8701589453168153675}
   m_Layer: 0
-  m_Name: HealCircle
+  m_Name: HealBolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4788,6 +4788,7 @@ Transform:
   m_Children:
   - {fileID: 8438042407475225546}
   - {fileID: 8312085722173210544}
+  - {fileID: 1269865510660742828}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4854,31 +4855,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6576802081623874161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 377115153599935253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c22217599e5592946a06b570f35bfed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: Enemy
-  speed: 20
-  lifetime: 1
-  distance: 0.5
-  dmg: 50
-  dotd: 100
-  dott: 10
-  slow: 0.5
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 256
-  destroyEffect: {fileID: 986805914817456092, guid: 25abb332a4bf4a843aa274daafa7adfc,
-    type: 3}
 --- !u!198 &7584612224574373646
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9601,6 +9577,32 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &8701589453168153675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377115153599935253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203588d31bb419341b8927d17cb80a57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: Player
+  user: {fileID: 0}
+  speed: 20
+  lifetime: 1
+  distance: 0.5
+  heal: 50
+  dotd: 0
+  dott: 0
+  slow: 0
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 512
+  destroyEffect: {fileID: 5802651140264993763, guid: fdb6ef943056669448a4d958f58b46e6,
+    type: 3}
 --- !u!1 &4536775374948747978
 GameObject:
   m_ObjectHideFlags: 0
@@ -14355,3 +14357,78 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!1001 &4690604031649168718
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 377115153599935255}
+    m_Modifications:
+    - target: {fileID: 5802651140264993763, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_Name
+      value: HealedEffectPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fdb6ef943056669448a4d958f58b46e6, type: 3}
+--- !u!4 &1269865510660742828 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5802651140264993762, guid: fdb6ef943056669448a4d958f58b46e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 4690604031649168718}
+  m_PrefabAsset: {fileID: 0}

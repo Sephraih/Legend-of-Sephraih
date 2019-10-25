@@ -13,6 +13,8 @@ public class HealerController : MonoBehaviour
     public Vector2 movementDirection; // from input
     public float movementSpeedInput; //from input
 
+    public bool isBot =true;
+
 
     public float movementSpeed = 1.0f;
 
@@ -34,10 +36,14 @@ public class HealerController : MonoBehaviour
 
     void Update()
     {
-        ProcessInputs();
-        Move();
-        Aim();
-        Attack();
+       
+        if (transform == Camera.main.GetComponent<camerafollow>().target)
+        {
+            ProcessInputs();
+            Move();
+            Aim();
+            Attack();
+        }
         StatusUpdate();
     }
 
@@ -90,17 +96,17 @@ public class HealerController : MonoBehaviour
 
         if (useSkill_1)
         {
-            this.GetComponent<FireBolt>().Blast();
+            this.GetComponent<HealBolt>().Blast();
         }
 
         if (useSkill_2)
         {
-            this.GetComponent<FireBolt>().BlastMouse();
+            this.GetComponent<HealBolt>().BlastMouse();
         }
 
         if (baseAttack)
         {
-            this.GetComponent<FireBolt>().Blast();
+            this.GetComponent<HealBolt>().Blast();
         }
     }
 

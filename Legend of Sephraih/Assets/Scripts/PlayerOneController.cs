@@ -15,8 +15,6 @@ public class PlayerOneController : MonoBehaviour
     public float movementSpeedInput; //from input
 
 
-    public float movementSpeed = 1.0f;
-
     private bool useSkill_1;
     private bool useSkill_2;
     private bool baseAttack;
@@ -34,11 +32,13 @@ public class PlayerOneController : MonoBehaviour
 
     void Update()
     {
-        ProcessInputs();
-        Move();
-        Aim();
-        Attack();
-        StatusUpdate();
+        if (transform == Camera.main.GetComponent<camerafollow>().target)
+        {
+            ProcessInputs();
+            Move();
+            Aim();
+            Attack();
+        }
     }
 
     void ProcessInputs()
@@ -58,7 +58,7 @@ public class PlayerOneController : MonoBehaviour
     //move player based on input and play movement animation
     void Move()
     {
-        rb.velocity = movementDirection * movementSpeedInput * movementSpeed;
+        rb.velocity = movementDirection * movementSpeedInput * this.GetComponent<StatusController>().mvspd;
 
         if (movementDirection != Vector2.zero)
         {
@@ -80,10 +80,6 @@ public class PlayerOneController : MonoBehaviour
     }
 
 
-    void StatusUpdate()
-    {
-        movementSpeed = this.GetComponent<StatusController>().mvspd;
-    }
 
     void Attack()
     {

@@ -10,13 +10,14 @@ public class camerafollow : MonoBehaviour
     public Transform ni;
     public Transform san;
     public Vector3 offset;
+    public Transform enemy;
 
 
 
     private void Start()
     {
         ni.gameObject.SetActive(true);
-        san.gameObject.SetActive(true);
+        // san.gameObject.SetActive(true);
     }
 
     void LateUpdate()
@@ -34,20 +35,21 @@ public class camerafollow : MonoBehaviour
         {
             if (target == ichi)
             {
-                target.gameObject.SetActive(false);
+                //target.gameObject.SetActive(false);
                 target = ni;
             }
             else if (target == ni)
             {
-                target.gameObject.SetActive(false);
-                target = san;
+                // target.gameObject.SetActive(false);
+                target = ichi;
             }
-             else if (target == san)
-             {
-                 target.gameObject.SetActive(false); 
-                 target = ichi;
-             }
-             
+
+            /*  else if (target == san)
+              {
+                  target.gameObject.SetActive(false); 
+                  target = ichi;
+              }*/
+
             target.gameObject.SetActive(true);
         }
 

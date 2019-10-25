@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class HealBoltProjectile : MonoBehaviour
 {
-    public string enemy ="Enemy";
+    public string target = "Player";
+    public Transform user;
+
     public float speed;
     public float lifetime;
     public float distance;
-    public int dmg;
+    public int heal;
     public int dotd;
     public int dott;
     public float slow;
@@ -27,12 +29,10 @@ public class Projectile : MonoBehaviour
 
         if (hitInfo.collider != null)
         {
-            if (hitInfo.collider.CompareTag(enemy))
+            if (hitInfo.collider.CompareTag(target) && hitInfo.collider.transform != user)
             {
-                Debug.Log("enemy damage taken");
-                hitInfo.collider.GetComponent<HealthController>().TakeDamage(dmg);
-                hitInfo.collider.GetComponent<StatusController>().Burn(dotd, dott,slow);
-
+                Debug.Log(hitInfo.collider);
+                hitInfo.collider.GetComponent<HealthController>().Heal(heal);
                 DestroyProjectile();
             }
 

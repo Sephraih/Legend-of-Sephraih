@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 3854664}
   - component: {fileID: 3854666}
   - component: {fileID: 3854665}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4971,7 +4971,7 @@ GameObject:
   - component: {fileID: 17665564}
   - component: {fileID: 17665566}
   - component: {fileID: 17665565}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Life
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6872,7 +6872,7 @@ GameObject:
   - component: {fileID: 305673699}
   - component: {fileID: 305673698}
   - component: {fileID: 305673701}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7527,6 +7527,7 @@ GameObject:
   - component: {fileID: 424657732}
   - component: {fileID: 424657731}
   - component: {fileID: 424657730}
+  - component: {fileID: 424657735}
   - component: {fileID: 424657729}
   - component: {fileID: 424657728}
   - component: {fileID: 424657727}
@@ -7534,6 +7535,8 @@ GameObject:
   - component: {fileID: 424657725}
   - component: {fileID: 424657724}
   - component: {fileID: 424657723}
+  - component: {fileID: 424657734}
+  - component: {fileID: 424657736}
   m_Layer: 9
   m_Name: Healer
   m_TagString: Player
@@ -7591,10 +7594,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: Enemy
-  projectile: {fileID: 377115153599935253, guid: 937abaceb1382274482cceaa3e075edf,
+  projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
     type: 3}
   shotPoint: {fileID: 847575888}
-  startTimeBtwShots: 0
+  startcd: 0
 --- !u!114 &424657726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7672,6 +7675,7 @@ MonoBehaviour:
   animator: {fileID: 424657729}
   movementDirection: {x: 0, y: 0}
   movementSpeedInput: 0
+  isBot: 0
   movementSpeed: 1
   attackingDirection: {fileID: 847575887}
 --- !u!95 &424657729
@@ -7808,6 +7812,70 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &424657734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424657722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 163ac87ff50eab7418567ba114d1e0e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: Player
+  projectile: {fileID: 377115153599935253, guid: 937abaceb1382274482cceaa3e075edf,
+    type: 3}
+  shotPoint: {fileID: 847575888}
+  startcd: 0.5
+--- !u!61 &424657735
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424657722}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.042, y: -0.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.0833334}
+    newSize: {x: 1, y: 1.0833334}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &424657736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424657722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e31e5b7619b384f4792e65cc4e7fc1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 424657731}
+  animator: {fileID: 424657729}
+  movementDirection: {x: 0, y: 0}
+  movementSpeedInput: 0
+  movementSpeed: 10
+  attackingDirection: {fileID: 847575887}
+  dps: {fileID: 913296801}
+  tank: {fileID: 972581358}
+  isBot: 0
 --- !u!4 &425878343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7480321473359576386, guid: 00713248121b4e942a3f5faa87138e92,
@@ -10044,6 +10112,8 @@ GameObject:
   - component: {fileID: 913296805}
   - component: {fileID: 913296806}
   - component: {fileID: 913296807}
+  - component: {fileID: 913296804}
+  - component: {fileID: 913296808}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -10264,6 +10334,32 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+--- !u!61 &913296804
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913296795}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.041999996, y: -0.0371989}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.0833334}
+    newSize: {x: 1, y: 1.0833334}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 1}
+  m_EdgeRadius: 0
 --- !u!114 &913296805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10280,7 +10376,7 @@ MonoBehaviour:
   projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
     type: 3}
   shotPoint: {fileID: 141768372}
-  startTimeBtwShots: 0
+  startcd: 0
 --- !u!114 &913296806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10318,6 +10414,25 @@ MonoBehaviour:
   crit: 0
   burnEffect: {fileID: 5987478075576669587, guid: b3cf8b2afe9be424a871a64504cd751b,
     type: 3}
+--- !u!114 &913296808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913296795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4192a10fae458b14d98b745ad5913ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 913296799}
+  animator: {fileID: 913296798}
+  movementDirection: {x: 0, y: 0}
+  movementSpeedInput: 0
+  movementSpeed: 1
+  attackingDirection: {fileID: 141768371}
+  isBot: 0
 --- !u!1001 &932262549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10474,20 +10589,21 @@ GameObject:
   - component: {fileID: 972581357}
   - component: {fileID: 972581356}
   - component: {fileID: 972581355}
+  - component: {fileID: 972581359}
   - component: {fileID: 972581354}
-  - component: {fileID: 972581353}
   - component: {fileID: 972581352}
   - component: {fileID: 972581351}
   - component: {fileID: 972581350}
   - component: {fileID: 972581349}
   - component: {fileID: 972581348}
+  - component: {fileID: 972581353}
   m_Layer: 9
   m_Name: tanktemp
   m_TagString: Player
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &972581348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10541,7 +10657,7 @@ MonoBehaviour:
   projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
     type: 3}
   shotPoint: {fileID: 460071110}
-  startTimeBtwShots: 0
+  startcd: 0
 --- !u!114 &972581351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10612,14 +10728,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 972581347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a73004c09ee7db46b674f51134e1f34, type: 3}
+  m_Script: {fileID: 11500000, guid: 33e67aeccda444e47b729db1fded2d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 972581356}
   animator: {fileID: 972581354}
   movementDirection: {x: 0, y: 0}
   movementSpeedInput: 0
-  movementSpeed: 1
+  movementSpeed: 10
   attackingDirection: {fileID: 460071109}
 --- !u!95 &972581354
 Animator:
@@ -10755,6 +10871,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &972581359
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972581347}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.042, y: -0.25}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1.0833334}
+    newSize: {x: 1, y: 1.0833334}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.67, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &977925640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12546,7 +12688,7 @@ GameObject:
   - component: {fileID: 1278468252}
   - component: {fileID: 1278468251}
   - component: {fileID: 1278468250}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19129,7 +19271,7 @@ GameObject:
   - component: {fileID: 1492140229}
   - component: {fileID: 1492140231}
   - component: {fileID: 1492140230}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: Life
   m_TagString: Untagged
   m_Icon: {fileID: 0}

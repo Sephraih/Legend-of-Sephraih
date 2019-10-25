@@ -64,6 +64,12 @@ public class HealBotBehaviour : MonoBehaviour
         {
             attackingDirection.transform.localPosition = movementDirection * 0.5f;
         }
+        else
+        {
+            var dir = dps.transform.position - transform.position;
+            attackingDirection.transform.localPosition = dir / dir.magnitude;
+
+        }
     }
 
     void UseSkills() {

@@ -96,7 +96,7 @@ public class HealerController : MonoBehaviour
 
         if (useSkill_1)
         {
-            this.GetComponent<HealBolt>().Blast();
+            this.GetComponent<HealWave>().BlastMouse();
         }
 
         if (useSkill_2)

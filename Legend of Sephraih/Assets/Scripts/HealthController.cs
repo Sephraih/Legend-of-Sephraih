@@ -9,6 +9,7 @@ public class HealthController : MonoBehaviour
     private GameObject dmgText;
     private GameObject healText;
     private GameObject BloodEffect;
+    private GameObject HealedEffect;
     private Vector3 RandomizeIntensity = new Vector3(0.5f, 0, 0);
 
     public GameObject ht;
@@ -18,6 +19,8 @@ public class HealthController : MonoBehaviour
         health = MaxHealth;
 
         BloodEffect = Resources.Load("Prefabs/BloodEffectPrefab") as GameObject;
+        HealedEffect = Resources.Load("Prefabs/HealedEffectPrefab") as GameObject;
+
         dmgText = Resources.Load("Prefabs/DmgTextPrefab") as GameObject;
         healText = Resources.Load("Prefabs/HealTextPrefab") as GameObject;
     }
@@ -38,6 +41,10 @@ public class HealthController : MonoBehaviour
 
     public void Heal(int heal)
     {
+        GameObject hef = Instantiate(HealedEffect, transform.position, Quaternion.identity);
+        hef.transform.parent = transform;
+        Destroy(hef, 1.0f);
+
         if (health < MaxHealth) { health += heal; }
         if (health > MaxHealth) { health = MaxHealth; }
         ShowHealText(heal);

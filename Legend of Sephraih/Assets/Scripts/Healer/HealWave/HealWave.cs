@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class HealBolt : MonoBehaviour
+public class HealWave : MonoBehaviour
 {
     private float offset = -90.0f;
-    public string target = "Player";
-    
+    public string friendly = "Player";
+    public string hostile = "Enemy";
 
     public GameObject projectile;
     public Transform shotPoint;
@@ -33,10 +33,14 @@ public class HealBolt : MonoBehaviour
 
 
             var bolt = Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
-            bolt.GetComponent<HealBoltProjectile>().target = target;
-            bolt.GetComponent<HealBoltProjectile>().heal += this.GetComponent<StatusController>().matk;
-            bolt.GetComponent<HealBoltProjectile>().user = transform;
-           cd = startcd;
+            Component boltProjectile = bolt.GetComponent<HealWaveProjectile>();
+            
+            bolt.GetComponent<HealWaveProjectile>().friendly = friendly;
+            bolt.GetComponent<HealWaveProjectile>().hostile = hostile;
+            bolt.GetComponent<HealWaveProjectile>().heal += this.GetComponent<StatusController>().matk;
+            bolt.GetComponent<HealWaveProjectile>().user = transform; 
+
+            cd = startcd;
 
         }
 
@@ -44,7 +48,7 @@ public class HealBolt : MonoBehaviour
 
 
 
-    //same use as blast but shooting towards mouse position, delay zero for testing
+    //same use as blast but shooting towards mouse position
     public void BlastMouse()
     {
 
@@ -58,11 +62,11 @@ public class HealBolt : MonoBehaviour
         {
 
             var bolt = Instantiate(projectile, transform.position, shotPoint.transform.rotation);
-            bolt.GetComponent<HealBoltProjectile>().target = target;
-            bolt.GetComponent<HealBoltProjectile>().heal += this.GetComponent<StatusController>().matk;
-            bolt.GetComponent<HealBoltProjectile>().user = transform;
+            bolt.GetComponent<HealWaveProjectile>().friendly = friendly;
+            bolt.GetComponent<HealWaveProjectile>().heal += this.GetComponent<StatusController>().matk;
+            bolt.GetComponent<HealWaveProjectile>().user = transform;
 
-            cd = 0f;
+            cd = startcd;
 
         }
 

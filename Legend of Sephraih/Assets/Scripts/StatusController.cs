@@ -18,6 +18,7 @@ public class StatusController : MonoBehaviour
     public int crit; //critical strike chance
 
     private int slows = 0; // counter to reset movement speed only when no slows are applied
+    private int mvspdboni = 0;
 
     //Status Effects
     public GameObject burnEffect;
@@ -34,10 +35,19 @@ public class StatusController : MonoBehaviour
 
     public void Burn(float totalDmg, float time, float slowAmt)
     {
-
         StartCoroutine(DoTCoroutine(totalDmg, time));
         StartCoroutine(SlowCoroutine(slowAmt, time));
     }
+
+    public void Slow(float slowAmt, float time) {
+        StartCoroutine(SlowCoroutine(slowAmt, time));
+    }
+
+    public void IncreaseMovementSpeed(float mvspdUpAmt, float time) {
+        StartCoroutine(MvspdUpCoroutine(mvspdUpAmt, time));
+    }
+
+
 
     IEnumerator DoTCoroutine(float dmg, float time)
     {
@@ -71,6 +81,21 @@ public class StatusController : MonoBehaviour
 
     }
 
+    IEnumerator MvspdUpCoroutine(float mvspdUp, float time)
+    {
+        mvspdboni++;
+        float count = 0.0f;
+        while (count < time)
+        {
+            mvspd = mvspdUp * dmvspd;
+            count += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        mvspdboni--;
+        if (slows == 0) mvspd = dmvspd;
+
+
+    }
 
 
 

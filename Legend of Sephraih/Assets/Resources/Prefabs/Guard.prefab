@@ -204,6 +204,8 @@ GameObject:
   - component: {fileID: 8970178574616923592}
   - component: {fileID: 104816430208220266}
   - component: {fileID: 1902846677811469099}
+  - component: {fileID: 1665300450}
+  - component: {fileID: 1665300451}
   m_Layer: 8
   m_Name: Guard
   m_TagString: Enemy
@@ -466,6 +468,32 @@ MonoBehaviour:
   guardPoint: {x: 5, y: 5}
   guardinitx: 5
   guardinity: 5
+  movementDirection: {x: 0, y: 0}
+--- !u!114 &1665300450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592420666366508164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 706d87db85444a04081f7d271dce956b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acd: 2
+--- !u!114 &1665300451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592420666366508164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffc0c99d37f6094bbc4bd5594b121f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   movementDirection: {x: 0, y: 0}
   movementSpeed: 1
 --- !u!1 &7592420667754977582

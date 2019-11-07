@@ -15,8 +15,7 @@ public class ChargeAttack : MonoBehaviour
             if (Vector2.Distance(transform.position, target.position) < 5.0f)
             {
                 chargeDirection = new Vector2(-1 * (transform.position.x - target.transform.position.x), -1 * (transform.position.y - target.transform.position.y));
-                chargeDirection.Normalize();
-
+                chargeDirection.Normalize();                                                           
                 transform.GetComponent<StatusController>().IncreaseMovementSpeed(10.0f, 0.2f);
                 target.GetComponent<HealthController>().TakeDamage(100);
                 cd = acd;

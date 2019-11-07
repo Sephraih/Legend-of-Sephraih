@@ -9,7 +9,7 @@ public class HealBotBehaviour : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
     public Vector2 movementDirection; // from input
-    public float movementSpeedInput; //from input
+    public float msi; //from input
 
     public GameObject attackingDirection;
 
@@ -43,17 +43,11 @@ public class HealBotBehaviour : MonoBehaviour
         }
         else movementDirection = new Vector2(0, 0);
 
-        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
-        rb.velocity = movementDirection * movementSpeedInput * this.GetComponent<StatusController>().mvspd;
+        msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
 
-        //mv anim
-        if (movementDirection != Vector2.zero)
-        {
-            animator.SetFloat("moveX", movementDirection.x);
-            animator.SetFloat("moveY", movementDirection.y);
+        GetComponent<MovementController>().Move(movementDirection, msi);
+        GetComponent<MovementController>().MovementAnimation();
 
-        }
-        animator.SetFloat("Speed", movementSpeedInput);
     }
 
 

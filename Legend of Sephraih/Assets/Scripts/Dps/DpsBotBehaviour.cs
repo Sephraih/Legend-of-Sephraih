@@ -11,7 +11,7 @@ public class DpsBotBehaviour : MonoBehaviour
     public Vector2 movementDirection; // from input
     public float movementSpeedInput; //from input
     public GameObject attackingDirection;
-    Transform enemy;
+    Transform target;
 
     public bool isBot = false;
 
@@ -21,8 +21,8 @@ public class DpsBotBehaviour : MonoBehaviour
         if (transform != Camera.main.GetComponent<camerafollow>().target)
         {
 
-            enemy = Camera.main.GetComponent<camerafollow>().enemy;
-            if (enemy)
+            target = Camera.main.GetComponent<camerafollow>().enemy;
+            if (target)
             {
                 Move();
                 Aim();
@@ -38,10 +38,11 @@ public class DpsBotBehaviour : MonoBehaviour
     void Move()
     {
 
-        movementDirection = new Vector2(-1 * (rb.position.x - enemy.transform.position.x), -1 * (rb.position.y - enemy.transform.position.y));
+        movementDirection = new Vector2(-1 * (rb.position.x - target.transform.position.x), -1 * (rb.position.y - target.transform.position.y));
         movementDirection.Normalize();
         movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
-        rb.velocity = movementDirection * movementSpeedInput * this.GetComponent<StatusController>().mvspd;
+        if (Vector2.Distance(transform.position, target.position) < 1.0f) { movementSpeedInput = 0.5f; }
+            rb.velocity = movementDirection * movementSpeedInput * this.GetComponent<StatusController>().mvspd;
 
         //mv anim
         if (movementDirection != Vector2.zero)
@@ -65,7 +66,10 @@ public class DpsBotBehaviour : MonoBehaviour
 
     void UseSkills()
     {
-        this.GetComponent<MultiSlash>().Attack();
+        if (Vector2.Distance(transform.position, target.position) < 1.0f)
+        {
+            this.GetComponent<MultiSlash>().Attack();
+        }
     }
 
 

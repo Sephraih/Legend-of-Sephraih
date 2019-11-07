@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 4671947060057722227}
   - component: {fileID: 4981967574065911920}
   - component: {fileID: 4047496929096329682}
+  - component: {fileID: 2006246590}
   m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
@@ -416,7 +417,6 @@ MonoBehaviour:
   attackingDirection: {fileID: 5765252529138207894}
   mainCam: {fileID: 0}
   movementDirection: {x: 0, y: 0}
-  movementSpeed: 3
 --- !u!61 &5765252530442742074
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3683b1e00d4e2a14b87f1a8ace30f7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 500
+  MaxHealth: 300
   health: 100
   ht: {fileID: 0}
 --- !u!114 &5765252528384337082
@@ -516,8 +516,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3852cc262743a534eb60223a5fae5688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atk: 5
-  matk: 5
+  atk: 1
+  matk: 1
   aspd: 1
   mvspd: 3
   dmvspd: 5
@@ -567,3 +567,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8848281, y: 1.0820003}
   m_EdgeRadius: 0
+--- !u!114 &2006246590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5765252530442742076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ffc0c99d37f6094bbc4bd5594b121f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5765252530442742075}

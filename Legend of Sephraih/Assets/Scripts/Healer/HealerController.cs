@@ -7,17 +7,15 @@ public class HealerController : MonoBehaviour
 
 
     public Rigidbody2D rb;
-    public Animator animator;
-
+    
 
     public Vector2 movementDirection; // from input
-    public float movementSpeedInput; //from input
+    public float msi; //from input
 
     public bool isBot =true;
 
 
-    public float movementSpeed = 1.0f;
-
+    
     private bool useSkill_1;
     private bool useSkill_2;
     private bool baseAttack;
@@ -40,11 +38,9 @@ public class HealerController : MonoBehaviour
         if (transform == Camera.main.GetComponent<camerafollow>().target)
         {
             ProcessInputs();
-            Move();
             Aim();
             Attack();
         }
-        StatusUpdate();
     }
 
 
@@ -53,7 +49,10 @@ public class HealerController : MonoBehaviour
 
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         movementDirection.Normalize();
-        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
+        msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
+        GetComponent<MovementController>().Move(movementDirection, msi);
+        GetComponent<MovementController>().MovementAnimation();
+
 
         baseAttack = Input.GetButtonUp("Attack");
         useSkill_1 = Input.GetButtonUp("Skill1");
@@ -62,19 +61,7 @@ public class HealerController : MonoBehaviour
     }
 
     //move player based on input and play movement animation
-    void Move()
-    {
-        rb.velocity = movementDirection * movementSpeedInput * movementSpeed;
-
-        if (movementDirection != Vector2.zero)
-        {
-            animator.SetFloat("moveX", movementDirection.x);
-            animator.SetFloat("moveY", movementDirection.y);
-
-        }
-        animator.SetFloat("Speed", movementSpeedInput);
-    }
-
+  
 
     // set attacking direction object's position
     void Aim()
@@ -86,10 +73,7 @@ public class HealerController : MonoBehaviour
     }
 
 
-    void StatusUpdate()
-    {
-        movementSpeed = this.GetComponent<StatusController>().mvspd;
-    }
+   
 
     void Attack()
     {

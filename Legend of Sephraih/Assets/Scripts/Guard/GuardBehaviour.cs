@@ -5,7 +5,6 @@ using UnityEngine;
 public class GuardBehaviour : MonoBehaviour
 {
 
-    // public Animator animator;
     public GameObject attackingDirection;
     public Camera mainCam;
 
@@ -15,8 +14,6 @@ public class GuardBehaviour : MonoBehaviour
 
     public Vector2 movementDirection;
     private float movementSpeedInput;
-
-    public float movementSpeed = 1.0f;
 
 
 
@@ -37,7 +34,6 @@ public class GuardBehaviour : MonoBehaviour
         Aim();
         Attack();
         Die();
-        UpdateStatus();
     }
 
     void Move()
@@ -55,20 +51,10 @@ public class GuardBehaviour : MonoBehaviour
         }
         else movementDirection = new Vector2(-1 * (rb.position.x - guardPoint.x), -1 * (rb.position.y - guardPoint.y));
 
-
-        //else movementDirection = new Vector2(0, 0);
-
         movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
-        rb.velocity = movementDirection * movementSpeedInput * this.GetComponent<StatusController>().mvspd;
-
-        // movement animation
-        /*if (movementDirection != Vector2.zero)
-        {
-            animator.SetFloat("moveX", movementDirection.x);
-            animator.SetFloat("moveY", movementDirection.y);
-
-        }
-        animator.SetFloat("Speed", movementSpeedInput);*/
+        
+        GetComponent<MovementController>().Move(movementDirection,movementSpeedInput);
+      
     }
 
     void Aim()
@@ -78,14 +64,8 @@ public class GuardBehaviour : MonoBehaviour
             attackingDirection.transform.localPosition = movementDirection;
         }
     }
-
-    void UpdateStatus()
-    {
-        movementSpeed = this.GetComponent<StatusController>().mvspd;
-
-    }
-
-
+    
+    
     void Attack()
     {
         if (Vector2.Distance(transform.position, player.position) < 1.0f)
@@ -100,7 +80,6 @@ public class GuardBehaviour : MonoBehaviour
     {
         if (this.GetComponent<HealthController>().health <= 0)
         {
-
             Instantiate((Resources.Load("Prefabs/Guard") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
             Destroy(gameObject);
         }

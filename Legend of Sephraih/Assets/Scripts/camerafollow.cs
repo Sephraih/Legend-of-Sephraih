@@ -16,7 +16,7 @@ public class camerafollow : MonoBehaviour
 
     private void Start()
     {
-        ni.gameObject.SetActive(true);
+       // ni.gameObject.SetActive(true);
         // san.gameObject.SetActive(true);
     }
 
@@ -36,7 +36,7 @@ public class camerafollow : MonoBehaviour
             if (target == ichi)
             {
                 //target.gameObject.SetActive(false);
-                target = ni;
+       //         target = ni;
             }
             else if (target == ni)
             {

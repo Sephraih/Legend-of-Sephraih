@@ -12,7 +12,7 @@ public class PlayerOneController : MonoBehaviour
 
 
     public Vector2 movementDirection; // from input
-    public float movementSpeedInput; //from input
+    public float msi; //from input
 
 
     private bool useSkill_1;
@@ -35,7 +35,6 @@ public class PlayerOneController : MonoBehaviour
         if (transform == Camera.main.GetComponent<camerafollow>().target)
         {
             ProcessInputs();
-            Move();
             Aim();
             Attack();
         }
@@ -43,11 +42,14 @@ public class PlayerOneController : MonoBehaviour
 
     void ProcessInputs()
     {
-
+        //movement
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         movementDirection.Normalize();
-        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
+        msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
+        GetComponent<MovementController>().Move(movementDirection, msi);
+        GetComponent<MovementController>().MovementAnimation();
 
+        //attacks and skills
         baseAttack = Input.GetButtonUp("Attack");
         useSkill_1 = Input.GetButtonUp("Skill1");
         useSkill_2 = Input.GetButtonUp("Skill2");
@@ -55,24 +57,11 @@ public class PlayerOneController : MonoBehaviour
 
     }
 
-    //move player based on input and play movement animation
-    void Move()
-    {
-        rb.velocity = movementDirection * movementSpeedInput * this.GetComponent<StatusController>().mvspd;
-
-        if (movementDirection != Vector2.zero)
-        {
-            animator.SetFloat("moveX", movementDirection.x);
-            animator.SetFloat("moveY", movementDirection.y);
-
-        }
-        animator.SetFloat("Speed", movementSpeedInput);
-    }
-
 
     // set attacking direction object's position
     void Aim()
     {
+        //position the attacking direction object infront of the character, keep position when stop moving
         if (movementDirection != Vector2.zero)
         {
             attackingDirection.transform.localPosition = movementDirection * 0.5f;

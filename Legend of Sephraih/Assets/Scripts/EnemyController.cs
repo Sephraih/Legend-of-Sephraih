@@ -10,10 +10,7 @@ public class EnemyController : MonoBehaviour
     public Camera mainCam;
 
     public Vector2 movementDirection;
-    private float movementSpeedInput;
-
-    public float movementSpeed = 1.0f;
-
+    private float msi;
 
 
     private Rigidbody2D rb;
@@ -31,7 +28,6 @@ public class EnemyController : MonoBehaviour
         Aim();
         Attack();
         Die();
-        UpdateStatus();
     }
 
     void Move()
@@ -43,17 +39,11 @@ public class EnemyController : MonoBehaviour
 
         movementDirection = new Vector2(-1 * (rb.position.x - player.transform.position.x), -1 * (rb.position.y - player.transform.position.y));
         movementDirection.Normalize();
-        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
-        rb.velocity = movementDirection * movementSpeedInput * movementSpeed;
 
-        // movement animation
-        if (movementDirection != Vector2.zero)
-        {
-            animator.SetFloat("moveX", movementDirection.x);
-            animator.SetFloat("moveY", movementDirection.y);
+        msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
+        GetComponent<MovementController>().Move(movementDirection, msi);
+        GetComponent<MovementController>().MovementAnimation();
 
-        }
-        animator.SetFloat("Speed", movementSpeedInput);
     }
 
     void Aim()
@@ -63,12 +53,6 @@ public class EnemyController : MonoBehaviour
             attackingDirection.transform.localPosition = movementDirection;
         }
     }
-
-    void UpdateStatus()
-    {
-        movementSpeed = this.GetComponent<StatusController>().mvspd;
-    }
-
 
     void Attack()
     {

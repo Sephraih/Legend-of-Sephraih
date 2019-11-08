@@ -27738,7 +27738,7 @@ PrefabInstance:
     - target: {fileID: 5765252530442742076, guid: 4f5f866bdc4e81147887548c409fde77,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5765252530442742022, guid: 4f5f866bdc4e81147887548c409fde77,
         type: 3}
@@ -27878,11 +27878,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guard
       objectReference: {fileID: 0}
-    - target: {fileID: 7592420666366508164, guid: a5c694bf189c59241937c12f647d0726,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7592420666366508222, guid: a5c694bf189c59241937c12f647d0726,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -27938,10 +27933,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1665300450, guid: a5c694bf189c59241937c12f647d0726, type: 3}
-      propertyPath: chargeEffect
-      value: 
-      objectReference: {fileID: 4909902925158851423, guid: 66417a4e2cfe2ef44a04fd7cc1b5c505,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5c694bf189c59241937c12f647d0726, type: 3}

@@ -467,11 +467,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackingDirection: {fileID: 7592420667754977582}
   mainCam: {fileID: 0}
-  guardPoint: {x: 5, y: 5, z: 0}
-  guardinitx: 5
-  guardinity: 5
-  movementDirection: {x: 0, y: 0}
-  distanceToTarget: 0
+  guardSpot: {x: 5, y: 5, z: 0}
+  guardMaxChaseRadius: 15
+  guardRadius: 5
 --- !u!114 &1665300450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,7 +484,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acd: 2
   range: 5
-  chargeEffect: {fileID: 0}
+  chargeEffect: {fileID: 4909902925158851423, guid: 66417a4e2cfe2ef44a04fd7cc1b5c505,
+    type: 3}
 --- !u!114 &1665300451
 MonoBehaviour:
   m_ObjectHideFlags: 0

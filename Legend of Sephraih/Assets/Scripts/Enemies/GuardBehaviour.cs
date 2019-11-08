@@ -8,20 +8,23 @@ public class GuardBehaviour : MonoBehaviour
     public GameObject attackingDirection;
     public Camera mainCam;
 
-    public Vector3 guardPoint = new Vector3(5.0f, 5.0f, 0f);
-    public float guardinitx;
-    public float guardinity;
 
-    public Vector2 movementDirection;
+    public Vector3 guardSpot = new Vector3(5.0f, 5.0f, 0f);
+    public float guardMaxChaseRadius = 25.0f;
+    public float guardRadius = 5.0f;
+
+    private Vector2 movementDirection;
     private float msi;
-    public float distanceToTarget;
+    private float distanceToTarget;
+    private float distanceToGuardSpot;
+
 
 
     private Transform player;
 
     void Start()
     {
-        transform.position = guardPoint;
+        transform.position = guardSpot;
         player = Camera.main.GetComponent<camerafollow>().target;
         GetComponent<FireBolt>().startcd = 5.0f;
         Camera.main.GetComponent<camerafollow>().enemylist.Add(transform);
@@ -43,7 +46,9 @@ public class GuardBehaviour : MonoBehaviour
         player = Camera.main.GetComponent<camerafollow>().ClosestPlayer(transform);
 
         distanceToTarget = Vector2.Distance(transform.position, player.position);
-        if (distanceToTarget < 5.0f)
+        distanceToGuardSpot = Vector2.Distance(transform.position, guardSpot);
+
+        if (distanceToTarget < guardRadius && distanceToGuardSpot < guardMaxChaseRadius)
         {
             movementDirection = player.transform.position - transform.position;
             if (distanceToTarget < 1.0f) { movementDirection = Vector2.zero; }
@@ -51,8 +56,8 @@ public class GuardBehaviour : MonoBehaviour
 
         else
         {
-            movementDirection = guardPoint - transform.position;
-            if (Vector2.Distance(transform.position, guardPoint) < 0.1f) { movementDirection = Vector2.zero; }
+            movementDirection = guardSpot - transform.position;
+            if (Vector2.Distance(transform.position, guardSpot) < 0.1f) { movementDirection = Vector2.zero; }
         }
 
         movementDirection.Normalize();
@@ -67,7 +72,7 @@ public class GuardBehaviour : MonoBehaviour
         {
             attackingDirection.transform.localPosition = movementDirection;
         }
-        else if (distanceToTarget < 10.0f)
+        else if (distanceToTarget < 20.0f)
         {
             var x = player.position - transform.position;
             x.Normalize();
@@ -83,8 +88,9 @@ public class GuardBehaviour : MonoBehaviour
         {
             this.GetComponent<BasicAttack>().Attack();
         }
-
-        this.GetComponent<ChargeAttack>().charge(player);
+        else if (distanceToTarget <5.0f) {
+            this.GetComponent<ChargeAttack>().charge(player);
+        }
 
         if (distanceToTarget > 5.0f && distanceToTarget < 10.0f) {
             GetComponent<FireBolt>().Blast();

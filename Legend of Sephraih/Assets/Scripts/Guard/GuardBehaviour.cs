@@ -25,6 +25,7 @@ public class GuardBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         transform.position = guardPoint;
         player = Camera.main.GetComponent<camerafollow>().target;
+        GetComponent<FireBolt>().startcd = 5.0f;
     }
 
     void Update()
@@ -77,12 +78,16 @@ public class GuardBehaviour : MonoBehaviour
 
     void Attack()
     {
-        if (Vector2.Distance(transform.position, player.position) < 1.0f)
+        if (distanceToTarget < 1.0f)
         {
             this.GetComponent<BasicAttack>().Attack();
         }
 
         this.GetComponent<ChargeAttack>().charge(player);
+
+        if (distanceToTarget > 5.0f && distanceToTarget < 10.0f) {
+            GetComponent<FireBolt>().Blast();
+        }
     }
 
     private void Die()

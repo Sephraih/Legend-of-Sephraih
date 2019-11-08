@@ -13112,6 +13112,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1310131886}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1316152517 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7592420667754977583, guid: a5c694bf189c59241937c12f647d0726,
+    type: 3}
+  m_PrefabInstance: {fileID: 8301812682577684398}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1334683238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26835,6 +26841,29 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2039453721}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2044990615 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7592420666366508164, guid: a5c694bf189c59241937c12f647d0726,
+    type: 3}
+  m_PrefabInstance: {fileID: 8301812682577684398}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2044990616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044990615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e82ab83fa701c498069fa7b8e974a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: Enemy
+  projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
+    type: 3}
+  shotPoint: {fileID: 1316152517}
+  startcd: 5
 --- !u!1001 &2045260887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27811,6 +27840,11 @@ PrefabInstance:
     - target: {fileID: 7592420666366508222, guid: a5c694bf189c59241937c12f647d0726,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970178574616923592, guid: a5c694bf189c59241937c12f647d0726,
+        type: 3}
+      propertyPath: startcd
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

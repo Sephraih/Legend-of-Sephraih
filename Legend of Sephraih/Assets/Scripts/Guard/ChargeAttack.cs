@@ -9,6 +9,8 @@ public class ChargeAttack : MonoBehaviour
 
     private float cd; //cool down remaining
     private Vector2 chargeDirection;
+
+    private float distanceToTarget;
     private float msi;
     private Transform target;
 
@@ -26,7 +28,8 @@ public class ChargeAttack : MonoBehaviour
         if (cd <= 0f)
         {
 
-            if (Vector2.Distance(transform.position, target.position) < 5.0f)
+            distanceToTarget = Vector2.Distance(transform.position, target.position);
+            if ( distanceToTarget <= 5.0f && distanceToTarget >= 2.0f)
             {
                 chargeDirection = new Vector2(-1 * (transform.position.x - target.transform.position.x), -1 * (transform.position.y - target.transform.position.y));
                 chargeDirection.Normalize();

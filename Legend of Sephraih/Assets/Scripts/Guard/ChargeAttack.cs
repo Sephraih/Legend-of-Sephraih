@@ -5,24 +5,39 @@ using UnityEngine;
 public class ChargeAttack : MonoBehaviour
 {
     public float acd; //ability cool down
+    public GameObject chargeEffect;
+
     private float cd; //cool down remaining
     private Vector2 chargeDirection;
+    private float msi;
+    private Transform target;
+
+
+
+
+    private Rigidbody2D rb;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
     public void charge(Transform target)
     {
-        if ( cd <= 0f){
+        if (cd <= 0f)
+        {
 
             if (Vector2.Distance(transform.position, target.position) < 5.0f)
             {
                 chargeDirection = new Vector2(-1 * (transform.position.x - target.transform.position.x), -1 * (transform.position.y - target.transform.position.y));
-                chargeDirection.Normalize();                                                           
-                transform.GetComponent<StatusController>().IncreaseMovementSpeed(10.0f, 0.2f);
-                target.GetComponent<HealthController>().TakeDamage(100);
+                chargeDirection.Normalize();
+                this.target = target;
+                msi = Mathf.Clamp(chargeDirection.magnitude, 0.0f, 1.0f);
+                StartCoroutine(ChargeCoroutine());
                 cd = acd;
             }
 
         }
-        
+
     }
 
     void Update()
@@ -31,6 +46,26 @@ public class ChargeAttack : MonoBehaviour
         {
             cd -= Time.deltaTime;
         }
+
+    }
+
+    IEnumerator ChargeCoroutine()
+    {
+        float time = 0.1f;
+        float count = 0.0f;
+        while (count < time)
+        {
+            GetComponent<MovementController>().charging = true;
+
+            rb.velocity = chargeDirection * msi * this.GetComponent<StatusController>().mvspd * 10;
+            count += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        GetComponent<MovementController>().charging = false;
+        target.GetComponent<HealthController>().TakeDamage(100);
+
+
+
     }
 
 }

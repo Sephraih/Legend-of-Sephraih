@@ -8,13 +8,13 @@ public class GuardBehaviour : MonoBehaviour
     public GameObject attackingDirection;
     public Camera mainCam;
 
-    public Vector2 guardPoint = new Vector2(5.0f, 5.0f);
+    public Vector3 guardPoint = new Vector3(5.0f, 5.0f, 0f);
     public float guardinitx;
     public float guardinity;
 
     public Vector2 movementDirection;
-    private float movementSpeedInput;
-
+    private float msi;
+    public float distanceToTarget;
 
 
     private Rigidbody2D rb;
@@ -40,21 +40,23 @@ public class GuardBehaviour : MonoBehaviour
     {
 
         player = Camera.main.GetComponent<camerafollow>().target;
-        //GameObject.Find("Player");
-
-
-        if (Vector2.Distance(transform.position, player.position) < 5.0f)
+        distanceToTarget = Vector2.Distance(transform.position, player.position);
+        if (distanceToTarget < 5.0f)
         {
-            movementDirection = new Vector2(-1 * (rb.position.x - player.transform.position.x), -1 * (rb.position.y - player.transform.position.y));
-            movementDirection.Normalize();
-
+            movementDirection = player.transform.position - transform.position;
+            if (distanceToTarget < 1.0f) { movementDirection = Vector2.zero; }
         }
-        else movementDirection = new Vector2(-1 * (rb.position.x - guardPoint.x), -1 * (rb.position.y - guardPoint.y));
 
-        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
-        
-        GetComponent<MovementController>().Move(movementDirection,movementSpeedInput);
-      
+        else
+        {
+            movementDirection = guardPoint - transform.position;
+            if (Vector2.Distance(transform.position, guardPoint) < 0.1f) { movementDirection = Vector2.zero; }
+        }
+
+        movementDirection.Normalize();
+        msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
+        GetComponent<MovementController>().Move(movementDirection, msi);
+
     }
 
     void Aim()
@@ -63,9 +65,16 @@ public class GuardBehaviour : MonoBehaviour
         {
             attackingDirection.transform.localPosition = movementDirection;
         }
+        else if (distanceToTarget < 10.0f)
+        {
+            var x = player.position - transform.position;
+            x.Normalize();
+            attackingDirection.transform.localPosition = x;
+
+        }
     }
-    
-    
+
+
     void Attack()
     {
         if (Vector2.Distance(transform.position, player.position) < 1.0f)

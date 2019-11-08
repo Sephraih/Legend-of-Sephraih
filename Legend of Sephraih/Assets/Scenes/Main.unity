@@ -7920,6 +7920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 424657729}
+  charging: 0
 --- !u!4 &425878343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7480321473359576386, guid: 00713248121b4e942a3f5faa87138e92,
@@ -10490,6 +10491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 913296798}
+  charging: 0
 --- !u!1001 &932262549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10967,6 +10969,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 972581354}
+  charging: 0
 --- !u!1001 &977925640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27611,6 +27614,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5765252530442742076, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5765252530442742022, guid: 4f5f866bdc4e81147887548c409fde77,
         type: 3}

@@ -39,14 +39,12 @@ public class HealBotBehaviour : MonoBehaviour
         {
             movementDirection = new Vector2(-1 * (rb.position.x - dps.transform.position.x), -1 * (rb.position.y - dps.transform.position.y));
             movementDirection.Normalize();
-
         }
         else movementDirection = new Vector2(0, 0);
 
         msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
 
         GetComponent<MovementController>().Move(movementDirection, msi);
-        GetComponent<MovementController>().MovementAnimation();
 
     }
 
@@ -66,11 +64,12 @@ public class HealBotBehaviour : MonoBehaviour
         }
     }
 
-    void UseSkills() {
-        if(Camera.main.GetComponent<camerafollow>().target.GetComponent<HealthController>().health != Camera.main.GetComponent<camerafollow>().target.GetComponent<HealthController>().MaxHealth)
-        this.GetComponent<HealBolt>().Blast();
+    void UseSkills()
+    {
+        if (Camera.main.GetComponent<camerafollow>().target.GetComponent<HealthController>().health != Camera.main.GetComponent<camerafollow>().target.GetComponent<HealthController>().MaxHealth)
+            this.GetComponent<HealBolt>().Blast();
     }
-  
+
 
 
 }

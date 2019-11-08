@@ -47,7 +47,6 @@ public class PlayerOneController : MonoBehaviour
         movementDirection.Normalize();
         msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
         GetComponent<MovementController>().Move(movementDirection, msi);
-        GetComponent<MovementController>().MovementAnimation();
 
         //attacks and skills
         baseAttack = Input.GetButtonUp("Attack");
@@ -77,10 +76,10 @@ public class PlayerOneController : MonoBehaviour
         {
             this.GetComponent<FireBolt>().Blast();
         }
-        
+
         if (useSkill_2)
         {
-            this.GetComponent<FireBolt>().BlastMouse();
+            this.GetComponent<ChargeAttack>().charge(Camera.main.GetComponent<camerafollow>().ClosestEnemy(transform));
         }
 
         if (baseAttack)

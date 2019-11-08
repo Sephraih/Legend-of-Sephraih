@@ -17,15 +17,15 @@ public class GuardBehaviour : MonoBehaviour
     public float distanceToTarget;
 
 
-    private Rigidbody2D rb;
     private Transform player;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         transform.position = guardPoint;
         player = Camera.main.GetComponent<camerafollow>().target;
         GetComponent<FireBolt>().startcd = 5.0f;
+        Camera.main.GetComponent<camerafollow>().enemylist.Add(transform);
+
     }
 
     void Update()
@@ -40,7 +40,8 @@ public class GuardBehaviour : MonoBehaviour
     void Move()
     {
 
-        player = Camera.main.GetComponent<camerafollow>().target;
+        player = Camera.main.GetComponent<camerafollow>().ClosestPlayer(transform);
+
         distanceToTarget = Vector2.Distance(transform.position, player.position);
         if (distanceToTarget < 5.0f)
         {
@@ -95,6 +96,7 @@ public class GuardBehaviour : MonoBehaviour
         if (this.GetComponent<HealthController>().health <= 0)
         {
             Instantiate((Resources.Load("Prefabs/Guard") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
+            Camera.main.GetComponent<camerafollow>().enemylist.Remove(transform);
             Destroy(gameObject);
         }
     }

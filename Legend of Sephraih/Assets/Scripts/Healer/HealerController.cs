@@ -51,8 +51,6 @@ public class HealerController : MonoBehaviour
         movementDirection.Normalize();
         msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
         GetComponent<MovementController>().Move(movementDirection, msi);
-        GetComponent<MovementController>().MovementAnimation();
-
 
         baseAttack = Input.GetButtonUp("Attack");
         useSkill_1 = Input.GetButtonUp("Skill1");
@@ -80,12 +78,12 @@ public class HealerController : MonoBehaviour
 
         if (useSkill_1)
         {
-            this.GetComponent<HealWave>().BlastMouse();
+            this.GetComponent<HealWave>().Blast();
         }
 
         if (useSkill_2)
         {
-            this.GetComponent<HealBolt>().BlastMouse();
+            this.GetComponent<HealBolt>().Blast();
         }
 
         if (baseAttack)

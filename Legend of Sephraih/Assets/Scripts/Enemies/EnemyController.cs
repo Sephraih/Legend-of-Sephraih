@@ -19,6 +19,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Camera.main.GetComponent<camerafollow>().enemylist.Add(transform);
     }
 
     void Update()
@@ -33,17 +34,13 @@ public class EnemyController : MonoBehaviour
     void Move()
     {
 
-        player = Camera.main.GetComponent<camerafollow>().target;
-        //GameObject.Find("Player");
-
-
+        player = Camera.main.GetComponent<camerafollow>().ClosestPlayer(transform);
+        
         movementDirection = new Vector2(-1 * (rb.position.x - player.transform.position.x), -1 * (rb.position.y - player.transform.position.y));
         movementDirection.Normalize();
 
         msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
         GetComponent<MovementController>().Move(movementDirection, msi);
-        GetComponent<MovementController>().MovementAnimation();
-
     }
 
     void Aim()
@@ -68,6 +65,7 @@ public class EnemyController : MonoBehaviour
         {
 
             Instantiate((Resources.Load("Prefabs/Enemy") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
+            Camera.main.GetComponent<camerafollow>().enemylist.Remove(transform);
             Destroy(gameObject);
         }
     }

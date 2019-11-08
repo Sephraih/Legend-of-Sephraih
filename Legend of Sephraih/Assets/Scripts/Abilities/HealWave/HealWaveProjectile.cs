@@ -78,8 +78,8 @@ public class HealWaveProjectile : MonoBehaviour
 
     void DestroyProjectile()
     {
-        GameObject a = Instantiate(destroyEffect, transform.position, Quaternion.Euler(0f, 0f, 0f));
-        Destroy(a, 1);
+        //GameObject a = Instantiate(destroyEffect, transform.position, Quaternion.Euler(0f, 0f, 0f));
+        //Destroy(a, 1);
         Destroy(gameObject);
     }
     void Turn()

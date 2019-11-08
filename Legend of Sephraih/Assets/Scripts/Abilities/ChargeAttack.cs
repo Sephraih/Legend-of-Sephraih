@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChargeAttack : MonoBehaviour
 {
     public float acd; //ability cool down
+    public float range =5.0f;
     public GameObject chargeEffect;
 
     private float cd; //cool down remaining
@@ -25,18 +26,17 @@ public class ChargeAttack : MonoBehaviour
 
     public void charge(Transform target)
     {
-        if (cd <= 0f)
+        if (cd <= 0f) // if ability ready to use
         {
 
             distanceToTarget = Vector2.Distance(transform.position, target.position);
-            if ( distanceToTarget <= 5.0f && distanceToTarget >= 2.0f)
+            if ( distanceToTarget <= range && distanceToTarget >= 2.0f)
             {
-                chargeDirection = new Vector2(-1 * (transform.position.x - target.transform.position.x), -1 * (transform.position.y - target.transform.position.y));
+                chargeDirection = target.position - transform.position;
                 chargeDirection.Normalize();
                 this.target = target;
-                msi = Mathf.Clamp(chargeDirection.magnitude, 0.0f, 1.0f);
                 StartCoroutine(ChargeCoroutine());
-                cd = acd;
+                cd = acd; //reset cooldown
             }
 
         }
@@ -47,7 +47,7 @@ public class ChargeAttack : MonoBehaviour
     {
         if (cd >= 0)
         {
-            cd -= Time.deltaTime;
+            cd -= Time.deltaTime; //decrease cooldown
         }
 
     }
@@ -58,13 +58,20 @@ public class ChargeAttack : MonoBehaviour
         float count = 0.0f;
         while (count < time)
         {
-            GetComponent<MovementController>().charging = true;
+            float rotZ = Mathf.Atan2(chargeDirection.y, chargeDirection.x) * Mathf.Rad2Deg;
+            
+            GameObject cef = Instantiate(chargeEffect, transform.position, Quaternion.Euler(0f, 0f, rotZ - 90));
+            cef.transform.parent = transform;
+            Destroy(cef, 0.5f);
 
-            rb.velocity = chargeDirection * msi * this.GetComponent<StatusController>().mvspd * 10;
+
+            GetComponent<MovementController>().stuck = true; //disalow other movement while charging
+            GetComponent<MovementController>().ChargeLookat(chargeDirection);
+            rb.velocity = chargeDirection * 50;
             count += 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
-        GetComponent<MovementController>().charging = false;
+        GetComponent<MovementController>().stuck = false;
         target.GetComponent<HealthController>().TakeDamage(100);
 
 

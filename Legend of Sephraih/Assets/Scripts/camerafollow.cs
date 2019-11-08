@@ -11,13 +11,15 @@ public class camerafollow : MonoBehaviour
     public Transform san;
     public Vector3 offset;
     public Transform enemy;
+    public bool allActive;
+    public List<Transform> enemylist;
 
 
 
     private void Start()
     {
        // ni.gameObject.SetActive(true);
-        // san.gameObject.SetActive(true);
+       // san.gameObject.SetActive(true);
     }
 
     void LateUpdate()
@@ -36,24 +38,50 @@ public class camerafollow : MonoBehaviour
             if (target == ichi)
             {
                 //target.gameObject.SetActive(false);
-       //         target = ni;
+                target = ni;
             }
             else if (target == ni)
             {
                 // target.gameObject.SetActive(false);
+                target = san;
+            }
+            else if (target == san)
+            {
+                //target.gameObject.SetActive(false);
                 target = ichi;
             }
-
-            /*  else if (target == san)
-              {
-                  target.gameObject.SetActive(false); 
-                  target = ichi;
-              }*/
 
             target.gameObject.SetActive(true);
         }
 
 
 
+    }
+
+    public Transform ClosestPlayer(Transform self)
+    {
+
+        if (ni.gameObject.activeSelf && san.gameObject.activeSelf) { 
+        var one = Vector2.Distance(self.position, ichi.position);
+        var two = Vector2.Distance(self.position, ni.position);
+        var three = Vector2.Distance(self.position, san.position);
+        if (one < two && one < three) return ichi; //one is the closest
+        if (three < two) return san; //one is not the closest, three is closer than two
+        return ni;
+        }
+        return ichi;
+    }
+
+    public Transform ClosestEnemy(Transform self) {
+        var distance = Vector2.Distance(self.position, enemylist[0].position);
+        enemy = enemylist[0];
+        foreach (Transform e in enemylist) {
+            if (Vector2.Distance(self.position, e.position) < distance) {
+                distance = Vector2.Distance(self.position, e.position);
+                enemy = e;
+            }
+        }
+
+        return enemy;
     }
 }

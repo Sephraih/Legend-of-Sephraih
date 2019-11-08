@@ -206,6 +206,8 @@ GameObject:
   - component: {fileID: 1902846677811469099}
   - component: {fileID: 1665300450}
   - component: {fileID: 1665300451}
+  - component: {fileID: 2044990629}
+  - component: {fileID: 2044990616}
   m_Layer: 8
   m_Name: Guard
   m_TagString: Enemy
@@ -465,10 +467,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackingDirection: {fileID: 7592420667754977582}
   mainCam: {fileID: 0}
-  guardPoint: {x: 5, y: 5}
+  guardPoint: {x: 5, y: 5, z: 0}
   guardinitx: 5
   guardinity: 5
   movementDirection: {x: 0, y: 0}
+  distanceToTarget: 0
 --- !u!114 &1665300450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -482,6 +485,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acd: 2
+  range: 5
+  chargeEffect: {fileID: 0}
 --- !u!114 &1665300451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -494,8 +499,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffc0c99d37f6094bbc4bd5594b121f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementDirection: {x: 0, y: 0}
-  movementSpeed: 1
+  animator: {fileID: 2044990629}
+  attackPos: {fileID: 7592420667754977582}
+  stuck: 0
+--- !u!95 &2044990629
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592420666366508164}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 70751e7fd8aa231458a226dd53bf80d2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2044990616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7592420666366508164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16e82ab83fa701c498069fa7b8e974a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy: Enemy
+  projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
+    type: 3}
+  shotPoint: {fileID: 7592420667754977583}
+  startcd: 5
 --- !u!1 &7592420667754977582
 GameObject:
   m_ObjectHideFlags: 0

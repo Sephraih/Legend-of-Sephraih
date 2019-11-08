@@ -34,6 +34,7 @@ public class HealthController : MonoBehaviour
 
         ShowDamageText(damage);
         health -= damage;
+        if (health < 0) { health = 0; }
 
         Debug.Log("took dmg" + damage);
 

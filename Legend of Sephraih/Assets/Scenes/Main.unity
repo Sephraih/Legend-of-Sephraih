@@ -7922,6 +7922,7 @@ MonoBehaviour:
   animator: {fileID: 424657729}
   attackPos: {fileID: 0}
   stuck: 0
+  stunned: 0
 --- !u!4 &425878343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7480321473359576386, guid: 00713248121b4e942a3f5faa87138e92,
@@ -10497,6 +10498,7 @@ MonoBehaviour:
   animator: {fileID: 913296798}
   attackPos: {fileID: 141768371}
   stuck: 0
+  stunned: 0
 --- !u!114 &913296810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10513,6 +10515,7 @@ MonoBehaviour:
   range: 10
   chargeEffect: {fileID: 4909902925158851423, guid: 66417a4e2cfe2ef44a04fd7cc1b5c505,
     type: 3}
+  stunTime: 0.4
 --- !u!1001 &932262549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10994,6 +10997,7 @@ MonoBehaviour:
   animator: {fileID: 972581354}
   attackPos: {fileID: 460071109}
   stuck: 0
+  stunned: 0
 --- !u!114 &972581361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11028,6 +11032,7 @@ MonoBehaviour:
   range: 5
   chargeEffect: {fileID: 4909902925158851423, guid: 66417a4e2cfe2ef44a04fd7cc1b5c505,
     type: 3}
+  stunTime: 0.2
 --- !u!1001 &977925640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27949,21 +27954,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1902846677811469099, guid: a5c694bf189c59241937c12f647d0726,
-        type: 3}
-      propertyPath: guardMaxChaseRadius
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8757794724829583563, guid: a5c694bf189c59241937c12f647d0726,
-        type: 3}
-      propertyPath: matk
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8757794724829583563, guid: a5c694bf189c59241937c12f647d0726,
-        type: 3}
-      propertyPath: atk
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5c694bf189c59241937c12f647d0726, type: 3}

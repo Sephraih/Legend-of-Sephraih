@@ -13,6 +13,7 @@ public class MovementController : MonoBehaviour
 
     private Rigidbody2D rb;
     public bool stuck;
+    public bool stunned;
 
     // Start is called before the first frame update
     void Start()
@@ -23,25 +24,45 @@ public class MovementController : MonoBehaviour
     //md is the movement direction, msi is a value between zero and one to determine movement speed from input
     public void Move(Vector2 md, float msi)
     {
-        if (!stuck)
+        if (!stuck && !stunned)
         {
             this.md = md;
             this.msi = msi;
             rb.velocity = md * msi * this.GetComponent<StatusController>().mvspd;
             MovementAnimation();
         }
+        if (stunned) { rb.velocity = Vector3.zero; }
     }
+
+    public void Stun(float time) {
+        StartCoroutine(StunCoroutine(time));
+    }
+    IEnumerator StunCoroutine(float time)
+    {
+        float timePassed = 0;
+        stunned = true;
+        while (timePassed < time)
+        {
+            timePassed += 0.1f;
+            yield return new WaitForSeconds(0.1f);
+        }
+        stunned = false;
+    }
+
+
 
     public void MovementAnimation()
     {
         //movement animation
-        if (md != Vector2.zero && !stuck)
+        if (md != Vector2.zero && !stuck &&!stunned)
         {
             animator.SetFloat("moveX", md.x);
             animator.SetFloat("moveY", md.y);
 
         }
-        animator.SetFloat("Speed", msi);
+        if(!stunned)animator.SetFloat("Speed", msi);
+        if (stunned) animator.SetFloat("Spedd", 0.0f);
+
     }
 
     public void WalkTowards(Vector2 target) {

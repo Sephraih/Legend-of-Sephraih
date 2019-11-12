@@ -7,6 +7,8 @@ public class ChargeAttack : MonoBehaviour
     public float acd; //ability cool down
     public float range =5.0f;
     public GameObject chargeEffect;
+    public float stunTime = 0.4f;
+
 
     private float cd; //cool down remaining
     private Vector2 chargeDirection;
@@ -36,6 +38,7 @@ public class ChargeAttack : MonoBehaviour
                 chargeDirection.Normalize();
                 this.target = target;
                 StartCoroutine(ChargeCoroutine());
+                target.GetComponent<MovementController>().Stun(stunTime);
                 cd = acd; //reset cooldown
             }
 

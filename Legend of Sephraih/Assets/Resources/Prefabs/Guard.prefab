@@ -270,7 +270,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -570551256919595871, guid: c5a30984c19685e40aebb49cd02601e2,
+  m_Sprite: {fileID: -1888405239356951315, guid: 61ff590124f6fc245a9d1a627bf5917f,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -320,7 +320,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 1.0833334}
     newSize: {x: 1, y: 1.0833334}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -402,8 +402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3852cc262743a534eb60223a5fae5688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atk: 30
-  matk: 5
+  atk: 100
+  matk: 100
   aspd: 1
   mvspd: 3
   dmvspd: 5
@@ -444,7 +444,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1, y: 1.0833334}
     newSize: {x: 1, y: 1.0833334}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -468,7 +468,7 @@ MonoBehaviour:
   attackingDirection: {fileID: 7592420667754977582}
   mainCam: {fileID: 0}
   guardSpot: {x: 5, y: 5, z: 0}
-  guardMaxChaseRadius: 15
+  guardMaxChaseRadius: 10
   guardRadius: 5
 --- !u!114 &1665300450
 MonoBehaviour:
@@ -486,6 +486,7 @@ MonoBehaviour:
   range: 5
   chargeEffect: {fileID: 4909902925158851423, guid: 66417a4e2cfe2ef44a04fd7cc1b5c505,
     type: 3}
+  stunTime: 0.4
 --- !u!114 &1665300451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,6 +502,7 @@ MonoBehaviour:
   animator: {fileID: 2044990629}
   attackPos: {fileID: 7592420667754977582}
   stuck: 0
+  stunned: 0
 --- !u!95 &2044990629
 Animator:
   serializedVersion: 3

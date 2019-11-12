@@ -44,15 +44,26 @@ public class MovementController : MonoBehaviour
         animator.SetFloat("Speed", msi);
     }
 
-    public void ChargeLookat(Vector2 chargeDir) {
+    public void WalkTowards(Vector2 target) {
         if (animator.isInitialized)
         {
-            animator.SetFloat("moveX", chargeDir.x);
-            animator.SetFloat("moveY", chargeDir.y);
-            attackPos.transform.localPosition = chargeDir.normalized;
+            animator.SetFloat("moveX", target.x);
+            animator.SetFloat("moveY", target.y);
+            attackPos.transform.localPosition = target.normalized;
             animator.SetFloat("Speed", 1.0f);
         }
     }
 
+    public void LookAt(Vector2 target)
+    {
+        if (animator.isInitialized)
+        {
+            target = target - new Vector2(transform.position.x,transform.position.y);
+            animator.SetFloat("moveX", target.x);
+            animator.SetFloat("moveY", target.y);
+            attackPos.transform.localPosition = target.normalized;
+            animator.SetFloat("Speed", 0.0f);
+        }
+    }
 
 }

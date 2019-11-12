@@ -66,7 +66,7 @@ public class ChargeAttack : MonoBehaviour
 
 
             GetComponent<MovementController>().stuck = true; //disalow other movement while charging
-            GetComponent<MovementController>().ChargeLookat(chargeDirection);
+            GetComponent<MovementController>().WalkTowards(chargeDirection);
             rb.velocity = chargeDirection * 50;
             count += 0.1f;
             yield return new WaitForSeconds(0.1f);

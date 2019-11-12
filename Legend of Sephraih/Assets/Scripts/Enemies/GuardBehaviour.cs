@@ -17,6 +17,7 @@ public class GuardBehaviour : MonoBehaviour
     private float msi;
     private float distanceToTarget;
     private float distanceToGuardSpot;
+    private bool returning = false;
 
 
 
@@ -48,16 +49,18 @@ public class GuardBehaviour : MonoBehaviour
         distanceToTarget = Vector2.Distance(transform.position, player.position);
         distanceToGuardSpot = Vector2.Distance(transform.position, guardSpot);
 
-        if (distanceToTarget < guardRadius && distanceToGuardSpot < guardMaxChaseRadius)
+        if (distanceToTarget <= guardRadius && distanceToGuardSpot < guardMaxChaseRadius && !returning)
         {
             movementDirection = player.transform.position - transform.position;
             if (distanceToTarget < 1.0f) { movementDirection = Vector2.zero; }
         }
-
         else
         {
+            returning = true;
             movementDirection = guardSpot - transform.position;
-            if (Vector2.Distance(transform.position, guardSpot) < 0.1f) { movementDirection = Vector2.zero; }
+
+            if (distanceToGuardSpot < 0.5f) { movementDirection = Vector2.zero; }
+            if (distanceToGuardSpot < guardRadius) { returning = false; }
         }
 
         movementDirection.Normalize();
@@ -74,10 +77,11 @@ public class GuardBehaviour : MonoBehaviour
         }
         else if (distanceToTarget < 20.0f)
         {
+
             var x = player.position - transform.position;
             x.Normalize();
             attackingDirection.transform.localPosition = x;
-
+            GetComponent<MovementController>().LookAt(player.position);
         }
     }
 
@@ -88,11 +92,13 @@ public class GuardBehaviour : MonoBehaviour
         {
             this.GetComponent<BasicAttack>().Attack();
         }
-        else if (distanceToTarget <5.0f) {
+        else if (distanceToTarget < guardRadius && distanceToGuardSpot <= guardMaxChaseRadius)
+        {
             this.GetComponent<ChargeAttack>().charge(player);
         }
 
-        if (distanceToTarget > 5.0f && distanceToTarget < 10.0f) {
+        if (distanceToTarget > 5.0f && distanceToTarget < 10.0f)
+        {
             GetComponent<FireBolt>().Blast();
         }
     }

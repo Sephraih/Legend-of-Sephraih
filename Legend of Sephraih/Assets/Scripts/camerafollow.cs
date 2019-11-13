@@ -13,7 +13,7 @@ public class camerafollow : MonoBehaviour
     public Transform enemy;
     public bool allActive;
     public List<Transform> enemylist;
-
+    public Animator ShakeAnimation;
 
 
     private void Start()
@@ -57,6 +57,10 @@ public class camerafollow : MonoBehaviour
 
 
 
+    }
+
+    public void CamShake() {
+        ShakeAnimation.SetTrigger("shake");
     }
 
     public Transform ClosestPlayer(Transform self)

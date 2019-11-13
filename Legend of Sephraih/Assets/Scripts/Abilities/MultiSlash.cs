@@ -60,6 +60,7 @@ public class MultiSlash : MonoBehaviour
             if (comboCount >= 5)
             {
                 slashParticleMain.startColor = Color.blue;
+                Camera.main.GetComponent<camerafollow>().CamShake();
 
             }
             

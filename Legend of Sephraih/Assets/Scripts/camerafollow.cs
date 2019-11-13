@@ -22,6 +22,7 @@ public class camerafollow : MonoBehaviour
        // san.gameObject.SetActive(true);
     }
 
+    // follow target
     void LateUpdate()
     {
         transform.position = target.position + offset;
@@ -84,4 +85,26 @@ public class camerafollow : MonoBehaviour
 
         return enemy;
     }
+
+    public Transform LowestHealthPlayer()
+    {
+
+        if (ni.gameObject.activeSelf && san.gameObject.activeSelf)
+        {
+            var one = ichi.GetComponent<HealthController>().health;
+            var two = ni.GetComponent<HealthController>().health;
+            var three = san.GetComponent<HealthController>().health;
+            if (one < two && one < three) return ichi; //one is the lowest
+            if (three < two) return san; //one is not the lowest, three is lower than two
+            return ni;
+        }
+        return ichi;
+    }
+    public Transform LowestHealthOtherPlayer(Transform self)
+    {
+        if (self == ichi) { if (ni.GetComponent<HealthController>().health <= san.GetComponent<HealthController>().health) return ni; else return san; }
+        else if (self == ni) { if (ichi.GetComponent<HealthController>().health <= san.GetComponent<HealthController>().health) return ichi; else return san; }
+        else { if (ichi.GetComponent<HealthController>().health <= ni.GetComponent<HealthController>().health) return ichi; else return ni; }
+    }
+
 }

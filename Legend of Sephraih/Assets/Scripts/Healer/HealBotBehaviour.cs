@@ -21,7 +21,7 @@ public class HealBotBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (transform != Camera.main.GetComponent<camerafollow>().target)
+        if (transform != Camera.main.GetComponent<camerafollow>().target) //if not followed by camera it is not the active char
         {
             Move();
             Aim();
@@ -58,7 +58,7 @@ public class HealBotBehaviour : MonoBehaviour
         }
         else
         {
-            var dir = dps.transform.position - transform.position;
+            var dir = Camera.main.GetComponent<camerafollow>().LowestHealthOtherPlayer(transform).transform.position - transform.position;
             attackingDirection.transform.localPosition = dir / dir.magnitude;
 
         }
@@ -66,7 +66,8 @@ public class HealBotBehaviour : MonoBehaviour
 
     void UseSkills()
     {
-        if (Camera.main.GetComponent<camerafollow>().target.GetComponent<HealthController>().health != Camera.main.GetComponent<camerafollow>().target.GetComponent<HealthController>().MaxHealth)
+        if (Camera.main.GetComponent<camerafollow>().LowestHealthOtherPlayer(transform).GetComponent<HealthController>().health 
+            != Camera.main.GetComponent<camerafollow>().LowestHealthOtherPlayer(transform).GetComponent<HealthController>().MaxHealth) //if the lowest health target that isnt the healer itself is not at max health.
             this.GetComponent<HealBolt>().Blast();
     }
 

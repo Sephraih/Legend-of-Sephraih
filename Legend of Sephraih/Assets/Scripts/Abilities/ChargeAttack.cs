@@ -38,7 +38,6 @@ public class ChargeAttack : MonoBehaviour
                 chargeDirection.Normalize();
                 this.target = target;
                 StartCoroutine(ChargeCoroutine());
-                target.GetComponent<MovementController>().Stun(stunTime);
                 cd = acd; //reset cooldown
             }
 
@@ -74,6 +73,7 @@ public class ChargeAttack : MonoBehaviour
             count += 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
+        target.GetComponent<MovementController>().Stun(stunTime);
         GetComponent<MovementController>().stuck = false;
         target.GetComponent<HealthController>().TakeDamage(100);
 

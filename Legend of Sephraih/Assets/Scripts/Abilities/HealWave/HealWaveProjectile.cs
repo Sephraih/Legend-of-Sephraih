@@ -13,7 +13,6 @@ public class HealWaveProjectile : MonoBehaviour
     public float lifetime;
     public int heal;
 
-    public float slow;
 
     private List<Collider2D> healedTargets = new List<Collider2D>();
     private List<Collider2D> damagedTargets = new List<Collider2D>();
@@ -78,8 +77,6 @@ public class HealWaveProjectile : MonoBehaviour
 
     void DestroyProjectile()
     {
-        //GameObject a = Instantiate(destroyEffect, transform.position, Quaternion.Euler(0f, 0f, 0f));
-        //Destroy(a, 1);
         Destroy(gameObject);
     }
     void Turn()

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class FireBolt : MonoBehaviour
 {
-    private float offset =-90.0f;
+    private float offset =-90.0f; // default sprite rotation to align with vector.up
     public string enemy="Enemy";
 
-    public GameObject projectile;
-    public Transform shotPoint;
+    public GameObject projectile; //prefab
+    public Transform shotPoint; // infront of character
 
-    private float cd;
-    public float startcd;
+    private float cd; //remaining cooldown
+    public float startcd; //ability cooldown
+
+    public float slow =0.5f; //default movement speed * slow
 
     private void Update()
     {
@@ -21,48 +23,42 @@ public class FireBolt : MonoBehaviour
 
     public void Blast()
     {
-        Vector2 difference = transform.position - shotPoint.transform.position;
+        Vector2 difference = transform.position - shotPoint.transform.position; // vector from transform to shotpoint
         
-        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg; //rotate projectile onto vector
         shotPoint.transform.rotation = Quaternion.Euler(0f, 0f, rotZ - offset);
-
-        if (cd <= 0)
-        {
-            
-
-            var bolt = Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
-            bolt.GetComponent<FireBoltProjectile>().enemy = this.enemy;
-            bolt.GetComponent<FireBoltProjectile>().dmg += this.GetComponent<StatusController>().matk;
-            bolt.GetComponent<FireBoltProjectile>().dotd += this.GetComponent<StatusController>().matk;
-
-            cd = startcd;
-
-        }
-
+        Bolt();
     }
-
-
-
+       
     //same use as blast but shooting towards mouse position, delay zero for testing
     public void BlastMouse()
     {
 
 
-        Vector2 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position; // vector from transform to mouse
 
-        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg -180;
+        float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg -180; //rotate projectile onto vector
         shotPoint.transform.rotation = Quaternion.Euler(0f, 0f, rotZ - offset);
+        Bolt();
+
+    }
+
+    // general blast logic
+    public void Bolt()
+    {
 
         if (cd <= 0)
         {
-            
-            var bolt = Instantiate(projectile, transform.position, shotPoint.transform.rotation);
-            bolt.GetComponent<FireBoltProjectile>().enemy = enemy;
+
+
+            var bolt = Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
+            bolt.GetComponent<FireBoltProjectile>().enemy = this.enemy;
             bolt.GetComponent<FireBoltProjectile>().dmg += this.GetComponent<StatusController>().matk;
             bolt.GetComponent<FireBoltProjectile>().dotd += this.GetComponent<StatusController>().matk;
-            
+            bolt.GetComponent<FireBoltProjectile>().slow = slow;
 
-            cd = 0f;
+
+            cd = startcd;
 
         }
 

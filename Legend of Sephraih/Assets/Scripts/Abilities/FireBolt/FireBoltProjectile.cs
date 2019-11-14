@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class FireBoltProjectile : MonoBehaviour
 {
-    public string enemy ="Enemy";
+    public string enemy ="Enemy"; // caster's enemy, from fire bolt script, default set to enemy units
     public float speed;
     public float lifetime;
-    public float distance;
-    public int dmg;
-    public int dotd;
-    public int dott;
-    public float slow;
+    public int dmg; // damage of direct hit
+    public int dotd; // damage over time damage
+    public int dott; // damage over time duration
+    public float slow; // slow amount
 
-    private List<Collider2D> damagedTargets = new List<Collider2D>();
+    private List<Collider2D> damagedTargets = new List<Collider2D>(); // list to save targets that have been damaged,
 
     public GameObject destroyEffect;
 
@@ -30,16 +29,15 @@ public class FireBoltProjectile : MonoBehaviour
         foreach (Collider2D collider in overlapColliders)
         {
             
-            if (collider.CompareTag(enemy) && collider.isTrigger)
+            if (collider.CompareTag(enemy) && collider.isTrigger) // all enemy colliders, each character has 2 colliders, only the trigger
             {
-                if (!damagedTargets.Contains(collider))
+                if (!damagedTargets.Contains(collider)) //before the bolt is destroyed, it checks for colliders on every frame, which might result in duplicate application
                 {
-                    Debug.Log("enemy damage taken");
                     collider.GetComponent<HealthController>().TakeDamage(dmg);
                     collider.GetComponent<StatusController>().Burn(dotd, dott, slow);
                     damagedTargets.Add(collider);
 
-                    DestroyProjectile();
+                    DestroyProjectile(); // destroy on first hit, optional
                 }
             }
 
@@ -58,8 +56,11 @@ public class FireBoltProjectile : MonoBehaviour
 
 }
 
-
+// checking for enemy using raycast
 /*
+ * 
+ * public float distance; // distance of collision detection relative to projectile
+    
     RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.up, distance);
      
         if (hitInfo.collider != null)

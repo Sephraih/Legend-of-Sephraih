@@ -44,6 +44,7 @@ public class MultiSlash : MonoBehaviour
             // instantiate slash prefab
             GameObject slash = Instantiate(slashEffect, transform.position + attackPos.localPosition, Quaternion.identity);
 
+            
             //get particle system to set it's color
             ParticleSystem.MainModule slashParticleMain = slash.GetComponent<ParticleSystem>().main;
             
@@ -60,6 +61,13 @@ public class MultiSlash : MonoBehaviour
             if (comboCount >= 5)
             {
                 slashParticleMain.startColor = Color.blue;
+                slash.transform.Rotate(0, 0, 45);
+                
+                GameObject slash2 = Instantiate(slashEffect, transform.position + attackPos.localPosition, Quaternion.identity);
+                ParticleSystem.MainModule slash2ParticleMain = slash2.GetComponent<ParticleSystem>().main;
+                slash2.transform.Rotate(0, 0, -45);
+                slash2ParticleMain.startColor = Color.blue;
+
                 Camera.main.GetComponent<camerafollow>().CamShake();
 
             }

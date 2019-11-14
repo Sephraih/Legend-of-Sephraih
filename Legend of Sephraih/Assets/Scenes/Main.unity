@@ -7601,6 +7601,7 @@ MonoBehaviour:
     type: 3}
   shotPoint: {fileID: 847575888}
   startcd: 0
+  slow: 0
 --- !u!114 &424657726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10448,7 +10449,8 @@ MonoBehaviour:
   projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
     type: 3}
   shotPoint: {fileID: 141768372}
-  startcd: 0
+  startcd: 0.5
+  slow: 0.3
 --- !u!114 &913296806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10765,6 +10767,7 @@ MonoBehaviour:
     type: 3}
   shotPoint: {fileID: 460071110}
   startcd: 0
+  slow: 0.3
 --- !u!114 &972581351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27764,6 +27767,21 @@ PrefabInstance:
       propertyPath: damage
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 5765252528384337072, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: MaxHealth
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981967574065911920, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: startcd
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4981967574065911920, guid: 4f5f866bdc4e81147887548c409fde77,
+        type: 3}
+      propertyPath: slow
+      value: 0.7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f5f866bdc4e81147887548c409fde77, type: 3}
 --- !u!1001 &7480321473027040659
@@ -27906,6 +27924,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2044990616, guid: a5c694bf189c59241937c12f647d0726, type: 3}
+      propertyPath: slow
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5c694bf189c59241937c12f647d0726, type: 3}

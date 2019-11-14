@@ -7,7 +7,7 @@ public class MultiSlash : MonoBehaviour
     public int damage;
     public float startDelay;
     private float delay;
-    private int maxCombo = 6;
+    private int maxCombo = 4;
     private int comboCount = 1;
     private float comboDelay = 0.1f;
 
@@ -51,21 +51,36 @@ public class MultiSlash : MonoBehaviour
             userAtk = transform.GetComponent<StatusController>().atk;
 
 
+
+            //effect
+            slash.transform.parent = transform;
+            slash.transform.Rotate(Mathf.Atan2(attackPos.localPosition.x, attackPos.localPosition.y) * Mathf.Rad2Deg, +90, 0);
+            slash.transform.Rotate(-45, 0, 0);
+
+            Destroy(slash, 0.2f);
+
+
             //set color depending on combo
 
-            if (comboCount >= 3)
+            if (comboCount >= 2)
             {
                 slashParticleMain.startColor = Color.cyan;
+                slash.transform.Rotate(90, 0, 0);
+
 
             }
-            if (comboCount >= 5)
+            if (comboCount >= 3)
             {
                 slashParticleMain.startColor = Color.blue;
-                slash.transform.Rotate(0, 0, 45);
+                slash.transform.Rotate(-90, 0, 0);
                 
+                //crossslash 
                 GameObject slash2 = Instantiate(slashEffect, transform.position + attackPos.localPosition, Quaternion.identity);
                 ParticleSystem.MainModule slash2ParticleMain = slash2.GetComponent<ParticleSystem>().main;
-                slash2.transform.Rotate(0, 0, -45);
+
+                slash2.transform.parent = transform;
+                slash2.transform.Rotate(Mathf.Atan2(attackPos.localPosition.x, attackPos.localPosition.y) * Mathf.Rad2Deg, +90, 0);
+                slash2.transform.Rotate(45, 0, 0);
                 slash2ParticleMain.startColor = Color.blue;
 
                 Camera.main.GetComponent<camerafollow>().CamShake();
@@ -73,10 +88,6 @@ public class MultiSlash : MonoBehaviour
             }
             
 
-            //effect
-            slash.transform.parent = transform;
-            slash.transform.Rotate(Mathf.Atan2(attackPos.localPosition.x, attackPos.localPosition.y) * Mathf.Rad2Deg, +90, 0);
-            Destroy(slash, 0.2f);
 
             //determine damaged enemies, apply damage
             Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(attackRangeX, attackRangeY), attackPos.localPosition.x * 90, whatIsEnemy);

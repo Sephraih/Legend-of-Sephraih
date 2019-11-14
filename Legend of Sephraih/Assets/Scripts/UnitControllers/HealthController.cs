@@ -10,7 +10,7 @@ public class HealthController : MonoBehaviour
     private GameObject healText;
     private GameObject BloodEffect;
     private GameObject HealedEffect;
-    private Vector3 RandomizeIntensity = new Vector3(0.5f, 0, 0);
+    private float htspawncount =0;
 
     public GameObject ht;
 
@@ -24,6 +24,7 @@ public class HealthController : MonoBehaviour
         dmgText = Resources.Load("Prefabs/DmgTextPrefab") as GameObject;
         healText = Resources.Load("Prefabs/HealTextPrefab") as GameObject;
     }
+
 
     public void TakeDamage(int damage)
     {
@@ -53,16 +54,13 @@ public class HealthController : MonoBehaviour
 
     public void ShowDamageText(int damage)
     {
-
+        if (htspawncount > 0.6) htspawncount = 0;
         if (dmgText)
         {
             ht = Instantiate(dmgText, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             ht.GetComponent<TextMesh>().text = damage.ToString();
-            ht.transform.localPosition += new Vector3(Random.Range(-RandomizeIntensity.y, RandomizeIntensity.x),
-                Random.Range(-RandomizeIntensity.y, RandomizeIntensity.y),
-                Random.Range(-RandomizeIntensity.z, RandomizeIntensity.z));
-
-
+            ht.transform.localPosition += new Vector3(htspawncount, htspawncount, 0);
+            htspawncount+=0.3f;
             Destroy(ht, 2.0f);
         }
 
@@ -71,15 +69,13 @@ public class HealthController : MonoBehaviour
     public void ShowHealText(int heal)
     {
 
+        if (htspawncount > 0.6) htspawncount = 0;
         if (healText)
         {
             ht = Instantiate(healText, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             ht.GetComponent<TextMesh>().text = heal.ToString();
-            ht.transform.localPosition += new Vector3(Random.Range(-RandomizeIntensity.y, RandomizeIntensity.x),
-                Random.Range(-RandomizeIntensity.y, RandomizeIntensity.y),
-                Random.Range(-RandomizeIntensity.z, RandomizeIntensity.z));
-
-
+            ht.transform.localPosition += new Vector3(-htspawncount, htspawncount, 0);
+            htspawncount+=0.3f;
             Destroy(ht, 2.0f);
         }
 

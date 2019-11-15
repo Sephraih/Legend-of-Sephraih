@@ -11,8 +11,6 @@ public class MultiSlash : MonoBehaviour
     private int comboCount = 1;
     private float comboDelay = 0.1f;
 
-    private int userAtk;
-
 
     public LayerMask whatIsEnemy;
 
@@ -21,7 +19,7 @@ public class MultiSlash : MonoBehaviour
     private float attackRangeY = 1.5f;
 
     private GameObject slashEffect;
-    
+
 
     private void Start()
     {
@@ -41,60 +39,18 @@ public class MultiSlash : MonoBehaviour
     {
         if (delay <= 0)
         {
-            // instantiate slash prefab
-            GameObject slash = Instantiate(slashEffect, transform.position + attackPos.localPosition, Quaternion.identity);
 
-            
-            //get particle system to set it's color
-            ParticleSystem.MainModule slashParticleMain = slash.GetComponent<ParticleSystem>().main;
-            
-            userAtk = transform.GetComponent<StatusController>().atk;
+            if (comboCount > 2)DoubleSlash();
+            else if (comboCount == 1)RightSlash();
+            else LeftSlash();
 
-
-
-            //effect
-            slash.transform.parent = transform;
-            slash.transform.Rotate(Mathf.Atan2(attackPos.localPosition.x, attackPos.localPosition.y) * Mathf.Rad2Deg, +90, 0);
-            slash.transform.Rotate(-45, 0, 0);
-
-            Destroy(slash, 0.2f);
-
-
-            //set color depending on combo
-
-            if (comboCount >= 2)
-            {
-                slashParticleMain.startColor = Color.cyan;
-                slash.transform.Rotate(90, 0, 0);
-
-
-            }
-            if (comboCount >= 3)
-            {
-                slashParticleMain.startColor = Color.blue;
-                slash.transform.Rotate(-90, 0, 0);
-                
-                //crossslash 
-                GameObject slash2 = Instantiate(slashEffect, transform.position + attackPos.localPosition, Quaternion.identity);
-                ParticleSystem.MainModule slash2ParticleMain = slash2.GetComponent<ParticleSystem>().main;
-
-                slash2.transform.parent = transform;
-                slash2.transform.Rotate(Mathf.Atan2(attackPos.localPosition.x, attackPos.localPosition.y) * Mathf.Rad2Deg, +90, 0);
-                slash2.transform.Rotate(45, 0, 0);
-                slash2ParticleMain.startColor = Color.blue;
-
-                Camera.main.GetComponent<camerafollow>().CamShake();
-
-            }
-            
-
-
+            var atk = transform.GetComponent<StatusController>().atk;
             //determine damaged enemies, apply damage
             Collider2D[] enemiesToDamage = Physics2D.OverlapBoxAll(attackPos.position, new Vector2(attackRangeX, attackRangeY), attackPos.localPosition.x * 90, whatIsEnemy);
             for (int i = 0; i < enemiesToDamage.Length; i++)
             {
-                if(enemiesToDamage[i].isTrigger)
-                enemiesToDamage[i].GetComponent<HealthController>().TakeDamage((damage +userAtk)  * comboCount);
+                if (enemiesToDamage[i].isTrigger)
+                    enemiesToDamage[i].GetComponent<HealthController>().TakeDamage((damage + atk) + comboCount*atk);
             }
             comboCount++;
             delay = comboDelay;
@@ -108,18 +64,43 @@ public class MultiSlash : MonoBehaviour
         }
     }
 
+    private void LeftSlash()
+    {
+        Slash(-30, Color.cyan);
+    }
+
+    private void RightSlash()
+    {
+        Slash(30, Color.cyan);
+    }
+
+    private void DoubleSlash()
+    {
+        Color sc = new Color(0.2f, 0, 0.7f,1);
+        Slash(30, sc);
+        Slash(-30, sc);
+        Camera.main.GetComponent<camerafollow>().CamShake();
+    }
+
+    private void Slash(float angle, Color color)
+    {
+
+        // instantiate slash prefab
+        GameObject slash = Instantiate(slashEffect, transform.position + attackPos.localPosition, Quaternion.identity);
+
+
+        //get particle system to set it's color
+        ParticleSystem.MainModule slashParticleMain = slash.GetComponent<ParticleSystem>().main;
+        slashParticleMain.startColor = color;
+
+        //effect
+        slash.transform.parent = transform; // to set the simulation space
+        slash.transform.Rotate(Mathf.Atan2(attackPos.localPosition.x, attackPos.localPosition.y) * Mathf.Rad2Deg, +90, 0); // direction user is facing
+        slash.transform.Rotate(angle, 0, 0); // turn the slash
+
+        Destroy(slash, 0.2f); //free memory
+
+
+    }
+
 }
-
-
-
-/*void OnDrawGizmosSelected(){
-      Gizmos.color = Color.red;
-      Gizmos.DrawWireCube(attackPos.position, new Vector3(attackRangeX,attackRangeY,1));
-
-  }*/
-
-/*
-  
-                float x = Mathf.Pow(2,comboCount-1);
-                int z = Mathf.RoundToInt(x);
-*/

@@ -10480,8 +10480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3852cc262743a534eb60223a5fae5688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atk: 10
-  matk: 10
+  atk: 50
+  matk: 50
   aspd: 1
   mvspd: 0
   dmvspd: 10

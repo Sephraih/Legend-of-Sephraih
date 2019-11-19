@@ -271,7 +271,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -1888405239356951315, guid: 61ff590124f6fc245a9d1a627bf5917f,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.99178326, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -521,6 +521,7 @@ MonoBehaviour:
     type: 3}
   shotPoint: {fileID: 7592420667754977583}
   startcd: 5
+  slow: 0.5
 --- !u!1 &7592420667754977582
 GameObject:
   m_ObjectHideFlags: 0

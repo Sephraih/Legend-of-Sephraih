@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 8917679878055481547}
   - component: {fileID: 164409420961742819}
   - component: {fileID: 164409421068278936}
+  - component: {fileID: 1610220893}
   m_Layer: 8
   m_Name: Wizard
   m_TagString: Enemy
@@ -385,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackingDirection: {fileID: 7716261698477887790}
   mainCam: {fileID: 0}
+  distanceToTarget: 0
 --- !u!114 &7716261698932046088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3683b1e00d4e2a14b87f1a8ace30f7c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 500
+  MaxHealth: 1000
   health: 100
   ht: {fileID: 0}
 --- !u!114 &8917679878055481547
@@ -454,6 +456,25 @@ MonoBehaviour:
   shotPoint: {fileID: 7716261698477887791}
   startcd: 5
   slow: 0.5
+--- !u!114 &1610220893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7716261697097872516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de72c2b4dcd34874fab40f6fce370659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acd: 5
+  range: 10
+  chargeEffect: {fileID: 0}
+  attackPos: {fileID: 7716261698477887791}
+  boundaries:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!1 &7716261698477887790
 GameObject:
   m_ObjectHideFlags: 0

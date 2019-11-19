@@ -52,7 +52,7 @@ public class WizardBehaviour : MonoBehaviour
         {
             GetComponent<Teleport>().Backjump();
             movementDirection = transform.position - target.transform.position; //walk away from target
-        } 
+        }
 
         movementDirection.Normalize();
         msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
@@ -62,11 +62,12 @@ public class WizardBehaviour : MonoBehaviour
 
     void Aim()
     {
-            var x = target.position - transform.position;
-            x.Normalize();
-            attackingDirection.transform.localPosition = x;
-        if (movementDirection == Vector2.zero) { 
-        GetComponent<MovementController>().LookAt(target.position);
+        var x = target.position - transform.position;
+        x.Normalize();
+        attackingDirection.transform.localPosition = x;
+        if (movementDirection == Vector2.zero)
+        {
+            GetComponent<MovementController>().LookAt(target.position);
         }
     }
 

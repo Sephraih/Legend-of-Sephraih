@@ -17,6 +17,8 @@ public class PlayerOneController : MonoBehaviour
 
     private bool useSkill_1;
     private bool useSkill_2;
+
+    private bool useSkill_3;
     private bool baseAttack;
 
 
@@ -52,7 +54,7 @@ public class PlayerOneController : MonoBehaviour
         baseAttack = Input.GetButtonUp("Attack");
         useSkill_1 = Input.GetButtonUp("Skill1");
         useSkill_2 = Input.GetButtonUp("Skill2");
-
+        useSkill_3 = Input.GetButtonUp("w");
 
     }
 
@@ -86,6 +88,12 @@ public class PlayerOneController : MonoBehaviour
         {
             this.GetComponent<MultiSlash>().Attack();
         }
-    }
 
+        if (useSkill_3)
+        {
+            this.GetComponent<Teleport>().Backjump();
+        }
+    }
 }
+
+

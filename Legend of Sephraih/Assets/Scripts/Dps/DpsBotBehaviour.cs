@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// the behaviour of the first character if it is a bot
 public class DpsBotBehaviour : MonoBehaviour
 {
 
 
-    public Rigidbody2D rb;
-    public Animator animator;
-    public Vector2 movementDirection; // from input
-    public float movementSpeedInput; //from input
+    public Rigidbody2D rb; // physics entity
+    public Animator animator; // to animate the character
+    public Vector2 movementDirection; // calculated movement direction
+    public float movementSpeedInput; // msi from zero to one deciding whether the character is moving or not
+    
+    // object used to calculate the direction of attack
     public GameObject attackingDirection;
+
+    // target character to interact with
     Transform target;
 
-    public bool isBot = false;
-
-
+    // called each frame
     void Update()
     {
-        if (transform != Camera.main.GetComponent<camerafollow>().target)
+        if (transform != Camera.main.GetComponent<camerafollow>().target) // bot logic applies if not active character
         {
 
-            target = Camera.main.GetComponent<camerafollow>().enemy;
+            target = Camera.main.GetComponent<camerafollow>().enemy; // get the enemy that last reported itself to the camera
             if (target)
             {
                 Move();
@@ -38,24 +41,18 @@ public class DpsBotBehaviour : MonoBehaviour
     void Move()
     {
 
-        movementDirection = new Vector2(-1 * (rb.position.x - target.transform.position.x), -1 * (rb.position.y - target.transform.position.y));
-        movementDirection.Normalize();
-        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
-        if (Vector2.Distance(transform.position, target.position) < 1.0f) { movementSpeedInput = 0.5f; }
-            rb.velocity = movementDirection * movementSpeedInput * this.GetComponent<StatusController>().mvspd;
+        movementDirection = target.transform.position - transform.position; //move towards target
+        movementDirection.Normalize(); // filter distance
+        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f); // zero or one
+        
+        if (Vector2.Distance(transform.position, target.position) < 1.0f) { movementSpeedInput = 0.5f; } // slow down movement if close to target
+        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f); // zero if still, one if moving
+        GetComponent<MovementController>().Move(movementDirection, movementSpeedInput); // move through controller
 
-        //mv anim
-        if (movementDirection != Vector2.zero)
-        {
-            animator.SetFloat("moveX", movementDirection.x);
-            animator.SetFloat("moveY", movementDirection.y);
-
-        }
-        animator.SetFloat("Speed", movementSpeedInput);
     }
 
 
-    // set attacking direction object's position
+    // set attacking direction object's position towards movement direction of character
     void Aim()
     {
         if (movementDirection != Vector2.zero)
@@ -63,7 +60,8 @@ public class DpsBotBehaviour : MonoBehaviour
             attackingDirection.transform.localPosition = movementDirection * 0.5f;
         }
     }
-
+    
+    // use basic attack (multislash) if close to the target
     void UseSkills()
     {
         if (Vector2.Distance(transform.position, target.position) < 1.0f)

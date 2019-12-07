@@ -5,11 +5,11 @@ using UnityEngine;
 public class SelfHeal : MonoBehaviour
 {
 
-    private float cd = 2.0f; //balancing right here.
-    private float cdtimer = 0;
-    public GameObject effect;
+    private float cd = 2.0f; //cooldown, inaccessible via editor
+    private float cdtimer = 0; //current cooldown
+    public GameObject effect; //effect to be displayed on ability use
 
-
+    //each frame, reduce cooldown based on time passed
     void Update()
     {
         if (cdtimer >= 0)
@@ -23,11 +23,11 @@ public class SelfHeal : MonoBehaviour
     {
         if (cdtimer <= 0)
         {
-            GetComponent<HealthController>().Heal(GetComponent<StatusController>().matk);
+            GetComponent<HealthController>().Heal(GetComponent<StatusController>().matk); // magical attack from status
             cdtimer = cd;
-            GameObject a = Instantiate(effect, transform.position, Quaternion.identity);
-            a.transform.parent = transform;
-            Destroy(a, 0.5f);
+            GameObject a = Instantiate(effect, transform.position, Quaternion.identity); // instantiate a heal effect
+            a.transform.parent = transform; //so the particle system follows the character
+            Destroy(a, 0.5f); // destroy the heal effect to safe memory
         }
 
     }

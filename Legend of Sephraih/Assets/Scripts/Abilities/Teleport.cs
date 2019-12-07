@@ -7,17 +7,18 @@ public class Teleport : MonoBehaviour
     public float acd; //ability cool down
     private float cd; //cool down remaining
 
-    public float range = 5.0f;
-    public GameObject chargeEffect;
-    public Transform attackPos;
-    public LayerMask boundaries;
+    public float range = 5.0f; //relocation distance
+    public GameObject teleportEffect; //effect to be displayed on teleport
+    public Transform attackPos; // object to determine the direction
+    public LayerMask boundaries; // all objects that act as game world boundaries belong to this layermask
 
+    
     public void Backjump()
     {
-        Vector3 direction = transform.position - attackPos.position;
-        direction.Normalize();
+        Vector3 direction = transform.position - attackPos.position; // get the direction the caster is facing
+        direction.Normalize(); // ignore distance
 
-        for (float range = this.range; range > 0; range--) //shorter jump distance if jump were out of boundary
+        for (float range = this.range; range > 0; range--) //shorter jump distance if location jumped at was out of boundary
         {
             RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, direction, range, boundaries); //check for boundary colliders
             if (hitInfo.collider == null)
@@ -25,7 +26,7 @@ public class Teleport : MonoBehaviour
                 if (cd <= 0f) // if ability ready to use
                 {
                     transform.position = transform.position + direction * range;
-                    cd = acd;
+                    cd = acd; // start cooldown
                     break;
                 }
             }
@@ -35,7 +36,7 @@ public class Teleport : MonoBehaviour
 
 
     }
-
+    // each frame
     void Update()
     {
         if (cd >= 0)

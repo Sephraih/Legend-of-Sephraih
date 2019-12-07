@@ -3,10 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// a script attached to every character object, defining it's status and status conditions such as slow or burn
 public class StatusController : MonoBehaviour
 {
 
-    //Stats
+    //Stats, to be defined in the editor for each character or character prefab
     public int atk; //melee attack stat
     public int matk; //magical attack stat
     public int aspd; // attack speed stat
@@ -15,40 +16,42 @@ public class StatusController : MonoBehaviour
     public float mvspd; // current movement speed
     public float dmvspd; // default movement speed for an object, set in inspector
 
-    public int crit; //critical strike chance
+    public int crit; //critical strike chance, currently unused
 
     private int slows = 0; // counter to reset movement speed only when no slows are applied
-    private int mvspdboni = 0;
+    private int mvspdboni = 0; // opposite of slows
 
     //Status Effects
-    public GameObject burnEffect;
+    public GameObject burnEffect; // prefab of a burning effect, displayed when suffering from the burning status condition
 
 
     public void Start()
     {
-        mvspd = dmvspd;
+        mvspd = dmvspd; // setting the current speed to the default
     }
     public void Update()
     {
 
     }
 
+    // burn the character for a total amount of damage over a certain time, slowing it for the duration
     public void Burn(float totalDmg, float time, float slowAmt)
     {
         StartCoroutine(DoTCoroutine(totalDmg, time));
         StartCoroutine(SlowCoroutine(slowAmt, time));
     }
 
+    // slow the character's speed to a percentual amount of its default speed for given time
     public void Slow(float slowAmt, float time) {
         StartCoroutine(SlowCoroutine(slowAmt, time));
     }
-
+    
     public void IncreaseMovementSpeed(float mvspdUpAmt, float time) {
         StartCoroutine(MvspdUpCoroutine(mvspdUpAmt, time));
     }
 
 
-
+    // coroutines make it possible to have events last for a period of time opposed to finishing with a method that must terminate in a single and each frame
     IEnumerator DoTCoroutine(float dmg, float time)
     {
         float amountDamaged = 0;
@@ -65,9 +68,10 @@ public class StatusController : MonoBehaviour
         }
     }
 
+   
     IEnumerator SlowCoroutine(float slow, float time)
     {
-        slows++;
+        slows++; // counter to be aware of multiple slows and know when to revert to default movement speed
         float count = 0.0f;
         while (count < time)
         {
@@ -76,11 +80,11 @@ public class StatusController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         slows --;
-        if(slows==0)mvspd = dmvspd;
+        if(slows==0 && mvspdboni == 0) mvspd = dmvspd; // reset to default movement speed if not slowed / buffed
 
 
     }
-
+    // inverted equal to slow coroutine, having duplicate code here improves simplicity
     IEnumerator MvspdUpCoroutine(float mvspdUp, float time)
     {
         mvspdboni++;
@@ -92,7 +96,7 @@ public class StatusController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         mvspdboni--;
-        if (slows == 0) mvspd = dmvspd;
+        if (mvspdboni == 0 && slows == 0) mvspd = dmvspd; 
 
 
     }

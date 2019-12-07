@@ -5,15 +5,17 @@ using UnityEngine;
 public class camerafollow : MonoBehaviour
 {
 
-    public Transform target;
-    public Transform ichi;
-    public Transform ni;
-    public Transform san;
-    public Vector3 offset;
-    public Transform enemy;
-    public bool allActive;
-    public List<Transform> enemylist;
-    public Animator ShakeAnimation;
+    public Transform target; // target the camera looks at 
+
+    //the three defined player characters
+    public Transform ichi; // the first character, the dps
+    public Transform ni; // the second character, the healer
+    public Transform san; // the third character, the tank
+    
+    public Vector3 offset; 
+    public Transform enemy; // an enemy determined to be target of certain spells of other enemies or players
+    public List<Transform> enemylist; // list of currently active enemies
+    public Animator ShakeAnimation; // various actions in the game use a shake animation to simulate collision effects
 
 
     private void Start()
@@ -59,10 +61,12 @@ public class camerafollow : MonoBehaviour
 
     }
 
+    // plays a shake animation using an animator attached to the camera object, essentially altering the camera's position for the duration of  the animation
     public void CamShake() {
         ShakeAnimation.SetTrigger("shake");
     }
 
+    // returns the closest player in relation to a character - enemy or player
     public Transform ClosestPlayer(Transform self)
     {
 
@@ -77,6 +81,7 @@ public class camerafollow : MonoBehaviour
         return ichi;
     }
 
+    // returns the enemy closest to the calling character
     public Transform ClosestEnemy(Transform self) {
         var distance = Vector2.Distance(self.position, enemylist[0].position);
         enemy = enemylist[0];
@@ -90,6 +95,7 @@ public class camerafollow : MonoBehaviour
         return enemy;
     }
 
+    // determines and returns the player with the lowest health among the three defined player characters
     public Transform LowestHealthPlayer()
     {
 
@@ -104,6 +110,8 @@ public class camerafollow : MonoBehaviour
         }
         return ichi;
     }
+
+    // determines lowest health player that is not the user, should only be called from a player character
     public Transform LowestHealthOtherPlayer(Transform self)
     {
         if (self == ichi) { if (ni.GetComponent<HealthController>().health <= san.GetComponent<HealthController>().health) return ni; else return san; }

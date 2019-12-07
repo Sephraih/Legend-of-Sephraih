@@ -2,39 +2,43 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//bot behaviour attached to the "guard" type enemy character and its prefab
 public class GuardBehaviour : MonoBehaviour
 {
 
-    public GameObject attackingDirection;
-    public Camera mainCam;
-
-
+    public GameObject attackingDirection; // object required to define attacking direction
+    
+    // definition of the guard spot and chase radius
     public Vector3 guardSpot = new Vector3(5.0f, 5.0f, 0f);
     public float guardMaxChaseRadius = 25.0f;
     public float guardRadius = 5.0f;
 
+    // variables for movement
     private Vector2 movementDirection;
     private float msi;
+
+    // required for attacking, following and guard logic
     private float distanceToTarget;
     private float distanceToGuardSpot;
     private bool returning = false;
 
 
 
-    private Transform player;
+    private Transform player; // target player
 
+    //initialization
     void Start()
     {
         transform.position = guardSpot;
-        player = Camera.main.GetComponent<camerafollow>().target;
-        GetComponent<FireBolt>().startcd = 5.0f;
-        Camera.main.GetComponent<camerafollow>().enemylist.Add(transform);
+        player = Camera.main.GetComponent<camerafollow>().target; // target the active player at start
+        GetComponent<FireBolt>().startcd = 5.0f; // define frequency of firebolt ability usage
+        Camera.main.GetComponent<camerafollow>().enemylist.Add(transform); // add to list of enemies
 
     }
 
     void Update()
     {
-        Camera.main.GetComponent<camerafollow>().enemy = transform;
+        Camera.main.GetComponent<camerafollow>().enemy = transform; // backup access if only one enemy
         Move();
         Aim();
         Attack();
@@ -44,17 +48,18 @@ public class GuardBehaviour : MonoBehaviour
     void Move()
     {
 
-        player = Camera.main.GetComponent<camerafollow>().ClosestPlayer(transform);
+        player = Camera.main.GetComponent<camerafollow>().ClosestPlayer(transform); // interact with closest player determined each frame
 
         distanceToTarget = Vector2.Distance(transform.position, player.position);
         distanceToGuardSpot = Vector2.Distance(transform.position, guardSpot);
 
+        // chase the player within guard radius and not outside of the maximal chase radius, follow it
         if (distanceToTarget <= guardRadius && distanceToGuardSpot < guardMaxChaseRadius && !returning)
         {
             movementDirection = player.transform.position - transform.position;
             if (distanceToTarget < 1.0f) { movementDirection = Vector2.zero; }
         }
-        else
+        else // return to the spot if not there
         {
             returning = true;
             movementDirection = guardSpot - transform.position;
@@ -63,12 +68,14 @@ public class GuardBehaviour : MonoBehaviour
             if (distanceToGuardSpot < guardRadius) { returning = false; }
         }
 
-        movementDirection.Normalize();
+        // tell the movement controller where to move to
+        movementDirection.Normalize(); //distance not to affect speed of movement
         msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
         GetComponent<MovementController>().Move(movementDirection, msi);
-
+       
     }
 
+    // aim towards movement direction if moving, else, if within sight aim at the closest player
     void Aim()
     {
         if (movementDirection != Vector2.zero)
@@ -85,7 +92,7 @@ public class GuardBehaviour : MonoBehaviour
         }
     }
 
-
+    // basic attack if next to enemy, charge if within charge range, firebolt if within sight and out of chase radius
     void Attack()
     {
         if (distanceToTarget < 1.0f)
@@ -103,6 +110,7 @@ public class GuardBehaviour : MonoBehaviour
         }
     }
 
+    // handle death and respawn
     private void Die()
     {
         if (this.GetComponent<HealthController>().health <= 0)

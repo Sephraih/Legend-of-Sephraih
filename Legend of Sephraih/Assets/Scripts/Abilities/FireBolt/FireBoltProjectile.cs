@@ -16,25 +16,27 @@ public class FireBoltProjectile : MonoBehaviour
 
     public GameObject destroyEffect;
 
+    // destroy the object based on its lifetime
     private void Start()
     {
         Invoke("DestroyProjectile", lifetime);
     }
+
+    // every frame
     private void FixedUpdate()
     {
-      
-
-        Collider2D[] overlapColliders = Physics2D.OverlapCircleAll(transform.position, 1.0f);
+              
+        Collider2D[] overlapColliders = Physics2D.OverlapCircleAll(transform.position, 1.0f); //a circle located at the projectile's position scanning for any colliders overlapped and adding them to a list
 
         foreach (Collider2D collider in overlapColliders)
         {
             
-            if (collider.CompareTag(enemy) && collider.isTrigger) // all enemy colliders, each character has 2 colliders, only the trigger
+            if (collider.CompareTag(enemy) && collider.isTrigger) // all enemy colliders, each character has 2 colliders, only the trigger collider is used
             {
-                if (!damagedTargets.Contains(collider)) //before the bolt is destroyed, it checks for colliders on every frame, which might result in duplicate application
+                if (!damagedTargets.Contains(collider)) //before the bolt is destroyed, it checks for colliders on every frame, which might result in duplicate application, which is unwished for
                 {
-                    collider.GetComponent<HealthController>().TakeDamage(dmg);
-                    collider.GetComponent<StatusController>().Burn(dotd, dott, slow);
+                    collider.GetComponent<HealthController>().TakeDamage(dmg); //apply damage to the character the collider belongs to
+                    collider.GetComponent<StatusController>().Burn(dotd, dott, slow); //burn the character
                     damagedTargets.Add(collider);
 
                     DestroyProjectile(); // destroy on first hit, optional
@@ -43,10 +45,10 @@ public class FireBoltProjectile : MonoBehaviour
 
         }
 
-
-        transform.Translate(Vector2.up * speed * Time.deltaTime);
+        transform.Translate(Vector2.up * speed * Time.deltaTime); //always fly upwards, the upwards vector's direction is assigned during instantiation in the firebolt script
     }
 
+    //destroy the projectile based on its lifetime / when it collides and deploy an explosion effect
     void DestroyProjectile()
     {
         GameObject a = Instantiate(destroyEffect, transform.position, Quaternion.Euler(0, 0f, 0f));
@@ -56,6 +58,7 @@ public class FireBoltProjectile : MonoBehaviour
 
 }
 
+// old way of scanning enemies, turned out to be slower but may find application elsewhere in the future, which is why this artifact is stored here
 // checking for enemy using raycast
 /*
  * 

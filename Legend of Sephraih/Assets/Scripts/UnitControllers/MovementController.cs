@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// every character object has a movement controller, enabling it to move
 public class MovementController : MonoBehaviour
 {
-
-    public Animator animator;
+    public Animator animator; // animator displaying movement based on zero to one speed and -1 to 1 x and y directional input.
     public GameObject attackPos; //the unit's attackPos transform
 
-    private Vector2 md;
-    private float msi;
+    private Vector2 md; // the movement direction determined by the character's player or bot controller
+    private float msi;  // the movement speed input, which is the strength of movement input from zero, not moving, to one, moving at full speed determined by the unit's max speed
 
-    private Rigidbody2D rb;
-    public bool stuck;
-    public bool stunned;
+    private Rigidbody2D rb; // physical entity of the character, where velocity is applied to
+    public bool stuck; // whether the character may not move aside from a fixed logic defined in the function causing the character to be stuck
+    public bool stunned; // whether the character is stunned, meaning it cannot move at all.
 
     // Start is called before the first frame update
     void Start()
@@ -28,12 +28,14 @@ public class MovementController : MonoBehaviour
         {
             this.md = md;
             this.msi = msi;
-            rb.velocity = md * msi * this.GetComponent<StatusController>().mvspd;
+            rb.velocity = md * msi * this.GetComponent<StatusController>().mvspd; //direction, input strength, character movement speed
             MovementAnimation();
         }
         if (stunned) { rb.velocity = Vector3.zero; }
     }
-
+    
+    // each method must be run through in its entirety in each frame, therefore a method may not wait or be aware of time passed
+    // a coroutine enables doing a seperate task over a defined time frame without blocking the flow of the game
     public void Stun(float time) {
         StartCoroutine(StunCoroutine(time));
     }
@@ -50,7 +52,7 @@ public class MovementController : MonoBehaviour
     }
 
 
-
+    // animate with help of the animator
     public void MovementAnimation()
     {
         //movement animation
@@ -61,10 +63,11 @@ public class MovementController : MonoBehaviour
 
         }
         if(!stunned)animator.SetFloat("Speed", msi);
-        if (stunned) animator.SetFloat("Spedd", 0.0f);
+        if (stunned) animator.SetFloat("Speed", 0.0f);
 
     }
 
+    // walking animation in direction of a specific target point
     public void WalkTowards(Vector2 target) {
         if (animator.isInitialized)
         {
@@ -75,6 +78,7 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    // ability to face a target direction without moving
     public void LookAt(Vector2 target)
     {
         if (animator.isInitialized)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//simple basic attack, see multislash for explanation of functionality
 public class BasicAttack : MonoBehaviour
 {
     public int damage;

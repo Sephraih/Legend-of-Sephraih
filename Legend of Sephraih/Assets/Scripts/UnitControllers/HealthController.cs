@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class HealthController : MonoBehaviour
 {
-    public int MaxHealth = 100;
-    public int health = 100;
-    private GameObject dmgText;
-    private GameObject healText;
-    private GameObject BloodEffect;
-    private GameObject HealedEffect;
-    private float htspawncount =0;
+    //the script is attached to all character objects.
 
-    public GameObject ht;
+    public int MaxHealth = 100; // maximal health the number here is default, overwritten in inspector
+    public int health = 100; // current health - default set to avoid errors
+    private GameObject dmgText; // a damage text prefab to be displayed when the character takes damage
+    private GameObject healText; // a text prefab to display the amount of health recovered as a number
+    private GameObject BloodEffect; //a blood effect spawned by the character when damage is taken
+    private GameObject HealedEffect; // a recovery effect
+    private float htspawncount =0; // a counter to influence the spawn position relative to the character of any health change numbers
+
+    public GameObject ht; // health text variable, this can be a heal or dmg text
 
     void Start()
     {
-        health = MaxHealth;
+        health = MaxHealth; // initialize character to start at max health
 
+        //loading prefabs to be instantiated later
         BloodEffect = Resources.Load("Prefabs/BloodEffectPrefab") as GameObject;
         HealedEffect = Resources.Load("Prefabs/HealedEffectPrefab") as GameObject;
 
@@ -25,12 +28,12 @@ public class HealthController : MonoBehaviour
         healText = Resources.Load("Prefabs/HealTextPrefab") as GameObject;
     }
 
-
+    // take damage, display number and blood effect
     public void TakeDamage(int damage)
     {
 
-        GameObject blood = Instantiate(BloodEffect, transform.position, Quaternion.identity);
-        blood.transform.parent = transform;
+        GameObject blood = Instantiate(BloodEffect, transform.position, Quaternion.identity); // at character's position without any rotation
+        blood.transform.parent = transform; // make the effect child of the character to let the effect follow it
         Destroy(blood, 0.7f);
 
         ShowDamageText(damage);
@@ -41,9 +44,10 @@ public class HealthController : MonoBehaviour
 
     }
 
+    // recover damage, display number and recovery effect
     public void Heal(int heal)
     {
-        GameObject hef = Instantiate(HealedEffect, transform.position, Quaternion.identity);
+        GameObject hef = Instantiate(HealedEffect, transform.position, Quaternion.identity); 
         hef.transform.parent = transform;
         Destroy(hef, 1.0f);
 

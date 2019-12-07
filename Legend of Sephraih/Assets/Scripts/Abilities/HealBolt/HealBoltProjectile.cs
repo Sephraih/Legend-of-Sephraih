@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// projectile launched by heal wave ability, see fire bolt projectile for documentation, heals instead of damaging
 public class HealBoltProjectile : MonoBehaviour
 {
     public string target = "Player";

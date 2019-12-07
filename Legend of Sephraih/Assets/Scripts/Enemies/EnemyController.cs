@@ -2,29 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// controller attached to the basic enemy and its prefab
 public class EnemyController : MonoBehaviour
 {
 
-    public Animator animator;
-    public GameObject attackingDirection;
-    public Camera mainCam;
+    public Animator animator; // animation
+    public GameObject attackingDirection; //attacking direction object used to calculate vector of attack
+    
+    public Vector2 movementDirection; // direction of movement
+    private float msi; // movement speed input, in the case of a bot this is either zero or one
 
-    public Vector2 movementDirection;
-    private float msi;
 
-
-    private Rigidbody2D rb;
-    private Transform player;
+    private Rigidbody2D rb; // physics entity
+    private Transform player; // the player character the bot interacts with
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Camera.main.GetComponent<camerafollow>().enemylist.Add(transform);
+        Camera.main.GetComponent<camerafollow>().enemylist.Add(transform); //upon creation add to list of enemies
     }
 
     void Update()
     {
-        Camera.main.GetComponent<camerafollow>().enemy = transform;
+        Camera.main.GetComponent<camerafollow>().enemy = transform; //backup access to the the enemy character incase it is the only one
         Move();
         Aim();
         Attack();
@@ -34,15 +34,16 @@ public class EnemyController : MonoBehaviour
     void Move()
     {
 
-        player = Camera.main.GetComponent<camerafollow>().ClosestPlayer(transform);
+        player = Camera.main.GetComponent<camerafollow>().ClosestPlayer(transform); // the player this bot interacts with is the one closest to it
         
-        movementDirection = new Vector2(-1 * (rb.position.x - player.transform.position.x), -1 * (rb.position.y - player.transform.position.y));
-        movementDirection.Normalize();
+        movementDirection = new Vector2(-1 * (rb.position.x - player.transform.position.x), -1 * (rb.position.y - player.transform.position.y)); // move towards the player
+        movementDirection.Normalize(); // normalized so distance doesnt influence movement speed
 
-        msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
-        GetComponent<MovementController>().Move(movementDirection, msi);
+        msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f); // zero or one depending on whether the bot moves not. it always moves.
+        GetComponent<MovementController>().Move(movementDirection, msi); // move using the controller
     }
 
+    // aim towards movement direction
     void Aim()
     {
         if (movementDirection != Vector2.zero)
@@ -51,6 +52,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    //attack if close to the target player
     void Attack()
     {
         if (Vector2.Distance(transform.position, player.position) < 1.0f)
@@ -59,6 +61,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // die and respawn at fixed location (testing) when health is at or below zero
     private void Die()
     {
         if (this.GetComponent<HealthController>().health <= 0)

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//an ability launching a projectile healing characters friendly to the caster, see documentation of firebolt
 public class HealBolt : MonoBehaviour
 {
     private float offset = -90.0f;

@@ -2,21 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// attached to second char, the healer controlling how player input the character when active
 public class HealerController : MonoBehaviour
 {
 
 
-    public Rigidbody2D rb;
+    public Rigidbody2D rb; // physical entity
     
 
-    public Vector2 movementDirection; // from input
-    public float msi; //from input
-
-    public bool isBot =true;
-
-
+    public Vector2 movementDirection; // from input x,y axis based determination of direction
+    public float msi; //from input ; strenght of input between zero and one
+       
     
-    private bool useSkill_1;
+    // keyups on keys specified in the editor cause these to be true and trigger an action
+    private bool useSkill_1; 
     private bool useSkill_2;
     private bool baseAttack;
 
@@ -24,14 +23,15 @@ public class HealerController : MonoBehaviour
 
 
 
-    public GameObject attackingDirection;
+    public GameObject attackingDirection; // object required to get a direction of attack vector, assigned in editor, child of character
 
 
     private void Start()
     {
-        attackingDirection.transform.localPosition = new Vector2(0, -0.5f);
+        attackingDirection.transform.localPosition = new Vector2(0, -0.5f); // initial position of the object to make sure the character may attack before moving for the first time
     }
 
+    // every frame
     void Update()
     {
        
@@ -46,12 +46,13 @@ public class HealerController : MonoBehaviour
 
     void ProcessInputs()
     {
-
+        //movement based on input strength and directional buttons
         movementDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         movementDirection.Normalize();
-        msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
+        msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f); // strenght has to be between zero and one, speed based on input strenght times speed of the status controller attached to character
         GetComponent<MovementController>().Move(movementDirection, msi);
 
+        //pressing and releasing one of the keys results in the corresponding bool being true for the frame, triggering the related actions in the Attack method
         baseAttack = Input.GetButtonUp("Attack");
         useSkill_1 = Input.GetButtonUp("Skill1");
         useSkill_2 = Input.GetButtonUp("Skill2");
@@ -61,7 +62,7 @@ public class HealerController : MonoBehaviour
     //move player based on input and play movement animation
   
 
-    // set attacking direction object's position
+    // set attacking direction object's position in 0.5 distance, direction of movement to generate a direction vector
     void Aim()
     {
         if (movementDirection != Vector2.zero)
@@ -75,7 +76,7 @@ public class HealerController : MonoBehaviour
 
     void Attack()
     {
-
+        // may be interchanged with other ability scripts that are attached to the character object
         if (useSkill_1)
         {
             this.GetComponent<HealWave>().Blast();

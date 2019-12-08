@@ -10982,7 +10982,6 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0}
   movementSpeedInput: 0
   attackingDirection: {fileID: 141768371}
-  isBot: 0
 --- !u!114 &913296809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11030,7 +11029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acd: 0
   range: 5
-  chargeEffect: {fileID: 0}
+  teleportEffect: {fileID: 0}
   attackPos: {fileID: 141768372}
   boundaries:
     serializedVersion: 2
@@ -11555,7 +11554,6 @@ MonoBehaviour:
   movementDirection: {x: 0, y: 0}
   movementSpeedInput: 0
   attackingDirection: {fileID: 460071109}
-  isBot: 0
 --- !u!114 &972581362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29293,6 +29291,10 @@ PrefabInstance:
     - target: {fileID: 2044990616, guid: a5c694bf189c59241937c12f647d0726, type: 3}
       propertyPath: slow
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2044990616, guid: a5c694bf189c59241937c12f647d0726, type: 3}
+      propertyPath: enemy
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7592420666366508161, guid: a5c694bf189c59241937c12f647d0726,
         type: 3}

@@ -386,7 +386,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackingDirection: {fileID: 7592420667754977582}
-  mainCam: {fileID: 0}
   guardSpot: {x: 5, y: 5, z: 0}
   guardMaxChaseRadius: 10
   guardRadius: 5
@@ -516,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e82ab83fa701c498069fa7b8e974a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: Enemy
+  enemy: Player
   projectile: {fileID: 1150724258750520066, guid: 818c5605413b00641b517b1f127b8ce0,
     type: 3}
   shotPoint: {fileID: 7592420667754977583}

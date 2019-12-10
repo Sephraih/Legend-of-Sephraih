@@ -7820,6 +7820,7 @@ GameObject:
   - component: {fileID: 424657737}
   - component: {fileID: 424657734}
   - component: {fileID: 424657738}
+  - component: {fileID: 424657740}
   m_Layer: 9
   m_Name: Healer
   m_TagString: Player
@@ -8201,6 +8202,26 @@ MonoBehaviour:
   attackPos: {fileID: 0}
   stuck: 0
   stunned: 0
+--- !u!114 &424657740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 424657722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de72c2b4dcd34874fab40f6fce370659, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acd: 1
+  range: 5
+  teleportEffect: {fileID: 3838902983540275944, guid: 822a85a45243e5f45adbd7dc67b9be4f,
+    type: 3}
+  attackPos: {fileID: 847575888}
+  boundaries:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!4 &425878343 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7480321473359576386, guid: 00713248121b4e942a3f5faa87138e92,
@@ -11029,7 +11050,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acd: 0
   range: 5
-  teleportEffect: {fileID: 0}
+  teleportEffect: {fileID: 3838902983540275944, guid: 822a85a45243e5f45adbd7dc67b9be4f,
+    type: 3}
   attackPos: {fileID: 141768372}
   boundaries:
     serializedVersion: 2

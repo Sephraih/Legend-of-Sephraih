@@ -7,7 +7,7 @@ public class ChargeAttack : MonoBehaviour
     public float acd; //ability cool down
     public float range = 5.0f;
     public GameObject chargeEffect;
-    public float stunTime = 0.4f;
+    public float stunTime = 1.0f;
     private float cd; //cool down remaining
     
     private Vector2 chargeDirection;

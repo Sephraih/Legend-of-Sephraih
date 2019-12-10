@@ -416,8 +416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3852cc262743a534eb60223a5fae5688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atk: 100
-  matk: 100
+  atk: 50
+  matk: 20
   aspd: 1
   mvspd: 3
   dmvspd: 5
@@ -520,7 +520,7 @@ MonoBehaviour:
     type: 3}
   shotPoint: {fileID: 7592420667754977583}
   startcd: 5
-  slow: 0.5
+  slow: 0.8
 --- !u!1 &7592420667754977582
 GameObject:
   m_ObjectHideFlags: 0

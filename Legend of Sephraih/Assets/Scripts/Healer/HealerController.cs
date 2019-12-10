@@ -12,13 +12,15 @@ public class HealerController : MonoBehaviour
 
     public Vector2 movementDirection; // from input x,y axis based determination of direction
     public float msi; //from input ; strenght of input between zero and one
-       
-    
-    // keyups on keys specified in the editor cause these to be true and trigger an action
-    private bool useSkill_1; 
-    private bool useSkill_2;
-    private bool baseAttack;
 
+
+    // keyups on keys specified in the editor cause these to be true and trigger an action
+    private bool _a;
+    private bool _q;
+    private bool _w;
+    private bool _e;
+    private bool _mouse0;
+    private bool _mouse1;
 
 
 
@@ -53,9 +55,12 @@ public class HealerController : MonoBehaviour
         GetComponent<MovementController>().Move(movementDirection, msi);
 
         //pressing and releasing one of the keys results in the corresponding bool being true for the frame, triggering the related actions in the Attack method
-        baseAttack = Input.GetButtonUp("Attack");
-        useSkill_1 = Input.GetButtonUp("Skill1");
-        useSkill_2 = Input.GetButtonUp("Skill2");
+        _a = Input.GetButtonUp("a");
+        _q = Input.GetButtonUp("q");
+        _w = Input.GetButtonUp("w");
+        _e = Input.GetButtonUp("e");
+        _mouse0 = Input.GetButtonUp("mouse0");
+        _mouse1 = Input.GetButtonUp("mouse1");
 
     }
 
@@ -77,19 +82,33 @@ public class HealerController : MonoBehaviour
     void Attack()
     {
         // may be interchanged with other ability scripts that are attached to the character object
-        if (useSkill_1)
+        if (_q)
         {
             this.GetComponent<HealWave>().Blast();
         }
 
-        if (useSkill_2)
+        if (_e)
         {
             this.GetComponent<HealBolt>().Blast();
         }
 
-        if (baseAttack)
+        if (_a)
         {
             this.GetComponent<SelfHeal>().Heal();
+        }
+        if (_w)
+        {
+            this.GetComponent<Teleport>().Backjump();
+        }
+
+        if (_mouse0)
+        {
+            GetComponent<HealWave>().BlastMouse();
+        }
+
+        if (_mouse1)
+        {
+            GetComponent<HealBolt>().BlastMouse();
         }
     }
 

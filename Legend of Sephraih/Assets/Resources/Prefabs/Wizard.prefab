@@ -385,7 +385,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackingDirection: {fileID: 7716261698477887790}
-  mainCam: {fileID: 0}
   distanceToTarget: 0
 --- !u!114 &7716261698932046088
 MonoBehaviour:
@@ -415,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atk: 20
-  matk: 100
+  matk: 50
   aspd: 1
   mvspd: 3
   dmvspd: 5
@@ -455,7 +454,7 @@ MonoBehaviour:
     type: 3}
   shotPoint: {fileID: 7716261698477887791}
   startcd: 5
-  slow: 0.5
+  slow: 0.8
 --- !u!114 &1610220893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -470,7 +469,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acd: 5
   range: 10
-  chargeEffect: {fileID: 0}
+  teleportEffect: {fileID: 3838902983540275944, guid: 822a85a45243e5f45adbd7dc67b9be4f,
+    type: 3}
   attackPos: {fileID: 7716261698477887791}
   boundaries:
     serializedVersion: 2

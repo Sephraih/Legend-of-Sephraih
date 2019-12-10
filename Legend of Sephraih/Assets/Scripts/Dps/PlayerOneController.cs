@@ -16,12 +16,12 @@ public class PlayerOneController : MonoBehaviour
     public float msi; // strength of input between zero and one
 
     // used in the process of determining whether the player wants to use a skill
-    private bool useSkill_1;
-    private bool useSkill_2;
-
-    private bool useSkill_3;
-    private bool baseAttack;
-
+    private bool _a;
+    private bool _q;
+    private bool _w;
+    private bool _e;
+    private bool _mouse0;
+    private bool _mouse1;
 
 
     public GameObject attackingDirection; // object used to calculate a vector of attack
@@ -53,11 +53,12 @@ public class PlayerOneController : MonoBehaviour
         GetComponent<MovementController>().Move(movementDirection, msi);
 
         // attacks and skills
-        baseAttack = Input.GetButtonUp("Attack");
-        useSkill_1 = Input.GetButtonUp("Skill1");
-        useSkill_2 = Input.GetButtonUp("Skill2");
-        useSkill_3 = Input.GetButtonUp("w");
-
+        _a = Input.GetButtonUp("a");
+        _q = Input.GetButtonUp("q");
+        _w = Input.GetButtonUp("w");
+        _e = Input.GetButtonUp("e");
+        _mouse0 = Input.GetButtonUp("mouse0");
+        _mouse1 = Input.GetButtonUp("mouse1");
     }
 
 
@@ -76,25 +77,33 @@ public class PlayerOneController : MonoBehaviour
     void Attack()
     {
 
-        if (useSkill_1)
+        if (_a)
         {
-            this.GetComponent<FireBolt>().Blast();
+            GetComponent<MultiSlash>().Attack();
         }
 
-        if (useSkill_2)
+        if (_q)
         {
-            this.GetComponent<ChargeAttack>().charge(Camera.main.GetComponent<camerafollow>().ClosestEnemy(transform));
+            GetComponent<FireBolt>().Blast();
         }
 
-        if (baseAttack)
+        if (_w)
         {
-            this.GetComponent<MultiSlash>().Attack();
+            GetComponent<Teleport>().Backjump();
         }
 
-        if (useSkill_3)
+        if (_e)
         {
-            this.GetComponent<Teleport>().Backjump();
+            GetComponent<ChargeAttack>().charge(Camera.main.GetComponent<camerafollow>().ClosestEnemy(transform));
         }
+
+
+        if (_mouse0)
+        {
+            GetComponent<FireBolt>().BlastMouse();
+        }
+
+
     }
 }
 

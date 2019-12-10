@@ -27,7 +27,6 @@ public class WizardBehaviour : MonoBehaviour
     // each frame
     void Update()
     {
-        Camera.main.GetComponent<camerafollow>().enemy = transform; // backup access if only one enemy
         Move();
         Aim();
         Attack();
@@ -87,7 +86,7 @@ public class WizardBehaviour : MonoBehaviour
     {
         if (this.GetComponent<HealthController>().health <= 0)
         {
-            Instantiate((Resources.Load("Prefabs/Wizard") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
+            //Instantiate((Resources.Load("Prefabs/Wizard") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
             Camera.main.GetComponent<camerafollow>().enemylist.Remove(transform);
             Destroy(gameObject);
         }

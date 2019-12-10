@@ -7,7 +7,7 @@ public class GuardBehaviour : MonoBehaviour
 {
 
     public GameObject attackingDirection; // object required to define attacking direction
-    
+
     // definition of the guard spot and chase radius
     public Vector3 guardSpot = new Vector3(5.0f, 5.0f, 0f);
     public float guardMaxChaseRadius = 25.0f;
@@ -33,12 +33,10 @@ public class GuardBehaviour : MonoBehaviour
         player = Camera.main.GetComponent<camerafollow>().target; // target the active player at start
         GetComponent<FireBolt>().startcd = 5.0f; // define frequency of firebolt ability usage
         Camera.main.GetComponent<camerafollow>().enemylist.Add(transform); // add to list of enemies
-
     }
 
     void Update()
     {
-        Camera.main.GetComponent<camerafollow>().enemy = transform; // backup access if only one enemy
         Move();
         Aim();
         Attack();
@@ -72,7 +70,7 @@ public class GuardBehaviour : MonoBehaviour
         movementDirection.Normalize(); //distance not to affect speed of movement
         msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f);
         GetComponent<MovementController>().Move(movementDirection, msi);
-       
+
     }
 
     // aim towards movement direction if moving, else, if within sight aim at the closest player
@@ -115,7 +113,7 @@ public class GuardBehaviour : MonoBehaviour
     {
         if (this.GetComponent<HealthController>().health <= 0)
         {
-            Instantiate((Resources.Load("Prefabs/Guard") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
+            //Instantiate((Resources.Load("Prefabs/Guard") as GameObject), new Vector3(0, 7, 0), Quaternion.identity);
             Camera.main.GetComponent<camerafollow>().enemylist.Remove(transform);
             Destroy(gameObject);
         }

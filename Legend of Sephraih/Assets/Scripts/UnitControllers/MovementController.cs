@@ -33,6 +33,15 @@ public class MovementController : MonoBehaviour
         }
         if (stunned) { rb.velocity = Vector3.zero; }
     }
+
+    public void Idle() {
+
+        Vector3 movementDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1) - transform.position; //move towards target
+        movementDirection.Normalize(); // filter distance
+        float msi = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f); // zero or one
+
+        GetComponent<MovementController>().Move(movementDirection, msi); // move through controller
+    }
     
     // each method must be run through in its entirety in each frame, therefore a method may not wait or be aware of time passed
     // a coroutine enables doing a seperate task over a defined time frame without blocking the flow of the game

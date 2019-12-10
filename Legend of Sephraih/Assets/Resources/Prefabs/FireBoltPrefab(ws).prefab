@@ -114,14 +114,10 @@ MonoBehaviour:
   enemy: Enemy
   speed: 50
   lifetime: 0.5
-  distance: 0.5
   dmg: 50
   dotd: 100
   dott: 10
   slow: 0.5
-  whatIsEnemy:
-    serializedVersion: 2
-    m_Bits: 256
   destroyEffect: {fileID: 986805914817456092, guid: 25abb332a4bf4a843aa274daafa7adfc,
     type: 3}
 --- !u!198 &7170307868503398169

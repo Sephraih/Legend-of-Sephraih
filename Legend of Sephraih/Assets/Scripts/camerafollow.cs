@@ -11,18 +11,11 @@ public class camerafollow : MonoBehaviour
     public Transform ichi; // the first character, the dps
     public Transform ni; // the second character, the healer
     public Transform san; // the third character, the tank
-    
-    public Vector3 offset; 
-    public Transform enemy; // an enemy determined to be target of certain spells of other enemies or players
+    public Transform dummy;
+
+    public Vector3 offset;
     public List<Transform> enemylist; // list of currently active enemies
     public Animator ShakeAnimation; // various actions in the game use a shake animation to simulate collision effects
-
-
-    private void Start()
-    {
-       // ni.gameObject.SetActive(true);
-       // san.gameObject.SetActive(true);
-    }
 
     // follow target
     void LateUpdate()
@@ -56,13 +49,16 @@ public class camerafollow : MonoBehaviour
 
             target.gameObject.SetActive(true);
         }
+        InstantiateEnemy();
+        SelectCharacter();
 
 
 
     }
 
     // plays a shake animation using an animator attached to the camera object, essentially altering the camera's position for the duration of  the animation
-    public void CamShake() {
+    public void CamShake()
+    {
         ShakeAnimation.SetTrigger("shake");
     }
 
@@ -70,23 +66,28 @@ public class camerafollow : MonoBehaviour
     public Transform ClosestPlayer(Transform self)
     {
 
-        if (ni.gameObject.activeSelf && san.gameObject.activeSelf) { 
-        var one = Vector2.Distance(self.position, ichi.position);
-        var two = Vector2.Distance(self.position, ni.position);
-        var three = Vector2.Distance(self.position, san.position);
-        if (one < two && one < three) return ichi; //one is the closest
-        if (three < two) return san; //one is not the closest, three is closer than two
-        return ni;
+        if (ni.gameObject.activeSelf && san.gameObject.activeSelf)
+        {
+            var one = Vector2.Distance(self.position, ichi.position);
+            var two = Vector2.Distance(self.position, ni.position);
+            var three = Vector2.Distance(self.position, san.position);
+            if (one < two && one < three) return ichi; //one is the closest
+            if (three < two) return san; //one is not the closest, three is closer than two
+            return ni;
         }
         return ichi;
     }
 
     // returns the enemy closest to the calling character
-    public Transform ClosestEnemy(Transform self) {
+    public Transform ClosestEnemy(Transform self)
+    {
+        if (enemylist.Count == 0) { return dummy; }
         var distance = Vector2.Distance(self.position, enemylist[0].position);
-        enemy = enemylist[0];
-        foreach (Transform e in enemylist) {
-            if (Vector2.Distance(self.position, e.position) < distance) {
+        Transform enemy = enemylist[0];
+        foreach (Transform e in enemylist)
+        {
+            if (Vector2.Distance(self.position, e.position) < distance)
+            {
                 distance = Vector2.Distance(self.position, e.position);
                 enemy = e;
             }
@@ -119,4 +120,55 @@ public class camerafollow : MonoBehaviour
         else { if (ichi.GetComponent<HealthController>().health <= ni.GetComponent<HealthController>().health) return ichi; else return ni; }
     }
 
+    public void InstantiateEnemy()
+    {
+
+        if (Input.GetButtonDown("enemy1"))
+        {
+            // load an enemy at current mouse position, transformed to game world position
+            Instantiate((Resources.Load("Prefabs/Enemy") as GameObject), Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1), Quaternion.identity);
+        }
+        if (Input.GetButtonDown("enemy2"))
+        {
+            // load an enemy at current mouse position, transformed to game world position
+            GameObject a = Instantiate((Resources.Load("Prefabs/Guard") as GameObject), Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1), Quaternion.identity);
+            a.GetComponent<GuardBehaviour>().guardSpot = Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1);
+        }
+        if (Input.GetButtonDown("enemy3"))
+        {
+            // load an enemy at current mouse position, transformed to game world position
+            Instantiate((Resources.Load("Prefabs/Wizard") as GameObject), Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 1), Quaternion.identity);
+        }
+    }
+
+    public void SelectCharacter()
+    {
+        
+        if (Input.GetButtonDown("ichi"))
+        {
+            DisableCharacters();
+            ichi.gameObject.SetActive(true);
+            target = ichi;
+        }
+        if (Input.GetButtonDown("ni"))
+        {
+            DisableCharacters();
+            ni.gameObject.SetActive(true);
+            target = ni;
+        }
+        if (Input.GetButtonDown("san"))
+        {
+            DisableCharacters();
+            san.gameObject.SetActive(true);
+            target = san;
+        }
+
+    }
+
+    public void DisableCharacters()
+    {
+        ichi.gameObject.SetActive(false);
+        ni.gameObject.SetActive(false);
+        san.gameObject.SetActive(false);
+    }
 }

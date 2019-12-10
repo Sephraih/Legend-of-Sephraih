@@ -24,7 +24,6 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        Camera.main.GetComponent<camerafollow>().enemy = transform; //backup access to the the enemy character incase it is the only one
         Move();
         Aim();
         Attack();
@@ -67,7 +66,7 @@ public class EnemyController : MonoBehaviour
         if (this.GetComponent<HealthController>().health <= 0)
         {
 
-            Instantiate((Resources.Load("Prefabs/Enemy") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
+            //Instantiate((Resources.Load("Prefabs/Enemy") as GameObject), new Vector3(0, 0, 0), Quaternion.identity);
             Camera.main.GetComponent<camerafollow>().enemylist.Remove(transform);
             Destroy(gameObject);
         }

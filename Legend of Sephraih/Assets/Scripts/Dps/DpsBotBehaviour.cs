@@ -24,13 +24,14 @@ public class DpsBotBehaviour : MonoBehaviour
         if (transform != Camera.main.GetComponent<camerafollow>().target) // bot logic applies if not active character
         {
 
-            target = Camera.main.GetComponent<camerafollow>().enemy; // get the enemy that last reported itself to the camera
-            if (target)
+            target = Camera.main.GetComponent<camerafollow>().ClosestEnemy(transform); // get the closest enemy
+            if (target && target != Camera.main.GetComponent<camerafollow>().dummy)
             {
                 Move();
                 Aim();
                 UseSkills();
             }
+            else { GetComponent<MovementController>().Idle(); }
         }
 
     }
@@ -43,14 +44,13 @@ public class DpsBotBehaviour : MonoBehaviour
 
         movementDirection = target.transform.position - transform.position; //move towards target
         movementDirection.Normalize(); // filter distance
-        movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f); // zero or one
         
         if (Vector2.Distance(transform.position, target.position) < 1.0f) { movementSpeedInput = 0.5f; } // slow down movement if close to target
         movementSpeedInput = Mathf.Clamp(movementDirection.magnitude, 0.0f, 1.0f); // zero if still, one if moving
         GetComponent<MovementController>().Move(movementDirection, movementSpeedInput); // move through controller
 
     }
-
+        
 
     // set attacking direction object's position towards movement direction of character
     void Aim()

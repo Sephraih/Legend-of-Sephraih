@@ -8,7 +8,7 @@ public class HealerController : MonoBehaviour
 
 
     public Rigidbody2D rb; // physical entity
-    
+
 
     public Vector2 movementDirection; // from input x,y axis based determination of direction
     public float msi; //from input ; strenght of input between zero and one
@@ -22,9 +22,6 @@ public class HealerController : MonoBehaviour
     private bool _mouse0;
     private bool _mouse1;
 
-
-
-
     public GameObject attackingDirection; // object required to get a direction of attack vector, assigned in editor, child of character
 
 
@@ -36,7 +33,6 @@ public class HealerController : MonoBehaviour
     // every frame
     void Update()
     {
-       
         if (transform == Camera.main.GetComponent<camerafollow>().target)
         {
             ProcessInputs();
@@ -65,7 +61,7 @@ public class HealerController : MonoBehaviour
     }
 
     //move player based on input and play movement animation
-  
+
 
     // set attacking direction object's position in 0.5 distance, direction of movement to generate a direction vector
     void Aim()
@@ -77,7 +73,7 @@ public class HealerController : MonoBehaviour
     }
 
 
-   
+
 
     void Attack()
     {

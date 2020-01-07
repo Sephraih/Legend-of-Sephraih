@@ -11,7 +11,7 @@ public class camerafollow : MonoBehaviour
     public Transform ichi; // the first character, the dps
     public Transform ni; // the second character, the healer
     public Transform san; // the third character, the tank
-    public Transform dummy;
+    public Transform dummy; //dummy target to see that there is no enemy
 
     public Vector3 offset;
     public List<Transform> enemylist; // list of currently active enemies

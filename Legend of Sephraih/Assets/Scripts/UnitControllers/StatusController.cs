@@ -19,7 +19,7 @@ public class StatusController : MonoBehaviour
     public int crit; //critical strike chance, currently unused
 
     private int slows = 0; // counter to reset movement speed only when no slows are applied
-    private int mvspdboni = 0; // opposite of slows
+    private int mvspdBoni = 0; // opposite of slows
 
     //Status Effects
     public GameObject burnEffect; // prefab of a burning effect, displayed when suffering from the burning status condition
@@ -80,14 +80,14 @@ public class StatusController : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         slows --;
-        if(slows==0 && mvspdboni == 0) mvspd = dmvspd; // reset to default movement speed if not slowed / buffed
+        if(slows==0 && mvspdBoni == 0) mvspd = dmvspd; // reset to default movement speed if not slowed / buffed
 
 
     }
     // inverted equal to slow coroutine, having duplicate code here improves simplicity
     IEnumerator MvspdUpCoroutine(float mvspdUp, float time)
     {
-        mvspdboni++;
+        mvspdBoni++;
         float count = 0.0f;
         while (count < time)
         {
@@ -95,8 +95,8 @@ public class StatusController : MonoBehaviour
             count += 0.1f;
             yield return new WaitForSeconds(0.1f);
         }
-        mvspdboni--;
-        if (mvspdboni == 0 && slows == 0) mvspd = dmvspd; 
+        mvspdBoni--;
+        if (mvspdBoni == 0 && slows == 0) mvspd = dmvspd; 
 
 
     }

@@ -10,9 +10,9 @@ public class HealthController : MonoBehaviour
     public int health = 100; // current health - default set to avoid errors
     private GameObject dmgText; // a damage text prefab to be displayed when the character takes damage
     private GameObject healText; // a text prefab to display the amount of health recovered as a number
-    private GameObject BloodEffect; //a blood effect spawned by the character when damage is taken
-    private GameObject HealedEffect; // a recovery effect
-    private float htspawncount =0; // a counter to influence the spawn position relative to the character of any health change numbers
+    private GameObject bloodEffect; //a blood effect spawned by the character when damage is taken
+    private GameObject healedEffect; // a recovery effect
+    private float htSpawnCount =0; // a counter to influence the spawn position relative to the character of any health change numbers
 
     public GameObject ht; // health text variable, this can be a heal or dmg text
 
@@ -21,8 +21,8 @@ public class HealthController : MonoBehaviour
         health = MaxHealth; // initialize character to start at max health
 
         //loading prefabs to be instantiated later
-        BloodEffect = Resources.Load("Prefabs/BloodEffectPrefab") as GameObject;
-        HealedEffect = Resources.Load("Prefabs/HealedEffectPrefab") as GameObject;
+        bloodEffect = Resources.Load("Prefabs/BloodEffectPrefab") as GameObject;
+        healedEffect = Resources.Load("Prefabs/HealedEffectPrefab") as GameObject;
 
         dmgText = Resources.Load("Prefabs/DmgTextPrefab") as GameObject;
         healText = Resources.Load("Prefabs/HealTextPrefab") as GameObject;
@@ -32,7 +32,7 @@ public class HealthController : MonoBehaviour
     public void TakeDamage(int damage)
     {
 
-        GameObject blood = Instantiate(BloodEffect, transform.position, Quaternion.identity); // at character's position without any rotation
+        GameObject blood = Instantiate(bloodEffect, transform.position, Quaternion.identity); // at character's position without any rotation
         blood.transform.parent = transform; // make the effect child of the character to let the effect follow it
         Destroy(blood, 0.7f);
 
@@ -47,7 +47,7 @@ public class HealthController : MonoBehaviour
     // recover damage, display number and recovery effect
     public void Heal(int heal)
     {
-        GameObject hef = Instantiate(HealedEffect, transform.position, Quaternion.identity); 
+        GameObject hef = Instantiate(healedEffect, transform.position, Quaternion.identity); 
         hef.transform.parent = transform;
         Destroy(hef, 1.0f);
 
@@ -58,13 +58,13 @@ public class HealthController : MonoBehaviour
 
     public void ShowDamageText(int damage)
     {
-        if (htspawncount > 0.6) htspawncount = 0;
+        if (htSpawnCount > 0.6) htSpawnCount = 0;
         if (dmgText)
         {
             ht = Instantiate(dmgText, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             ht.GetComponent<TextMesh>().text = damage.ToString();
-            ht.transform.localPosition += new Vector3(htspawncount, htspawncount, 0);
-            htspawncount+=0.3f;
+            ht.transform.localPosition += new Vector3(htSpawnCount, htSpawnCount, 0);
+            htSpawnCount+=0.3f;
             Destroy(ht, 2.0f);
         }
 
@@ -73,13 +73,13 @@ public class HealthController : MonoBehaviour
     public void ShowHealText(int heal)
     {
 
-        if (htspawncount > 0.6) htspawncount = 0;
+        if (htSpawnCount > 0.6) htSpawnCount = 0;
         if (healText)
         {
             ht = Instantiate(healText, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             ht.GetComponent<TextMesh>().text = heal.ToString();
-            ht.transform.localPosition += new Vector3(-htspawncount, htspawncount, 0);
-            htspawncount+=0.3f;
+            ht.transform.localPosition += new Vector3(-htSpawnCount, htSpawnCount, 0);
+            htSpawnCount+=0.3f;
             Destroy(ht, 2.0f);
         }
 

@@ -27,9 +27,7 @@ public class HealBotBehaviour : MonoBehaviour
             UseSkills();
         }
     }
-
-
-
+       
     //move player based on input and play movement animation
     void Move()
     {

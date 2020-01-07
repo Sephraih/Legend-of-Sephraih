@@ -27,18 +27,7 @@ public class HealBolt : MonoBehaviour
 
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
         shotPoint.transform.rotation = Quaternion.Euler(0f, 0f, rotZ - offset);
-
-        if (cd <= 0)
-        {
-
-
-            var bolt = Instantiate(projectile, shotPoint.position, shotPoint.transform.rotation);
-            bolt.GetComponent<HealBoltProjectile>().target = target;
-            bolt.GetComponent<HealBoltProjectile>().heal += this.GetComponent<StatusController>().matk;
-            bolt.GetComponent<HealBoltProjectile>().user = transform;
-           cd = startcd;
-
-        }
+        Bolt();
 
     }
 
@@ -47,16 +36,20 @@ public class HealBolt : MonoBehaviour
     //same use as blast but shooting towards mouse position, delay zero for testing
     public void BlastMouse()
     {
-
-
         Vector2 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
         float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg - 180;
         shotPoint.transform.rotation = Quaternion.Euler(0f, 0f, rotZ - offset);
+        Bolt();
 
+    }
+
+    public void Bolt() {
+
+        // chech whether the ability is ready to use
         if (cd <= 0)
         {
-
+            //instantiate projectile and assign values
             var bolt = Instantiate(projectile, transform.position, shotPoint.transform.rotation);
             bolt.GetComponent<HealBoltProjectile>().target = target;
             bolt.GetComponent<HealBoltProjectile>().heal += this.GetComponent<StatusController>().matk;
@@ -65,7 +58,6 @@ public class HealBolt : MonoBehaviour
             cd = startcd;
 
         }
-
     }
 
 }
